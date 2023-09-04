@@ -6,19 +6,19 @@ initialized 2023-08-01
 
 ## Issues
 
-diagrams ✔
-database ✔
-sqlconnection
-navigation
-templating
-posts
-comments
-forms
-login
-edition
-contacts
-admin
-security
+- diagrams ✔
+- database ✔
+- sqlconnection
+- navigation
+- templating
+- posts
+- comments
+- forms
+- login
+- edition
+- contacts
+- admin
+- security
 
 ## Structure des fichiers
 
