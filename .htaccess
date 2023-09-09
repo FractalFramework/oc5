@@ -1,8 +1,8 @@
 RewriteEngine On
 #RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^([^./]+)/([^./]+)/([^./]+)/([^./]+)$ /index.php?a=$1&b=$2&c=$3&d=$4 [L]
-RewriteRule ^([^./]+)/([^./]+)/([^./]+)$ /index.php?a=$1&b=$2&c=$3 [L]
-RewriteRule ^([^./]+)/([^./]+)$ /index.php?a=$1&b=$2 [L]
-RewriteRule ^([^./]+)$ /index.php?a=$1 [L]
-RewriteRule ^/$ /index.php [L]
-RewriteRule ^$ /index.php [L]
+RewriteRule ^([^./]+)/([^./]+)/([^./]+)/([^./]+)$ /src/public/index.php?a=$1&b=$2&c=$3&d=$4 [L]
+RewriteRule ^([^./]+)/([^./]+)/([^./]+)$ /src/public/index.php?a=$1&b=$2&c=$3 [L]
+RewriteRule ^([^./]+)/([^./]+)$ /src/public/index.php?a=$1&b=$2 [L]
+RewriteRule ^([^./]+)$ /src/public/index.php?a=$1 [L]
+RewriteRule ^/$ /src/public/index.php [L]
+RewriteRule ^$ /src/public/index.php [L]
