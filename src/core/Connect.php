@@ -23,21 +23,19 @@ class Connect{
         return $this->pdo;
     }
 
-    public function query($stmt,$class,$one=false){
+    public function query($stmt,$class){
         $req=$this->getPDO()->query($stmt);
-        $req->setFetchMode(PDO::FETCH_CLASS,$class);
-        if($one)$datas=$req->fetch();
-        else $datas=$req->fetchAll();
+        $datas=$req->fetchAll(PDO::FETCH_CLASS,$class);
         return $datas;
     }
 
-    public function prepare($stmt,$queries,$class,$one){
-        $req=$this->getPDO()->prepare($stmt);
-        $req->execute($queries);
-        $req->setFetchMode(PDO::FETCH_CLASS,$class);
-        if($one)$datas=$req->fetch();
-        else $datas=$req->fetchAll();
-        return $datas;
-    }
+public function prepare($stmt,$queries,$class,$one){
+    $req=$this->getPDO()->prepare($stmt);
+    $req->execute($queries);
+    $req->setFetchMode(PDO::FETCH_CLASS,$class);
+    if($one)$datas=$req->fetch();
+    else $datas=$req->fetchAll();
+    return $datas;
+}
 
 }
