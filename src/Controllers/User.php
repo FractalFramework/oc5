@@ -12,8 +12,11 @@ class User extends Main
 
     public static function find($id)
     {
-        $qr='select name from '.self::$table.' where id=?';
-        return Db::getDb()->prepare($qr,[$id],'User',1);
+        $sql='select name from '.self::$table.' where id=?';
+        $class='\App\Controllers\User';
+        $blind=[$id];
+        $one_result=1;
+        return self::query($sql,$blind,$class,$one_result);
     }
 
     public function getName()

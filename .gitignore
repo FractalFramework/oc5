@@ -57,3 +57,4 @@ vendor
 Article.php
 Category.php
 Root.php
+src/public/lib.php
