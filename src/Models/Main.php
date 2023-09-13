@@ -3,7 +3,8 @@
 namespace App\Models;
 use App\Models\Db;
 
-class Main{
+class Main
+{
 
     private static $site='poo';
 
