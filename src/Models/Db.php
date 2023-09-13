@@ -1,7 +1,7 @@
 <?php
 
-//namespace Src\Core;
-//use \PDO;
+namespace App\Models;
+use App\Models\Connect;
 
 class Db{
     private static $params=['host'=>'localhost', 'user'=>'root', 'pass'=>'dev', 'base'=>'oc5'];

@@ -1,7 +1,8 @@
 <?php
 
-//namespace Core;
-//use \PDO;
+namespace App\Models;
+use App\Controllers\User;
+use \PDO;
 
 class Connect{
 	private $params=[];

@@ -47,11 +47,13 @@ _sql
 _old
 _notes
 _trash.php
-cnfg/wapp.ovh.php
+cnfg/oc5.test.php
 settings.json
 *.sh
 composer.json
 composer.lock
 vendor
 .vscode
-
+Article.php
+Category.php
+Root.php
