@@ -10,7 +10,10 @@ class Db
 
     public static function getDb()
     {
-        if(!self::$db)self::$db=new Connect(self::$params);
+        if(!self::$db)
+        {
+            self::$db=new Connect(self::$params);
+        }
         return self::$db;
     }
 

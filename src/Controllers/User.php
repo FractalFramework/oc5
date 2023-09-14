@@ -16,7 +16,7 @@ class User extends Main
         $class='\App\Controllers\User';
         $blind=[$id];
         $one_result=1;
-        return self::query($sql,$blind,$class,$one_result);
+        return self::query($sql, $blind, $class, $one_result);
     }
 
     public function getName()

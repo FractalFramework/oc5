@@ -8,22 +8,29 @@ class Main
 
     private static $site='poo';
 
-    public static function query($stmt,$prm=null,$one=false){
-        if($prm)return Db::getDb()->prepare($stmt,$prm,get_called_class(),$one);
-        return Db::getDb()->query($stmt,get_called_class(),0);
+    public static function query($stmt,$prm=null,$one=false)
+    {
+        if($prm)
+        {
+            return Db::getDb()->prepare($stmt, $prm,get_called_class(), $one);
+        }
+        return Db::getDb()->query($stmt, get_called_class(), $one);
     }
 
-    public function __get($key){
+    public function __get($key)
+    {
         $method='get'.ucfirst($key);
         $this->$key=$this->$method();
         return $this->$key;
     }
     
-    public function getTitle(){
+    public function getTitle()
+    {
         return self::$site;
     }
     
-    public function setTitle($t){
+    public function setTitle($t)
+    {
         return self::$site=$t;
     }
 
