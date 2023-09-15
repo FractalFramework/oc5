@@ -4,26 +4,6 @@
 
 initialized 2023-08-01
 
-## Issues
-
-- diagrams ✔
-- database ✔
-- sqlconnection
-- navigation
-- templating
-- posts
-- comments
-- forms
-- login
-- edition
-- contacts
-- admin
-- security
-
-## Issue 3 : sqlconnection
-
-Exécution d'un requête Sql.
-
 ## Structure des fichiers
 
 - src/Controllers
@@ -34,12 +14,4 @@ Exécution d'un requête Sql.
 -- src/Models/Main.php : Classe générique, concentrateur des requêtes vers Db, et distributeur des méthodes appelées par la classe retournée par Pdo.
 - src/Public :
 -- src/Public/index.php : point d'arrivée du htaccess
-
-
-## Travaux :
-
-- installation de Composer
-- usage de son autoload
-- installation des classes de connexion à la base de données
-- lancement d'une requête
 
