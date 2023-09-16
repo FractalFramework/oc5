@@ -28,20 +28,20 @@ class Connect
         return $this->pdo;
     }
 
-    public function query(string $stmt, string $class)
+    public function query(string $sql, string $class): array
     {
-        $req = $this->getPDO()->query($stmt);
+        $req = $this->getPDO()->query($sql);
         $datas = $req->fetchAll(PDO::FETCH_CLASS, $class);
         return $datas;
     }
 
     public function prepare(
-        object $stmt,
+        string $sql,
         array $queries,
         string $class,
-        string $one
-    ) {
-        $req = $this->getPDO()->prepare($stmt);
+        int $one
+    ): object {
+        $req = $this->getPDO()->prepare($sql);
         $req->execute($queries);
         $req->setFetchMode(PDO::FETCH_CLASS, $class);
         if ($one) {
