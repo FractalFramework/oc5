@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Pdo;
+namespace App\Entities;
 
-class User
+class UserEntity
 {
 
     public ?string $name = '';
