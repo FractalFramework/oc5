@@ -5,7 +5,7 @@ namespace App\Controllers;
 
 use App\Models\Main;
 
-class User extends Main
+class UserController extends Main
 {
 
     protected static string $table = 'users';

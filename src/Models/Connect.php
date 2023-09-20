@@ -1,9 +1,8 @@
 <?php
 
-//declare(strict_types=1);
+declare(strict_types=1);
 namespace App\Models;
 
-use App\Controllers\User;
 use \PDO;
 
 class Connect
