@@ -2,13 +2,8 @@
 
 declare(strict_types=1);
 
-$root = dirname(dirname(__DIR__));
-require $root . '/vendor/autoload.php';
-
-function pr($r)
-{
-    echo '<pre>' . print_r($r, true) . '</pre>';
-}
+require 'vendor/autoload.php';
+require 'src/public/lib.php';
 
 use App\Models\Connect;
 use App\Controllers\ArticleController;
