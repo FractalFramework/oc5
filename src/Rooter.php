@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Pub;
+namespace App;
 
 use App\Controllers\ArticleController;
 use App\Controllers\CategoryController;
 use App\Controllers\UserController;
 
-class Root
+class Rooter
 {
     function __construct()
     {
-        require_once 'src/pub/lib.php';
     }
 
     public function home()

@@ -26,7 +26,5 @@ class Db
             'pass' => $_ENV['PASS'],
             'base' => $db ? $db : $_ENV['BASE']
         ];
-
     }
-
 }

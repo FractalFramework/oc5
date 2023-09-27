@@ -54,3 +54,4 @@ composer.json
 composer.lock
 vendor
 .vscode
+.env.*
