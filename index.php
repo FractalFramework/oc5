@@ -5,20 +5,31 @@ declare(strict_types=1);
 require 'vendor/autoload.php';
 require 'src/Lib/lib.php';
 
-//use App\Lib\Tests;
 use App\Rooter;
 use Symfony\Component\Dotenv\Dotenv;
+use App\Lib\Php;
+use App\Lib\Html;
 
 $dotenv = new Dotenv();
-
-// you can also load several files
 $dotenv->load(__DIR__ . '/.env', __DIR__ . '/.env.local');
+//echo $_ENV['BASE'];
 
-//echo getenv('S3_BUCKET');
-echo $_ENV['BASE'];
+$mt = microtime(true);
 
-//$main = new Tests();
-//echo $main->call();
+echo '
+<link href="/src/css/core.css?' . $mt . '" rel="stylesheet" />';
+echo '
+<script src="/src/js/lib.js?' . $mt . '"></script>';
+echo '
+<script src="/src/js/ajax.js?' . $mt . '"></script>';
+echo '
+<script type="text/javascript">
+state={"page":"home"};
+var maintg="main"</script>';
+echo "\n";
 
-$root = new Rooter();
-echo $root->home();
+$rooter = new Rooter();
+echo $rooter->test();
+echo Html::div('', '', 'main');
+//echo $rooter->home();
+

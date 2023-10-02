@@ -1,5 +1,8 @@
 <?php
-class ses
+
+namespace App\Lib;
+
+class Ses
 {
     static array $r = [];
     static array $er = [];

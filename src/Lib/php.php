@@ -1,21 +1,20 @@
 <?php
-class php
+
+namespace App\Lib;
+
+class Php
 {
     //arrays
-    static function expl(string $s, string $d, int $n = 2): string
+    static function expl(string $s, string $d, int $n = 2): array
     {
         $r = explode($s, $d);
         for ($i = 0; $i < $n; $i++)
             $rb[] = $r[$i] ?? '';
         return $rb;
     }
-    static function implode_j(string $d): string
+    static function implode_j(array $r): string
     {
         $rb = [];
-        if (!is_array($d))
-            $r[] = $d;
-        else
-            $r = $d;
         foreach ($r as $k => $v)
             if ($v == 'this' or $v == 'event')
                 $rb[] = $v;

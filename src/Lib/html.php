@@ -2,6 +2,8 @@
 
 namespace App\Lib;
 
+use App\Lib\Php;
+
 class Html
 {
     static function atr(array $r): string
@@ -39,7 +41,7 @@ class Html
 
     static function atj(string $d, string $j): string
     {
-        return $d . '(' . implode_j($j) . ');';
+        return $d . '(' . Php::implode_j($j) . ');';
     }
     static function ajax(string $j, string $v, string $c = '', array $p = []): string
     {
