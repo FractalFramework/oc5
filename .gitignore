@@ -54,7 +54,4 @@ composer.json
 composer.lock
 vendor
 .vscode
-Article.php
-Category.php
-Root.php
-src/public/lib.php
+.env.*

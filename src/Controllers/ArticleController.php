@@ -21,14 +21,14 @@ class ArticleController extends Main
         return self::query($sql, $blind, $class, $one_result);
     }
 
-    public static function all(): object
+    public static function all(): array
     {
         $sql = 'select ' . self::$table . '.id,title,content,category
         from ' . self::$table . '
         left join cats
         on cats.id=catid
         order by ' . self::$table . '.up desc';
-        return self::query($sql);
+        return self::query($sql, [], ArticleEntity::class);
     }
 
     public static function lasts(): array

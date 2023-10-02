@@ -7,15 +7,24 @@ use App\Models\Connect;
 
 class Db
 {
-    private static array $params = ['host' => 'localhost', 'user' => 'root', 'pass' => 'dev', 'base' => 'oc5'];
     private static ?object $db;
 
     public static function getDb()
     {
         if (!isset(self::$db)) {
-            self::$db = new Connect(self::$params);
+            $params = self::params();
+            self::$db = new Connect($params);
         }
         return self::$db;
     }
 
+    private static function params(string $db = ''): array
+    {
+        return [
+            'host' => $_ENV['HOST'],
+            'user' => $_ENV['USER'],
+            'pass' => $_ENV['PASS'],
+            'base' => $db ? $db : $_ENV['BASE']
+        ];
+    }
 }

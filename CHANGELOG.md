@@ -32,10 +32,18 @@ Database : `docs/database`
 
 Running a Sql query.
 
-- installing Composer
+- installing Composer (and made it works)
 - use of its autoload
 - installing the database connection classes
 - launching a query
 - installing Phpcs and normalize the code
 - add types of variables
 
+## Issue 4 : DotEnv
+
+- use types of variables and methods
+- use strict_types
+- reshape way to specify the classes used by Pdo (in Entity)
+- install dotenv
+- displace critical values in .env
+- rechape sqlconnection

@@ -11,9 +11,6 @@ class Connect
 
     public function __construct(private array $params = [])
     {
-        if (!$params)
-            $params = ['host' => 'localhost', 'user' => 'root', 'pass' => 'dev', 'base' => 'oc5'];
-        $this->params = $params;
     }
 
     private function getPDO()
