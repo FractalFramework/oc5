@@ -47,3 +47,8 @@ Running a Sql query.
 - install dotenv
 - displace critical values in .env
 - rechape sqlconnection
+- phpcs
+- system of navigation using ajax
+
+## Issue 5 : Templating
+
