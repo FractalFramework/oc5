@@ -1,0 +1,19 @@
+{% extends 'main.html.twig' %}
+{% block posts %}{% endblock %}
+{% block post %}
+	<div class="post">
+		<h1>{{results.title | raw }}</h1>
+		<div class="excerpt">{{results.excerpt | raw }}</div>
+		<div class="content">{{results.content | raw }}</div>
+	</div>
+{% endblock post %}
+
+{% block comments %}
+	<div class="comments">
+		<h1>Commentaires</h1>
+		{% for comment in comments %}
+			<h3>{{comment.from | raw }}</h3>
+			<p>{{comment.content | raw }}</p>
+		{% endfor %}
+	</div>
+{% endblock comments %}

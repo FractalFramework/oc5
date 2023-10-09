@@ -1,9 +1,10 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Models;
 
-use \PDO;
+use PDO;
 
 class Connect
 {
@@ -13,7 +14,7 @@ class Connect
     {
     }
 
-    private function getPDO()
+    private function getPDO(): object
     {
         if (!$this->pdo) {
             ['host' => $host, 'user' => $user, 'pass' => $pass, 'base' => $base] = $this->params;
@@ -24,10 +25,10 @@ class Connect
         return $this->pdo;
     }
 
-    public function query(string $sql, string $class): array
+    public function query(string $sql, string $class): object //wtf
     {
-        $req = $this->getPDO()->query($sql);
-        $datas = $req->fetchAll(PDO::FETCH_CLASS, $class);
+        $stmt = $this->getPDO()->query($sql);
+        $datas = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_CLASSTYPE, $class);
         return $datas;
     }
 
@@ -37,13 +38,15 @@ class Connect
         string $class,
         int $one
     ): object {
-        $req = $this->getPDO()->prepare($sql);
-        $req->execute($queries);
-        $req->setFetchMode(PDO::FETCH_CLASS, $class);
+        $stmt = $this->getPDO()->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS | PDO::FETCH_PROPS_LATE, $class); // | PDO::FETCH_CLASSTYPE
+        $stmt->execute($queries);
         if ($one) {
-            $datas = $req->fetch();
+            $datas = $stmt->fetch(PDO::FETCH_CLASS | PDO::FETCH_CLASSTYPE);
         } else {
-            $datas = $req->fetchAll();
+            //echo $class;
+            $datas = $stmt->fetchAll(PDO::FETCH_CLASS | PDO::FETCH_CLASSTYPE);
+            //var_dump($datas);
         }
         return $datas;
     }

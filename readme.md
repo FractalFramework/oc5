@@ -41,5 +41,8 @@ initialized 2023-08-01
 - ajax.js : motor of actions in ajax
 - lib.js : common functions, including the control of the states
 
+/src/css
+- core.css
+
 //commands
 ./vendor/bin/phpcs src/Controllers

@@ -1,23 +1,21 @@
 <?php
 
 declare(strict_types=1);
-namespace App\Controllers;
 
-use App\Models\Main;
-use App\Entities\UserEntity;
+namespace App\Services;
 
-class UserController extends Main
+use App\Services\UserService;
+use App\Controllers\TemplateController;
+
+class UserController extends UserService
 {
 
-    protected static string $table = 'users';
-
-    public static function find(int $id): object
+    public function user(int $id = 1): void
     {
-        $sql = 'select name from ' . self::$table . ' where id=?';
-        $class = UserEntity::class;
-        $blind = [$id];
-        $one_result = 1;
-        return self::query($sql, $blind, $class, $one_result);
+        $datas = $this->findUserFromId($id);
+        $array['name'] = $datas[0]->name;
+        $template = new TemplateController('user');
+        $template->call($array);
     }
 
 }

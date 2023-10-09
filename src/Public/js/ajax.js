@@ -51,20 +51,18 @@ function jsonput(keys, json) {
     }
 }
 
-//target,tg2|app,mth|var1,var2|inp1,inp2 //tg;a;tp;g;p
-function bj(ob) { var val = ob.dataset.bj; bjcall(val); }
 function bjcall(val) {//if(typeof x!='undefined')clearTimeout(x);
     var dn = val.split('|'); var fd = new FormData();
     var pp = '&_tg=' + dn[0]; var tp = '';
     if (dn[0].indexOf(',') != -1) tp = 'json';
-    if (dn[1].indexOf('/') != -1) {
+    /*if (dn[1].indexOf('/') != -1) {
         var url = dn[1];
         var sn = dn[1].split('/');
-        dn[1] = 'Rooter,' + sn[0];
+        dn[1] = sn[0];
         dn[2] = 'p1=' + sn[1];
-        if (sn[2]) dn[2] += 'p2=' + sn[2];
+        if (sn[2]) dn[2] += ',p2=' + sn[2];
         updateurl(url, dn);
-    }
+    }*/
     if (dn[2]) {
         prm = dn[2].split(',');
         for (i = 0; i < prm.length; i++) { var p = prm[i].split('='); fd.append(p[0], p[1]); }
@@ -75,6 +73,9 @@ function bjcall(val) {//if(typeof x!='undefined')clearTimeout(x);
     }
     ajax_req(dn[0], dn[1], fd, pp, tp);
 }
+
+//target{,tg2}|app|p1=a,p2=b|inp1,inp2 //app called by Rooter
+function bj(ob) { var val = ob.dataset.bj; bjcall(val); }
 
 function bg(ob) {
     var j = ob.dataset.bj; var act = active(ob); var dn = j.split('|');
@@ -89,3 +90,18 @@ function bh(o) {
     updateurl(com, j);
     return false;
 }
+
+//hlinks detectors
+function classAction(evt) {
+    let css = evt.target.className; pr(css);
+    if (css === 'ajaxCall')
+        bj(this);
+    else if (css === 'ajaxToggle')
+        bg(this);
+    else if (css === 'ajaxLink')
+        bh(this);
+    return false;
+}
+//document.body.addEventListener('click', classAction(evt), false);
+const divs = document.querySelectorAll('.ajaxLink');
+divs.forEach(el => el.addEventListener('click', evt => { classAction(evt); }));

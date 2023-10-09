@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{pageTitle}}
+{% endblock %}
+{% block nav %}
+	<a href="/test" onclick="return bh(this)">test</a>
+	<a href="/home" onclick="return bh(this)">Home</a>
+	<a href="/posts" onclick="return bh(this)">Articles</a>
+	<a href="/post/2" onclick="return bh(this)">Article 2</a>
+	<a onclick="return bg(this)" data-bj="target|categories" class="ajaxCall">Catégories (Toggle)</a>
+	<div id="target"></div>
+{% endblock nav %}
+{% block main %}
+	{% block post %}{% endblock post %}
+	{% block posts %}{% endblock posts %}
+	{% block comments %}{% endblock comments %}
+{% endblock main %}

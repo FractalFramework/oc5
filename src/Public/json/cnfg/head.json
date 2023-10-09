@@ -1,0 +1,23 @@
+[
+    {
+        "tagb":["title","hello"]
+    },
+    {
+        "link":["shortcut icon","/favicon.ico"]
+    },
+    {
+        "css":"lib"
+    },
+    {
+        "css":"core"
+    },
+    {
+        "js":"lib"
+    },
+    {
+        "js":"ajax"
+    },
+    {
+        "js":"core"
+    }
+]

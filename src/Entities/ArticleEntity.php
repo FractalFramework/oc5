@@ -4,15 +4,20 @@ namespace App\Entities;
 
 class ArticleEntity
 {
-
-    public int $id = 0;
+    public string $id = '';
+    public string $cat_id = '';
     public string $title = '';
     public string $content = '';
     public string $category = '';
 
     public function getUrl(): string
     {
-        return '/' . $this->id;
+        return '/post/' . $this->id;
+    }
+
+    public function getId(): int
+    {
+        return $this->id;
     }
 
     public function getTitle(): string
@@ -28,6 +33,11 @@ class ArticleEntity
     public function getCategory(): string
     {
         return $this->category;
+    }
+
+    public function getCat_id(): int
+    {
+        return $this->cat_id;
     }
 
 }

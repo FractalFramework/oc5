@@ -1,68 +1,91 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Controllers;
 
+use App\Services\ArticleService;
+use App\Controllers\TemplateController;
 
-use App\Models\Main;
-use App\Models\Db;
-use App\Entities\ArticleEntity;
-
-class ArticleController extends Main
+class ArticleController extends ArticleService
 {
-    protected static string $table = 'posts';
+    private $prefix = '';
 
-    public static function post(int $id): object
+    public function __construct($target)
     {
-        $sql = 'select id,title,content from ' . self::$table . ' where id=?';
-        $class = ArticleEntity::class;
-        $one_result = 1;
-        $blind = [$id];
-        return self::query($sql, $blind, $class, $one_result);
+        if ($target) {
+            $this->prefix = 'alone_';
+        }
     }
 
-    public static function all(): array
+    public function post(int $id): void
     {
-        $sql = 'select ' . self::$table . '.id,title,content,category
-        from ' . self::$table . '
-        left join cats
-        on cats.id=catid
-        order by ' . self::$table . '.up desc';
-        return self::query($sql, [], ArticleEntity::class);
+        $datas = $this->articleById($id);
+        //vd($datas);
+        $template_page = $this->prefix . 'post';
+        $template = new TemplateController($template_page);
+        $array['results'] = [
+            'id' => $datas->id,
+            'title' => $datas->title,
+            'content' => $datas->content,
+        ];
+        //pr($array);
+        $template->call($array);
     }
 
-    public static function lasts(): array
+    public function posts(): void
     {
-        $sql = 'select ' . self::$table . '.id,title,content,category
-        from ' . self::$table . '
-        left join cats
-        on cats.id=catid
-        limit 10';
-        $class = ArticleEntity::class;
-        $one_result = 0;
-        $blind = [];
-        return self::query($sql, $blind, $class, $one_result);
+        $datas = $this->allArticles();
+        $template_page = $this->prefix . 'posts';
+        $template = new TemplateController($template_page);
+        $array = [];
+        foreach ($datas as $k => $obj) {
+            $array[] = [
+                'id' => $obj->id,
+                'title' => $obj->category,
+                'excerpt' => $obj->excerpt,
+                'category' => $obj->category,
+            ];
+        }
+        $array['results'] = $array;
+        $template->call($array);
     }
 
-    public static function artByCat($catid): object
+    public function lasts(): void
     {
-        $sql = 'select ' . self::$table . '.id,title,content,category
-        from ' . self::$table . '
-        left join cats
-        on cats.id=catid
-        where catid=?
-        order by ' . self::$table . '.up desc';
-        $blind = [$catid];
-        return self::query($sql, $blind);
+        $datas = $this->lastsArticles();
+        $template_page = $this->prefix . 'post';
+        $template = new TemplateController($template_page);
+        $array = [];
+        foreach ($datas as $k => $obj) {
+            $array[] = [
+                'id' => $obj->id,
+                'title' => $obj->category,
+                'excerpt' => $obj->excerpt,
+                'category' => $obj->category,
+            ];
+        }
+        $array['results'] = $array;
+        $template->call($array);
     }
 
-    public static function categories(): object
+    public function category(int $cat_id): void
     {
-        $sql = 'select id,title,content from ' . self::$table . ' where id=?';
-        $blind = [1];
-        $class = ArticleEntity::class;
-        $one_result = 0;
-        return self::query($sql, $blind, $class, $one_result);
+        $datas = $this->ArticlesByCategory($cat_id);
+        pr($datas);
+        $template_page = $this->prefix . 'posts';
+        $template = new TemplateController($template_page);
+        $array = [];
+        foreach ($datas as $k => $obj) {
+            $array[] = [
+                'id' => $obj->id,
+                'title' => $obj->category,
+                'excerpt' => $obj->excerpt,
+                'category' => $obj->category,
+            ];
+        }
+        $array['results'] = $array;
+        $template->call($array);
     }
 
 }

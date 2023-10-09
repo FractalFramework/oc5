@@ -1,31 +1,43 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Controllers;
 
-use App\Entities\CategoryEntity;
+use App\Services\CategoryService;
+use App\Controllers\TemplateController;
 
-use App\Models\Main;
-
-class CategoryController extends Main
+class CategoryController extends CategoryService
 {
+    private $prefix = '';
 
-    protected static string $table = 'cats';
-
-    public static function all(): array
+    public function __construct($target)
     {
-        $sql = 'select id,category from ' . self::$table . '';
-        $class = CategoryEntity::class;
-        return self::query($sql, [], $class, 0);
+        if ($target) {
+            $this->prefix = 'alone_';
+        }
     }
 
-    public static function find(int $id): object
+    public function all(int $id = 1): void
     {
-        $sql = 'select category from ' . self::$table . ' where id=?';
-        $class = CategoryEntity::class;
-        $blind = [$id];
-        $one_result = 1;
-        return self::query($sql, $blind, $class, $one_result);
+        $datas = $this->allCategories();
+        $template_page = $this->prefix . 'categories';
+        $template = new TemplateController($template_page);
+        $array = [];
+        foreach ($datas as $k => $obj) {
+            $array[] = [
+                'cat_id' => $obj->id,
+                'category' => $obj->category,
+            ];
+        }
+        $array['results'] = $array;
+        $template->call($array);
+    }
+
+    public function find(int $cat_id = 1): string
+    {
+        $datas = $this->findCategoryFromId($cat_id);
+        return $datas->category;
     }
 
 }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+	<head>
+		<title>
+			{% block title %}hello{% endblock %}
+		</title>
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link href="/src/Public/css/lib.css?{{mtime}}" rel="stylesheet">
+		<link href="/src/Public/css/core.css?{{mtime}}" rel="stylesheet">
+		<script src="/src/Public/js/lib.js?{{mtime}}"></script>
+		<script src="/src/Public/js/ajax.js?{{mtime}}"></script>
+		<script type="text/javascript">
+			state = {"page": "{{ page }}"}; var maintg = "main";</script>
+	</head>
+	<body>
+		<div id="page" class="grid">
+			<header class="grid-header">
+				<div class="banner">
+					<div class="blog-title">
+						<a href="/">{% block blogtitle %}etc{% endblock %}</a>
+					</div>
+					<div class="blog-subtitle">{% block subtitle %}hello{% endblock %}</div>
+				</div>
+			</header>
+			<nav class="grid-nav">
+				<div class="nav" id="nav">
+					{% block nav %}{% endblock %}
+				</div>
+			</nav>
+			<main class="grid-main">
+				<div class="main" id="main">
+					{% block main %}main{% endblock %}
+					{% block comments %}{% endblock %}
+				</div>
+			</main>
+			<footer class="grid-foot">
+				{% block footer %}dav@2023{% endblock %}
+			</main>
+		</div>
+	</body>
+</html>

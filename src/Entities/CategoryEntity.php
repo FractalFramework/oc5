@@ -4,7 +4,6 @@ namespace App\Entities;
 
 class CategoryEntity
 {
-
     public string $category = '';
     public int $id = 0;
 

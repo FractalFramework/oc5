@@ -1,0 +1,37 @@
+[
+    [
+        "div",
+        {
+            "id":"track{id}",
+            "class":"track"
+        },
+        [
+            [
+                "div",
+                {"class":"infos"},
+                [
+                    [
+                        "span",
+                        {"class":"author"},
+                        "{name}"
+                    ],
+                    [
+                        "span",
+                        {"class":"date"},
+                        "{date}"
+                    ],
+                    [
+                        "span",
+                        {},
+                        "{pub}"
+                    ]
+                ]
+            ],
+            [
+                "div",
+                {"class":"track-content"},
+                "{txt}"
+            ]
+        ]
+    ]
+]

@@ -1,0 +1,15 @@
+{% block posts %}
+	<div class="posts">
+		<h1>hello</h1>
+		{% block body %}
+			{% for result in results %}
+				<div class="post{{result.id}}">
+				<h2>{{result.title | raw }}</h2>
+				<p>{{result.excerpt | raw }}</p>
+				</div>
+			{% endfor %}
+		{% endblock body %}
+	</div>
+{% endblock posts %}
+{% block post %}{% endblock %}
+{% block comments %}{% endblock %}

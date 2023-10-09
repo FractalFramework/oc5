@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace App\Models;
 
 use App\Models\Connect;
@@ -9,7 +10,7 @@ class Db
 {
     private static ?object $db;
 
-    public static function getDb()
+    public static function getDb(): object
     {
         if (!isset(self::$db)) {
             $params = self::params();

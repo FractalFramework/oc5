@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+    {% block header %}
+		<meta charset="utf-8">
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link href="/src/css/core.css?{{mtime}}" rel="stylesheet">
+		<script src="/src/js/lib.js?{{mtime}}"></script>
+		<script src="/src/js/ajax.js?{{mtime}}"></script>
+		<script type="text/javascript">state = {"page": "{{ page }}"}; var maintg = "main";</script>
+    {% endblock %}

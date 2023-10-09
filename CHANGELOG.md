@@ -1,24 +1,22 @@
-
-## Issues
+# Issues
 
 - diagrams ✔
 - database ✔
-- sqlconnection
-- navigation
-- templating
-- posts
-- comments
-- forms
-- login
-- edition
-- contacts
-- admin
-- security
-
+- sqlconnection ✔
+- navigation ✔
+- templating 
+- posts 
+- comments 
+- forms 
+- login 
+- edition 
+- contacts 
+- admin 
+- security 
 
 ## Issue 1 : sqlconnection
 
-Diagrams : `/docs/diagrams`)
+Diagrams : `/docs/diagrams`
 
 - sequential diagram
 - models of datas
@@ -51,4 +49,5 @@ Running a Sql query.
 - system of navigation using ajax
 
 ## Issue 5 : Templating
+- install Twig
 
