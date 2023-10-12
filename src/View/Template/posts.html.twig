@@ -1,6 +1,7 @@
+{% extends 'main.html.twig' %}
 {% block posts %}
 	<div class="posts">
-		<h1>hello</h1>
+		<h1>{{pageTitle}}</h1>
 		{% block body %}
 			{% for result in results %}
 				<div class="post{{result.id}}">

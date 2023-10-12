@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entity;
 
 class CategoryEntity
 {
-    public string $category = '';
     public int $id = 0;
+    public string $category = '';
 
     public function getUrl(): string
     {
@@ -15,6 +15,11 @@ class CategoryEntity
     public function getCategory(): string
     {
         return $this->category;
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 
 }

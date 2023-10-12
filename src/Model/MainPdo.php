@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Models;
+namespace App\Model;
 
-use App\Models\Db;
+use App\Model\Db;
 
 class MainPdo
 {
+    /*
     public static function query(
         string $sql,
         array $queries = [],
@@ -19,7 +20,7 @@ class MainPdo
         }
         return Db::getDb()->query($sql, $class);
     }
-
+*/
     public function __get(string $key): string
     {
         $method = 'get' . ucfirst($key);

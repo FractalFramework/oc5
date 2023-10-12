@@ -2,9 +2,9 @@
 
 namespace App;
 
-use App\Controllers\ArticleController;
-use App\Controllers\CategoryController;
-use App\Controllers\TemplateController;
+use App\Controller\ArticleController;
+use App\Controller\CategoryController;
+use App\Controller\TemplateController;
 
 class Rooter
 {
@@ -39,21 +39,19 @@ class Rooter
     {
         //pr($params);
         $com = $params['com'] ?? 'test'; //default
-        $id = $params['p1'] ?? 1; //interessant
+        $id = $params['p1'] ?? 1;
         $target = get('_tg');
-        $article = new ArticleController($target);
-        $category = new CategoryController($target);
+        $articleController = ArticleController::getInstance($target);
+        $categoryController = CategoryController::getInstance($target);
         return match ($com) {
             'test' => $this->test($params),
-            'home' => $article->post(1),
-            'post' => $article->post((int) $id),
-            'posts' => $article->posts($id),
-            'category' => $article->category($id),
-            'categories' => $category->allCategories(),
-            default => $article->post(1)
+            'home' => $articleController->displayPost(1),
+            'post' => $articleController->displayPost((int) $id),
+            'posts' => $articleController->displayPosts(),
+            'lasts' => $articleController->displayLasts(),
+            'category' => $articleController->displayCategory((int) $id),
+            'categories' => $categoryController->displayCategories(),
+            default => $articleController->displayPost(1)
         };
-
-
     }
-
 }

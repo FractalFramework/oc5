@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Repository;
 
-use App\Models\MainPdo;
-use App\Entities\UserEntity;
+use App\Model\MainPdo;
+use App\Entity\UserEntity;
 
-class UserService extends MainPdo
+class UserRepository extends MainPdo
 {
     protected static string $table = 'users';
 

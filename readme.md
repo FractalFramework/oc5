@@ -16,17 +16,17 @@ initialized 2023-08-01
 /src
 - Rooter.php : concentrator of all actions on the site
 
-/src/Controllers :
+/src/Controller :
 - UserController.php : controller of user
 - ArticleController.php : controller of articles
 - CategoryController.php : controller of categories
 
-/src/Entities
+/src/Entity
 - UserEntity.php : returned class from Pdo
 - ArticleEntity.php : returned class from Pdo
 - CategoryEntity.php : returned class from Pdo
 
-/src/Models
+/src/Model
 - Connect.php : Pdo database connection with options
 - Db.php : Calling up the database with connection parameters
 - Main.php : Generic class, concentrator of requests to Db, and distributor of methods called by the class returned by Pdo.
@@ -45,4 +45,4 @@ initialized 2023-08-01
 - core.css
 
 //commands
-./vendor/bin/phpcs src/Controllers
+./vendor/bin/phpcs src/Controller

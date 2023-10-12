@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controllers;
+namespace App\Controller;
 
-use App\Repositories\TemplateRepository;
+use App\Controller\AbstractTemplateController;
 
-class TemplateController extends TemplateRepository
+class TemplateController extends AbstractTemplateController
 {
 
     public function call(array $params): void

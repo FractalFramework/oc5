@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Entities;
+namespace App\Entity;
 
 class ArticleEntity
 {
-    public string $id = '';
-    public string $cat_id = '';
+    public int $id;
+    public int $cat_id;
     public string $title = '';
+    public string $excerpt = '';
     public string $content = '';
     public string $category = '';
 
     public function getUrl(): string
     {
-        return '/post/' . $this->id;
+        return 'post/' . $this->id;
     }
 
     public function getId(): int
@@ -28,6 +29,11 @@ class ArticleEntity
     public function getContent(): string
     {
         return $this->content;
+    }
+
+    public function getExcerpt(): string
+    {
+        return $this->excerpt;
     }
 
     public function getCategory(): string

@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Services;
+namespace App\Service;
 
-use App\Services\UserService;
-use App\Controllers\TemplateController;
+use App\Repository\UserRepository;
+use App\Controller\TemplateController;
 
-class UserController extends UserService
+class UserController extends UserRepository
 {
 
     public function user(int $id = 1): void

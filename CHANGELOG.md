@@ -19,7 +19,7 @@
 Diagrams : `/docs/diagrams`
 
 - sequential diagram
-- models of datas
+- Model of datas
 - classes diagram
 
 ## Issue 2 : sqlconnection
