@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Model\MainPdo;
-use App\Entity\ArticleEntity;
 use App\Model\Connect;
+use App\Entity\ArticleEntity;
+use App\Model\ArticleModel;
 use PDO;
 
 class ArticleRepository extends MainPdo
@@ -14,10 +15,12 @@ class ArticleRepository extends MainPdo
     protected static string $table = 'posts';
     private static $instance;
     private Connect $connect;
+    private ArticleModel $articleModel;
 
     private function __construct()
     {
         $this->connect = Connect::getInstance();
+        $this->articleModel = ArticleModel::getInstance();
     }
 
     public static function getInstance(): self
@@ -28,14 +31,16 @@ class ArticleRepository extends MainPdo
         return self::$instance;
     }
 
-    public function getById(int $id): ArticleEntity
+    public function getById(int $id): ArticleEntity //ArticleModel//ArticleEntity
     {
         $sql = 'select id,title,content from posts where id=?';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
         $stmt->execute([$id]);
-        return $stmt->fetch();
+        $array = $stmt->fetch();
+        return $array;
+        //return $this->articleModel->specifyDatas($array);
     }
 
     public function getAll(int $limit = 10): array

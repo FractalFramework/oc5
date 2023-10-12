@@ -96,7 +96,7 @@ class ArticleController
             ];
         }
         $array['results'] = $array;
-        $category = $this->categoryController->displayCategory($cat_id); //
+        $category = $this->categoryController->displayCategory($cat_id); //unuseful
         $array['category'] = $category;
         $array['pageTitle'] = 'Articles de ' . $category;
         $template->call($array);

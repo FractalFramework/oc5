@@ -25,28 +25,25 @@ class ArticleService
         return self::$instance;
     }
 
-    public function getPost(int $id): ArticleEntity //ArticleModel
+    public function getPost(int $id): ArticleEntity //ArticleModel//ArticleEntity
     {
         return $this->articleRepository->getById($id);
         //todo: transformer articleEntity en un articleModel
     }
 
-    public function getPosts(int $number): array //ArticleModel
+    public function getPosts(int $number): array
     {
         return $this->articleRepository->getAll($number);
-        //todo: transformer articleEntity en un articleModel
     }
 
-    public function getLasts(int $number): array //ArticleModel
+    public function getLasts(int $number): array
     {
         return $this->articleRepository->getLasts($number);
-        //todo: transformer articleEntity en un articleModel
     }
 
-    public function getPostsCategory(int $id): array //ArticleModel
+    public function getPostsCategory(int $id): array
     {
         return $this->articleRepository->getByCategory($id);
-        //todo: transformer articleEntity en un articleModel
     }
 
 }

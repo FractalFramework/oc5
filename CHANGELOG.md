@@ -50,4 +50,6 @@ Running a Sql query.
 
 ## Issue 5 : Templating
 - install Twig
+- install dump for Twig
+- architecture controller+service+repository+entity
 

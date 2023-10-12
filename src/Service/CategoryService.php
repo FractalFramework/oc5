@@ -25,16 +25,14 @@ class CategoryService
         return self::$instance;
     }
 
-    public function getCategories(): array //CategoryModel
+    public function getCategories(): array
     {
         return $this->categoryRepository->allCategories();
-        //todo: transformer categoryEntity en un categoryModel
     }
 
-    public function getCategory(int $id): CategoryEntity //CategoryModel
+    public function getCategory(int $id): CategoryEntity
     {
         return $this->categoryRepository->findCategoryFromId($id);
-        //todo: transformer categoryEntity en un categoryModel
     }
 
 }
