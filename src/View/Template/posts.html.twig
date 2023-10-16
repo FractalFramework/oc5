@@ -5,7 +5,9 @@
 		{% block body %}
 			{% for result in results %}
 				<div class="post{{result.id}}">
-				<h2>{{result.title | raw }}</h2>
+				<a href="post/{{result.id}}" onclick="return bh(this)">
+					<h2>{{result.title | raw }}</h2>
+				</a>
 				<p>{{result.excerpt | raw }}</p>
 				</div>
 			{% endfor %}

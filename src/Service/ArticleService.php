@@ -6,15 +6,18 @@ namespace App\Service;
 
 use App\Repository\articleRepository;
 use App\Entity\ArticleEntity;
+use App\Model\ArticleModel;
 
 class ArticleService
 {
     private static $instance;
     private ArticleRepository $articleRepository;
+    private ArticleModel $articleModel;
 
     private function __construct()
     {
         $this->articleRepository = ArticleRepository::getInstance();
+        $this->articleModel = ArticleModel::getInstance();
     }
 
     public static function getInstance(): self
@@ -25,10 +28,11 @@ class ArticleService
         return self::$instance;
     }
 
-    public function getPost(int $id): ArticleEntity //ArticleModel//ArticleEntity
+    public function getPost(int $id): ArticleEntity //ArticleModel
     {
-        return $this->articleRepository->getById($id);
         //todo: transformer articleEntity en un articleModel
+        $articleEntity = $this->articleRepository->getById($id);
+        return $this->articleModel->specifyDatas($articleEntity);
     }
 
     public function getPosts(int $number): array

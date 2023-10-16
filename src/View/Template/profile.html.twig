@@ -1,0 +1,11 @@
+{% extends 'main.html.twig' %}
+{% block posts %}{% endblock %}
+{% block post %}
+	<div class="profile">
+		<h1>{{results.name | raw }}</h1>
+		<div class="excerpt">{{results.surname | raw }}</div>
+		<div class="content">{{results.mail | raw }}</div>
+	</div>
+{% endblock post %}
+
+{% block comments %}{% endblock comments %}

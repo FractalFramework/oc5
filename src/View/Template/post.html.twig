@@ -10,7 +10,7 @@
 
 {% block comments %}
 	<div class="comments">
-		<h1>Commentaires</h1>
+		<h3>Commentaires</h3>
 		{% for comment in comments %}
 			<h3>{{comment.from | raw }}</h3>
 			<p>{{comment.content | raw }}</p>

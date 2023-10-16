@@ -5,7 +5,7 @@ namespace App\Entity;
 class ArticleEntity
 {
     public int $id;
-    public int $cat_id;
+    public int $catId;
     public string $title = '';
     public string $excerpt = '';
     public string $content = '';
@@ -41,9 +41,9 @@ class ArticleEntity
         return $this->category;
     }
 
-    public function getCat_id(): int
+    public function getCatid(): int
     {
-        return $this->cat_id;
+        return $this->catId;
     }
 
 }

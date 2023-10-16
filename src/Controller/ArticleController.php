@@ -20,8 +20,8 @@ class ArticleController
         if ($target) {
             $this->prefix = 'alone_';
         }
-        $this->articleService = ArticleService::getInstance();
-        $this->categoryController = CategoryController::getInstance('1');
+        $this->articleService = ArticleService::getInstance($target);
+        $this->categoryController = CategoryController::getInstance($target);
     }
 
     public static function getInstance(string $target): self
@@ -34,11 +34,11 @@ class ArticleController
 
     public function displayPost(string $id): void
     {
-        $article = $this->articleService->getPost((int) $id); //vd($datas);
+        $article = $this->articleService->getPost((int) $id);
         $template_page = $this->prefix . 'post';
         $template = new TemplateController($template_page);
-        $array['results'] = $article; //article //vient de model //pr($array);
-        $template->call($array);
+        $res['results'] = $article; //article //vient de model //pr($res);
+        $template->call($res);
     }
 
     public function displayPosts(): void
@@ -50,34 +50,34 @@ class ArticleController
         foreach ($datas as $k => $obj) {
             $articles[] = [
                 'id' => $obj->id,
-                'title' => $obj->category,
+                'title' => $obj->title,
                 'excerpt' => $obj->excerpt,
                 'category' => $obj->category,
             ];
         }
-        $array['results'] = $articles;
+        $res['results'] = $articles;
         //pr($articles);
-        $array['pageTitle'] = 'Tous les articles';
-        $template->call($array);
+        $res['pageTitle'] = 'Tous les articles';
+        $template->call($res);
     }
 
     public function displayLasts(): void
     {
         $datas = $this->articleService->getLasts(10);
-        $template_page = $this->prefix . 'post';
+        $template_page = $this->prefix . 'posts';
         $template = new TemplateController($template_page);
-        $array = [];
+        $res = [];
         foreach ($datas as $k => $obj) {
-            $array[] = [
+            $res[] = [
                 'id' => $obj->id,
-                'title' => $obj->category,
+                'title' => $obj->title,
                 'excerpt' => $obj->excerpt,
                 'category' => $obj->category,
             ];
         }
-        $array['results'] = $array;
-        $array['pageTitle'] = 'Derniers articles';
-        $template->call($array);
+        $res['results'] = $res;
+        $res['pageTitle'] = 'Derniers articles';
+        $template->call($res);
     }
 
     public function displayCategory(int $cat_id): void
@@ -86,20 +86,20 @@ class ArticleController
         //pr($datas);
         $template_page = $this->prefix . 'posts';
         $template = new TemplateController($template_page);
-        $array = [];
+        $res = [];
         foreach ($datas as $k => $obj) {
-            $array[] = [
+            $res[] = [
                 'id' => $obj->id,
-                'title' => $obj->category,
+                'title' => $obj->title,
                 'excerpt' => $obj->excerpt,
                 'category' => $obj->category,
             ];
         }
-        $array['results'] = $array;
+        $res['results'] = $res;
         $category = $this->categoryController->displayCategory($cat_id); //unuseful
-        $array['category'] = $category;
-        $array['pageTitle'] = 'Articles de ' . $category;
-        $template->call($array);
+        $res['category'] = $category;
+        $res['pageTitle'] = 'Articles de ' . $category;
+        $template->call($res);
     }
 
 }

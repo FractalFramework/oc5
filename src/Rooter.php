@@ -4,6 +4,7 @@ namespace App;
 
 use App\Controller\ArticleController;
 use App\Controller\CategoryController;
+use App\Controller\UserController;
 use App\Controller\TemplateController;
 
 class Rooter
@@ -43,6 +44,7 @@ class Rooter
         $target = get('_tg');
         $articleController = ArticleController::getInstance($target);
         $categoryController = CategoryController::getInstance($target);
+        $userController = UserController::getInstance($target);
         return match ($com) {
             'test' => $this->test($params),
             'home' => $articleController->displayPost(1),
@@ -51,6 +53,8 @@ class Rooter
             'lasts' => $articleController->displayLasts(),
             'category' => $articleController->displayCategory((int) $id),
             'categories' => $categoryController->displayCategories(),
+            'user' => $userController->displayName($id),
+            'profile' => $userController->displayProfile($id),
             default => $articleController->displayPost(1)
         };
     }
