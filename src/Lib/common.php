@@ -128,9 +128,7 @@ function implode_j(array $r): string
     return $ret;
 }
 
-
 //gets
-
 function gets(): array
 {
     $r = $_GET;
@@ -191,7 +189,7 @@ function post($k)
     return Ses::$r['post'][$k] ?? '';
 }
 
-#Service
+#service
 
 //ses
 function voc(string $d): string

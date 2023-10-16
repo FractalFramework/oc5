@@ -8,24 +8,25 @@ use App\Entity\ArticleEntity;
 
 class ArticleModel
 {
-    private static $datas;
     private static $instance;
+    private ArticleEntity $entity;
 
-    private function __construct()
+    private function __construct($entity)
     {
+        $this->entity = $entity;
     }
 
-    public static function getInstance(): self
+    public static function getInstance($entity): self
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self();
+            self::$instance = new self($entity);
         }
         return self::$instance;
     }
 
-    public function specifyDatas(ArticleEntity $datas): ArticleEntity
+    public function specifyEntity(): ArticleEntity
     {
-        return $datas;
+        return $this->entity;
     }
 
 }

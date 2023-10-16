@@ -17,7 +17,6 @@ class ArticleService
     private function __construct()
     {
         $this->articleRepository = ArticleRepository::getInstance();
-        $this->articleModel = ArticleModel::getInstance();
     }
 
     public static function getInstance(): self
@@ -28,11 +27,11 @@ class ArticleService
         return self::$instance;
     }
 
-    public function getPost(int $id): ArticleEntity //ArticleModel
+    public function getPost(int $id): ArticleEntity //ArticleEntity//ArticleModel
     {
         //todo: transformer articleEntity en un articleModel
-        $articleEntity = $this->articleRepository->getById($id);
-        return $this->articleModel->specifyDatas($articleEntity);
+        return $articleEntity = $this->articleRepository->getById($id);
+        return ArticleModel::getInstance($articleEntity);
     }
 
     public function getPosts(int $number): array

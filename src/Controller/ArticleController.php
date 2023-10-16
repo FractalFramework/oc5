@@ -20,7 +20,7 @@ class ArticleController
         if ($target) {
             $this->prefix = 'alone_';
         }
-        $this->articleService = ArticleService::getInstance($target);
+        $this->articleService = ArticleService::getInstance();
         $this->categoryController = CategoryController::getInstance($target);
     }
 
@@ -34,10 +34,11 @@ class ArticleController
 
     public function displayPost(string $id): void
     {
-        $article = $this->articleService->getPost((int) $id);
+        $datas = $this->articleService->getPost((int) $id);
+        //vd($datas);
         $template_page = $this->prefix . 'post';
         $template = new TemplateController($template_page);
-        $res['results'] = $article; //article //vient de model //pr($res);
+        $res['results'] = $datas; //article //vient de model //pr($res);
         $template->call($res);
     }
 
