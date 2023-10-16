@@ -12,6 +12,7 @@ use PDO;
 class UserRepository extends MainPdo
 {
     protected static string $table = 'users';
+    protected static string $socials = 'socials';
     private static $instance;
     private Connect $connect;
 
@@ -31,7 +32,7 @@ class UserRepository extends MainPdo
     public function userInfos(int $id): UserEntity
     {
         $sql = 'select users.id,name,mail,surname,slogan,banner,logo
-        from ' . self::$table . '
+        from users
         left join profile
         on users.id=uid
         where users.id=?';
@@ -50,6 +51,16 @@ class UserRepository extends MainPdo
         $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
         $stmt->execute([$id]);
         return $stmt->fetch();
+    }
+
+    public function userLinks(int $id): array
+    {
+        $sql = 'select url from socials where uid=?';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
+        $stmt->execute([$id]);
+        return $stmt->fetchAll();
     }
 
 }

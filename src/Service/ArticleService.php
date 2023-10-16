@@ -31,7 +31,7 @@ class ArticleService
     {
         //todo: transformer articleEntity en un articleModel
         return $articleEntity = $this->articleRepository->getById($id);
-        return ArticleModel::getInstance($articleEntity);
+        //return ArticleModel::getInstance($articleEntity);
     }
 
     public function getPosts(int $number): array

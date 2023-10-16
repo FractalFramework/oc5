@@ -1,7 +1,14 @@
 {% block post %}
 	<div class="profile">
 		<h1>{{results.name | raw }}</h1>
+		<img src="/img/{{results.banner }}" />
 		<div class="excerpt">{{results.surname | raw }}</div>
-		<div class="content">{{results.mail | raw }}</div>
+		<div class="content">{{results.slogan | raw }}</div>
 	</div>
 {% endblock post %}
+
+<div class="menu">
+{% for link in links %}
+	<a href="{{link.url}}">{{link.url | raw }}</a>
+{% endfor %}
+</div>

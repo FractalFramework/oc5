@@ -35,4 +35,9 @@ class UserService
         return $this->userRepository->userInfos($id);
     }
 
+    public function getLinks(int $id): array
+    {
+        return $this->userRepository->userLinks($id);
+    }
+
 }

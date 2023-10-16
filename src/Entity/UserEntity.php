@@ -11,6 +11,7 @@ class UserEntity
     public ?string $slogan = '';
     public ?string $banner = '';
     public ?string $logo = '';
+    public ?string $url = '';
 
     public function getId(): string
     {
@@ -39,6 +40,10 @@ class UserEntity
     public function getLogo(): string
     {
         return $this->logo;
+    }
+    public function getUrl(): string
+    {
+        return $this->url;
     }
 
 }

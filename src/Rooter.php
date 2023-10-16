@@ -4,6 +4,7 @@ namespace App;
 
 use App\Controller\ArticleController;
 use App\Controller\CategoryController;
+use App\Controller\HomeController;
 use App\Controller\UserController;
 use App\Controller\TemplateController;
 
@@ -36,7 +37,7 @@ class Rooter
         $template->call($datas);
     }
 
-    public function index(array $params): mixed
+    public function index(array $params): void
     {
         //pr($params);
         $com = $params['com'] ?? 'test'; //default
@@ -45,9 +46,10 @@ class Rooter
         $articleController = ArticleController::getInstance($target);
         $categoryController = CategoryController::getInstance($target);
         $userController = UserController::getInstance($target);
-        return match ($com) {
+        $homeController = HomeController::getInstance($target);
+        match ($com) {
             'test' => $this->test($params),
-            'home' => $articleController->displayPost(1),
+            'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
             'posts' => $articleController->displayPosts(),
             'lasts' => $articleController->displayLasts(),
