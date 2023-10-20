@@ -1,9 +1,9 @@
 {% block posts %}{% endblock %}
 {% block post %}
 	<div class="post">
-		<h1>{{results.title | raw }}</h1>
-		<div class="excerpt">{{results.excerpt | raw }}</div>
-		<div class="content">{{results.content | raw }}</div>
+		<h1>{{article.title | raw }}</h1>
+		<div class="excerpt">{{article.excerpt | raw }}</div>
+		<div class="content">{{article.content | raw }}</div>
 	</div>
 {% endblock post %}
 

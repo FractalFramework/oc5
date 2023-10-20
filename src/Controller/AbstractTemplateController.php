@@ -16,6 +16,8 @@ abstract class AbstractTemplateController
     {
         $this->loader = new FilesystemLoader('src/View/Template');
         $this->twig = new Environment($this->loader);
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
+        //$this->twig->addFilter('var_dump', new Twig_Filter_Function('var_dump'));
         $this->template = $template;
     }
 }
