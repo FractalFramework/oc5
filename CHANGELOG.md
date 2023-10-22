@@ -54,3 +54,6 @@ Running a Sql query.
 - install dump for Twig
 - architecture controller+service+repository+entity
 - architecture + model
+
+## Issue 6 : Posts
+- reading posts from id
