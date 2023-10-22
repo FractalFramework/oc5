@@ -23,11 +23,6 @@ class ArticleModel
         $articleModel->title = $entity->title;
         $articleModel->content = $entity->content;
         $articleModel->excerpt = $entity->excerpt;
-        $articleModel->results = [ //unused
-            'title' => $entity->title,
-            'content' => $entity->content,
-            'excerpt' => $entity->excerpt
-        ];
         return $articleModel;
     }
 }

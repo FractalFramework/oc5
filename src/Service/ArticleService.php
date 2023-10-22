@@ -28,22 +28,10 @@ class ArticleService
         return self::$instance;
     }
 
-    public function getPost(int $id): ArticleEntity
-    {
-        $articleEntity = $this->articleRepository->getById($id);
-        return $articleEntity;
-    }
-
-    public function getPostModel(int $id): ArticleModel
+    public function getPost(int $id): ArticleModel
     {
         $articleEntity = $this->articleRepository->getById($id);
         return ArticleModel::fromDatabase($articleEntity);
-    }
-    public function getPostModel2(int $id): ArticleModel2
-    {
-        $articleEntity = $this->articleRepository->getById($id);
-        $articleModel = new ArticleModel2();
-        return $articleModel->fromDatabase($articleEntity);
     }
 
     public function getPosts(int $number): array

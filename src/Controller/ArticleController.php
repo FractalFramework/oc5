@@ -34,12 +34,8 @@ class ArticleController
 
     public function displayPost(string $id): void
     {
-        //$articleModel = $this->articleService->getPost((int) $id);
-        $articleModel = $this->articleService->getPostModel((int) $id);
-        //$articleModel = $this->articleService->getPostModel2((int) $id);
-        //vd($articleModel);
+        $articleModel = $this->articleService->getPost((int) $id);
         $res['article'] = $articleModel;
-        //pr($res);
         $template_page = $this->prefix . 'post';
         $template = new TemplateController($template_page);
         $template->call($res);
