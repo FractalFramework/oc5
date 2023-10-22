@@ -49,7 +49,8 @@ Running a Sql query.
 - system of navigation using ajax
 
 ## Issue 5 : Templating
+- using env variables
 - install Twig
 - install dump for Twig
 - architecture controller+service+repository+entity
-
+- architecture + model
