@@ -17,7 +17,16 @@ class ArticleModel
     {
     }
 
-    public static function fromDatabase(ArticleEntity $entity): self
+    public static function fromFetch(ArticleEntity $entity): self
+    {
+        $articleModel = new self();
+        $articleModel->title = $entity->title;
+        $articleModel->content = $entity->content;
+        $articleModel->excerpt = $entity->excerpt;
+        return $articleModel;
+    }
+
+    public static function fromFetchAll(ArticleEntity $entity): self
     {
         $articleModel = new self();
         $articleModel->title = $entity->title;

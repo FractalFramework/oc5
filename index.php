@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 //declare(strict_types=1);
 
 require 'vendor/autoload.php';
-require 'src/Lib/common.php';
+require 'src/Common/lib.php';
 
 $g = gets();
 

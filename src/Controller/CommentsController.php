@@ -37,6 +37,7 @@ class CommentsController
         $array['result'] = $datas;
         $template->call($array);
     }
+
     public function displayComments(int $id = 1): void
     {
         $datas = $this->commentsService->getComments($id);

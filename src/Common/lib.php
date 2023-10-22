@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Lib\Ses;
+use App\Common\Ses;
 
 function n(): string
 {

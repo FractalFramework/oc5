@@ -31,12 +31,13 @@ class ArticleService
     public function getPost(int $id): ArticleModel
     {
         $articleEntity = $this->articleRepository->getById($id);
-        return ArticleModel::fromDatabase($articleEntity);
+        return ArticleModel::fromFetch($articleEntity);
     }
 
     public function getPosts(int $number): array
     {
-        return $this->articleRepository->getAll($number);
+        return $articleEntity = $this->articleRepository->getAll($number);
+        //ArticleModel::fromFetchAll($articleEntity);
     }
 
     public function getLasts(int $number): array
