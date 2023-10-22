@@ -55,3 +55,4 @@ composer.lock
 vendor
 .vscode
 .env.*
+.php-cs-fixer.cache

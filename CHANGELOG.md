@@ -1,27 +1,25 @@
-
-## Issues
+# Issues
 
 - diagrams ✔
 - database ✔
-- sqlconnection
-- navigation
-- templating
-- posts
-- comments
-- forms
-- login
-- edition
-- contacts
-- admin
-- security
-
+- sqlconnection ✔
+- navigation ✔
+- templating 
+- posts 
+- comments 
+- forms 
+- login 
+- edition 
+- contacts 
+- admin 
+- security 
 
 ## Issue 1 : sqlconnection
 
-Diagrams : `/docs/diagrams`)
+Diagrams : `/docs/diagrams`
 
 - sequential diagram
-- models of datas
+- Model of datas
 - classes diagram
 
 ## Issue 2 : sqlconnection
@@ -47,3 +45,12 @@ Running a Sql query.
 - install dotenv
 - displace critical values in .env
 - rechape sqlconnection
+- phpcs
+- system of navigation using ajax
+
+## Issue 5 : Templating
+- using env variables
+- install Twig
+- install dump for Twig
+- architecture controller+service+repository+entity
+- architecture + model

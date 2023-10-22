@@ -1,0 +1,49 @@
+[
+    [
+        "div",
+        {
+            "id":"page",
+            "class":"grid",
+            "style":"background-image:{bkg};"
+        },
+        [
+            [
+                "header",
+                {"class":"grid-head"},
+                "{banner}"
+            ],
+            [
+                "nav",
+                {"id":"nav","class":"grid-nav"},
+                "{nav}"
+            ],
+            [
+                "main",
+                {"class":"wrapper grid-main"},
+                [
+                    [
+                    "div",
+                    {"id":"main","class":"main"},
+                    "{main}"
+                    ]
+                ]
+            ],
+            [
+                "aside",
+                {"class":"shutter grid-right"},
+                "{shutter}"
+            ],
+            [
+                "footer",
+                {"class":"grid-foot"},
+                [
+                    [
+                        "div",
+                        {"class":"pane"},
+                        "{footer}"
+                    ]
+                ]
+            ]
+        ]
+    ]
+]

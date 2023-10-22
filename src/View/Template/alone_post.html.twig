@@ -1,0 +1,18 @@
+{% block posts %}{% endblock %}
+{% block post %}
+	<div class="post">
+		<h1>{{article.title | raw }}</h1>
+		<div class="excerpt">{{article.excerpt | raw }}</div>
+		<div class="content">{{article.content | raw }}</div>
+	</div>
+{% endblock post %}
+
+{% block comments %}
+	<div class="comments">
+		<h3>Commentaires</h3>
+		{% for comment in comments %}
+			<h3>{{comment.from | raw }}</h3>
+			<p>{{comment.content | raw }}</p>
+		{% endfor %}
+	</div>
+{% endblock comments %}

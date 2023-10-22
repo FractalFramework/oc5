@@ -1,0 +1,17 @@
+{
+    "dev":"1",
+    "db":"etc",
+    "local":"1",
+    "install":"1",
+    "templater":"1",
+    "savecss":"1",
+    "savehtml":"1",
+    "usrhome":"1",
+    "tgmain":"main",
+    "css_location":"public/",
+    "js_location":"public/",
+    "json_location":"public/json/",
+    "json_views":"views/",
+    "templates_location":"templates/"
+
+}

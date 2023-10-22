@@ -1,0 +1,7 @@
+<div class="list">
+    {% for result in results %}
+	    <a href="/category/{{result.id}}" onclick="return bh(this)">
+            {{result.category | raw }}
+        </a>
+    {% endfor %}
+</div>
