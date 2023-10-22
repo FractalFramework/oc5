@@ -44,10 +44,10 @@ class CommentsRepository extends MainPdo
 
     public function commentsByPost(int $id): array
     {
-        $sql = 'select uid,bid,txt,pub,surname
+        $sql = 'select profile.uid,bid,txt,pub,surname,date_format(tracks.up,"%d/%m/%Y") as date
         from ' . self::$table . '
         left join profile
-        on tracks.id=uid
+        on tracks.id=profile.uid
         where tracks.bid=?';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);

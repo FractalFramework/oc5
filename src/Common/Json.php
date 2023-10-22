@@ -1,4 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
+namespace App\Common;
+
 class json
 {
 	static $path = 'src/Public/json/';

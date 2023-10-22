@@ -6,35 +6,12 @@ use App\Controller\ArticleController;
 use App\Controller\CategoryController;
 use App\Controller\HomeController;
 use App\Controller\UserController;
-use App\Controller\TemplateController;
 
 class Rooter
 {
     public function __construct()
     {
         //boot
-
-    }
-
-    public function test(array $params): void
-    {
-        $datas['pageTitle'] = 'hey';
-        $datas['page'] = 'test'; //current state
-        $datas['results'] =
-            [
-                0 => [
-                    'title' => 'one',
-                    'excerpt' => 'un'
-                ],
-                1 => [
-                    'title' => 'two',
-                    'excerpt' => 'deux'
-                ],
-            ];
-        $target = get('_tg');
-        $template_page = ($target ? 'alone_' : '') . 'posts';
-        $template = new TemplateController($template_page);
-        $template->call($datas);
     }
 
     public function index(array $params): void
@@ -48,7 +25,6 @@ class Rooter
         $userController = UserController::getInstance($target);
         $homeController = HomeController::getInstance($target);
         match ($com) {
-            'test' => $this->test($params),
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
             'posts' => $articleController->displayPosts(),

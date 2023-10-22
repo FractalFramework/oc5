@@ -4,17 +4,27 @@ namespace App\Entity;
 
 class CommentsEntity
 {
-    public ?string $id = '';
+    public ?int $id;
+    public ?int $uid;
+    public ?int $bid;
     public ?string $name = '';
     public ?string $mail = '';
     public ?string $surname = '';
-    public ?string $slogan = '';
-    public ?string $banner = '';
-    public ?string $logo = '';
+    public ?string $txt = '';
+    public ?int $pub;
+    public ?string $date;
 
-    public function getId(): string
+    public function getId(): int
     {
         return $this->id;
+    }
+    public function getUid(): int
+    {
+        return $this->uid;
+    }
+    public function getBid(): int
+    {
+        return $this->uid;
     }
     public function getName(): string
     {
@@ -28,17 +38,17 @@ class CommentsEntity
     {
         return $this->surname;
     }
-    public function getSlogan(): string
+    public function getTxt(): string
     {
-        return $this->slogan;
+        return $this->txt;
     }
-    public function getBanner(): string
+    public function getPub(): int
     {
-        return $this->banner;
+        return $this->pub;
     }
-    public function getLogo(): string
+    public function getDate(): int
     {
-        return $this->logo;
+        return $this->date;
     }
 
 }

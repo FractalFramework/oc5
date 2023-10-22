@@ -6,7 +6,7 @@
 declare(strict_types=1);
 
 require 'vendor/autoload.php';
-require 'src/Lib/common.php';
+require 'src/Common/lib.php';
 
 use App\Rooter;
 use Symfony\Component\Dotenv\Dotenv;

@@ -6,12 +6,14 @@ namespace App\Controller;
 
 use App\Controller\TemplateController;
 use App\Service\ArticleService;
+use App\Service\CommentsService;
 
 class ArticleController
 {
     private $prefix = '';
     private static $instance;
     private ArticleService $articleService;
+    private CommentsService $commentsService;
     private CategoryController $categoryController;
 
 
@@ -21,6 +23,7 @@ class ArticleController
             $this->prefix = 'alone_';
         }
         $this->articleService = ArticleService::getInstance();
+        $this->commentsService = CommentsService::getInstance();
         $this->categoryController = CategoryController::getInstance($target);
     }
 
@@ -34,9 +37,10 @@ class ArticleController
 
     public function displayPost(string $id): void
     {
-        $articleModel = $this->articleService->getPost((int) $id);
-        $res['article'] = $articleModel;
+        $res['article'] = $this->articleService->getPost((int) $id);
+        $res['comments'] = $this->commentsService->getComments((int) $id);
         $template_page = $this->prefix . 'post';
+        //pr($res);
         $template = new TemplateController($template_page);
         $template->call($res);
     }

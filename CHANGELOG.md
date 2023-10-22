@@ -57,3 +57,6 @@ Running a Sql query.
 
 ## Issue 6 : Posts
 - reading posts from id
+
+## Issue 7 : Comments
+- reading comments from id
