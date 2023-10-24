@@ -1,0 +1,20 @@
+{% extends "main.html.twig" %}
+{%  block main %}
+    <h2>Inscription</h2>
+        <div class="frame-white">
+            <div class="">
+                <input type="text" id="name" placeholder="Pseudo" required>
+                <label for="name">Pseudo</label>
+            </div>
+            <div class="">
+                <input type="text" id="pswd" placeholder="Mot de passe" required>
+                <label for="pswd">Mot de passe</label>
+            </div>
+            <a id="logbt" class="btsav" onclick="bj(this)" data-bj="main|login,authentificate||name,pswd">
+                Login !</a>
+
+            <a id="logbt" class="btsav" onclick="bg(this)" data-bj="register|register">
+                S'enregistrer ?</a>
+            <div id="register"></div>
+        </div>
+{% endblock %}

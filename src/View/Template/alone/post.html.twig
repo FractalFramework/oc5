@@ -1,9 +1,6 @@
-{% extends 'main.html.twig' %}
 {% block posts %}{% endblock %}
 {% block post %}
 	<div class="post">
-	{{ dump(article) }}
-		{{results.title }}
 		<h1>{{article.title | raw }}</h1>
 		<div class="excerpt">{{article.excerpt | raw }}</div>
 		<div class="content">{{article.content | raw }}</div>

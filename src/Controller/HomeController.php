@@ -15,11 +15,9 @@ class HomeController
     private HomeService $homeService;
     private UserService $userService;
 
-    private function __construct(string $target)
+    private function __construct(string $prefix)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
+        $this->prefix = $prefix;
         $this->homeService = HomeService::getInstance();
         $this->userService = UserService::getInstance();
     }

@@ -1,0 +1,13 @@
+{%  block main %}
+    <h4>Compléter avec les champs suivants</h4>
+    <div class="">
+        <input type="email" id="mail" placeholder="e-mail" required>
+        <label for="email">Adresse e-mail</label>
+    </div>
+    <div class="">
+        <input type="password" id="psw2" placeholder="Confirmation mot de passe" required>
+        <label for="psw2">Confirmation votre mot de passe</label>
+    </div>
+    <a id="logbt" class="btsav" onclick="bg(this)" data-bj="register|registerUser">
+        Inscription !</a>
+{% endblock %}

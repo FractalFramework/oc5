@@ -13,11 +13,9 @@ class UserController
     private static $instance;
     private UserService $userService;
 
-    private function __construct(string $target)
+    private function __construct(string $prefix)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
+        $this->prefix = $prefix;
         $this->userService = UserService::getInstance();
     }
 
@@ -45,5 +43,44 @@ class UserController
         $array['results'] = $datas;
         $template->call($array);
     }
+    public function displayRegisterForm(): void
+    {
+        $template_page = $this->prefix . 'register';
+        $template = new TemplateController($template_page);
+        $template->call([]);
+    }
+    public function displayLoginForm(): void
+    {
+        $template_page = $this->prefix . 'login';
+        $template = new TemplateController($template_page);
+        $template->call([]);
+    }
+    public function displayLogOut(): void
+    {
+        $template_page = $this->prefix . 'login';
+        $template = new TemplateController($template_page);
+        $template->call([]);
+    }
+    public function loginRoot(): void
+    {
+        if (isset($_SESSION['usr']))
+            $this->displayLogOut();
+        else
+            $this->displayLoginForm();
+    }
+
+    public function registerUser(): void
+    {
+        $template_page = $this->prefix . 'login';
+        $template = new TemplateController($template_page);
+        $template->call([]);
+    }
+    public function loginUser(): void
+    {
+        $template_page = $this->prefix . 'login';
+        $template = new TemplateController($template_page);
+        $template->call([]);
+    }
+
 
 }

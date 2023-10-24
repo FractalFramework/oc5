@@ -17,14 +17,12 @@ class ArticleController
     private CategoryController $categoryController;
 
 
-    private function __construct(string $target)
+    private function __construct(string $prefix)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
+        $this->prefix = $prefix;
         $this->articleService = ArticleService::getInstance();
         $this->commentsService = CommentsService::getInstance();
-        $this->categoryController = CategoryController::getInstance($target);
+        $this->categoryController = CategoryController::getInstance($prefix);
     }
 
     public static function getInstance(string $target): self
@@ -39,8 +37,9 @@ class ArticleController
     {
         $res['article'] = $this->articleService->getPost((int) $id);
         $res['comments'] = $this->commentsService->getComments((int) $id);
+        if (!count($res['comments']))
+            $res['nocomment'] = 'Aucun commentaire';
         $template_page = $this->prefix . 'post';
-        //pr($res);
         $template = new TemplateController($template_page);
         $template->call($res);
     }

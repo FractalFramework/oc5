@@ -13,11 +13,9 @@ class CommentsController
     private static $instance;
     private CommentsService $commentsService;
 
-    private function __construct(string $target)
+    private function __construct(string $prefix)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
+        $this->prefix = $prefix;
         $this->commentsService = CommentsService::getInstance();
     }
 

@@ -17,13 +17,14 @@ class Rooter
     public function index(array $params): void
     {
         //pr($params);
-        $com = $params['com'] ?? 'test'; //default
-        $id = $params['p1'] ?? 1;
+        $com = $params['com'] ?? 'home'; //default
+        $id = $params['p1'] ?? 1; //default
         $target = get('_tg');
-        $articleController = ArticleController::getInstance($target);
-        $categoryController = CategoryController::getInstance($target);
-        $userController = UserController::getInstance($target);
-        $homeController = HomeController::getInstance($target);
+        $prefix = $target ? 'alone/' : 'pages/';
+        $articleController = ArticleController::getInstance($prefix);
+        $categoryController = CategoryController::getInstance($prefix);
+        $userController = UserController::getInstance($prefix);
+        $homeController = HomeController::getInstance($prefix);
         match ($com) {
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
@@ -33,6 +34,10 @@ class Rooter
             'categories' => $categoryController->displayCategories(),
             'user' => $userController->displayName($id),
             'profile' => $userController->displayProfile($id),
+            'register' => $userController->displayRegisterForm(),
+            'registerUser' => $userController->registerUser(),
+            'login' => $userController->loginRoot(),
+            'logon' => $userController->loginUser(),
             default => $articleController->displayPost(1)
         };
     }

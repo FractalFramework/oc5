@@ -1,0 +1,49 @@
+{% extends "base.html.twig" %}
+{%  block main %}
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Page d'inscritpion</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                <div class="divider-custom-line"></div>
+            </div>
+            <!-- Portfolio Grid Items-->
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="lastname">Nom</label>
+                    <input type="text" class="form-control" name="lastname" id="lastname" aria-describedby="emailHelp" placeholder="Entrez votre nom" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" class="form-control" name="firstname" id="firstname" aria-describedby="emailHelp" placeholder="Entrez votre prénom" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="email">Adresse email</label>
+                    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp" placeholder="Entrez votre email" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" class="form-control" name="password" id="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="confirmedPassword">Confirmez votre mot de passe</label>
+                    <input type="password" class="form-control" name="confirmedPassword" id="confirmedPassword" placeholder="Confirmez votre mot de passe" required>
+                </div>
+                <button type="submit" name="button-signup" class="btn btn-primary mt-2">S'inscrire</button>
+            </form>
+            {{ user.register }}
+            <div>
+                <span>Vous possédez déja un compte ?</span><br>
+                <a href="./login">Connectez-vous</a>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,6 +1,9 @@
+{% extends 'main.html.twig' %}
 {% block posts %}{% endblock %}
 {% block post %}
 	<div class="post">
+	{{ dump(article) }}
+		{{results.title }}
 		<h1>{{article.title | raw }}</h1>
 		<div class="excerpt">{{article.excerpt | raw }}</div>
 		<div class="content">{{article.content | raw }}</div>
@@ -11,8 +14,12 @@
 	<div class="comments">
 		<h3>Commentaires</h3>
 		{% for comment in comments %}
-			<h3>{{comment.from | raw }}</h3>
-			<p>{{comment.content | raw }}</p>
+			<p>
+				<strong>{{comment.surname | raw }}</strong>
+				<span class="date">{{comment.date | raw }}</strong>
+			</p>
+			<p>{{comment.txt | raw }}</p>
 		{% endfor %}
+		<div class="">{{nocomment | raw }}</div>
 	</div>
 {% endblock comments %}

@@ -13,11 +13,9 @@ class CategoryController
     private static $instance;
     private CategoryService $categoryService;
 
-    private function __construct(string $target)
+    private function __construct(string $prefix)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
+        $this->prefix = $prefix;
         $this->categoryService = CategoryService::getInstance();
     }
 
