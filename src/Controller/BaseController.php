@@ -8,20 +8,21 @@ use App\Controller\TemplateService;
 
 class BaseController
 {
-    private $prefix = '';
+    private $ajaxMode = '';
     protected $template = 'pages/main.html.twig';
     private TemplateService $twigService;
 
-    public function __construct(string $prefix)
+    public function __construct(string $ajaxMode)
     {
-        $this->prefix = $prefix;
-        $this->twigService = TemplateService::getInstance($prefix);
+        $this->ajaxMode = $ajaxMode;
+        $this->twigService = TemplateService::getInstance();
     }
 
     public function renderHtml(array $params, $htmlPage): void
     {
         $params['mtime'] = microtime(true);
-        $this->template = $this->prefix . $htmlPage . TemplateService::ARTICLE_VIEW;
+        $params['ajaxMode'] = $this->ajaxMode;
+        $this->template = 'pages/' . $htmlPage . TemplateService::ARTICLE_VIEW;
         $this->twigService->twig->display($this->template, $params);
     }
 

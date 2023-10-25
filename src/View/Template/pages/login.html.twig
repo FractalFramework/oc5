@@ -1,4 +1,4 @@
-{% extends "main.html.twig" %}
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
 {%  block main %}
     <h2>Inscription</h2>
         <div class="frame-white">

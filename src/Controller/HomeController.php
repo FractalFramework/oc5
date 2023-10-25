@@ -14,11 +14,11 @@ class HomeController extends BaseController
     private HomeService $homeService;
     private UserService $userService;
 
-    private function __construct(string $prefix)
+    private function __construct(string $ajaxMode)
     {
         $this->homeService = HomeService::getInstance();
         $this->userService = UserService::getInstance();
-        parent::__construct($prefix);
+        parent::__construct($ajaxMode);
     }
 
     public static function getInstance(string $target): self

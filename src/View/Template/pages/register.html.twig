@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends ajaxMode == 'false' ? 'base.html.twig' : 'empty.html.twig' %}
 {%  block main %}
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">

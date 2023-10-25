@@ -12,16 +12,16 @@ class UserController extends BaseController
     private static $instance;
     private UserService $userService;
 
-    private function __construct(string $prefix)
+    private function __construct(string $ajaxMode)
     {
         $this->userService = UserService::getInstance();
-        parent::__construct($prefix);
+        parent::__construct($ajaxMode);
     }
 
-    public static function getInstance(string $prefix): self
+    public static function getInstance(string $ajaxMode): self
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($prefix);
+            self::$instance = new self($ajaxMode);
         }
         return self::$instance;
     }

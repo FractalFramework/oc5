@@ -12,10 +12,10 @@ class CommentsController extends BaseController
     private static $instance;
     private CommentsService $commentsService;
 
-    private function __construct(string $prefix)
+    private function __construct(string $ajaxMode)
     {
         $this->commentsService = CommentsService::getInstance();
-        parent::__construct($prefix);
+        parent::__construct($ajaxMode);
     }
 
     public static function getInstance(string $target): self

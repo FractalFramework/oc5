@@ -15,18 +15,18 @@ class ArticleController extends BaseController
     private CategoryController $categoryController;
 
 
-    private function __construct(string $prefix)
+    private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
         $this->commentsService = CommentsService::getInstance();
-        $this->categoryController = CategoryController::getInstance($prefix);
-        parent::__construct($prefix);
+        $this->categoryController = CategoryController::getInstance($ajaxMode);
+        parent::__construct($ajaxMode);
     }
 
-    public static function getInstance(string $prefix): self
+    public static function getInstance(string $ajaxMode): self
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($prefix);
+            self::$instance = new self($ajaxMode);
         }
         return self::$instance;
     }

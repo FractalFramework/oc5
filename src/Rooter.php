@@ -20,11 +20,11 @@ class Rooter
         $com = $params['com'] ?? 'home'; //default
         $id = $params['p1'] ?? 1; //default
         $target = get('_tg');
-        $prefix = $target ? 'alone/' : 'pages/';
-        $articleController = ArticleController::getInstance($prefix);
-        $categoryController = CategoryController::getInstance($prefix);
-        $userController = UserController::getInstance($prefix);
-        $homeController = HomeController::getInstance($prefix);
+        $ajaxMode = $target ? 'true' : 'false';
+        $articleController = ArticleController::getInstance($ajaxMode);
+        $categoryController = CategoryController::getInstance($ajaxMode);
+        $userController = UserController::getInstance($ajaxMode);
+        $homeController = HomeController::getInstance($ajaxMode);
         match ($com) {
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
