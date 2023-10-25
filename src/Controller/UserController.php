@@ -7,22 +7,21 @@ namespace App\Controller;
 use App\Controller\TemplateController;
 use App\Service\UserService;
 
-class UserController
+class UserController extends BaseController
 {
-    private $prefix = '';
     private static $instance;
     private UserService $userService;
 
     private function __construct(string $prefix)
     {
-        $this->prefix = $prefix;
         $this->userService = UserService::getInstance();
+        parent::__construct($prefix);
     }
 
-    public static function getInstance(string $target): self
+    public static function getInstance(string $prefix): self
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self($target);
+            self::$instance = new self($prefix);
         }
         return self::$instance;
     }
@@ -31,35 +30,25 @@ class UserController
     {
         $datas = $this->userService->getUserName($id);
         $array['results']['name'] = $datas->name;
-        $template_page = $this->prefix . 'user';
-        $template = new TemplateController($template_page);
-        $template->call($array);
+        $this->renderHtml($array, 'user');
     }
     public function displayProfile(int $id = 1): void
     {
         $datas = $this->userService->getUser($id);
-        $template_page = $this->prefix . 'profile';
-        $template = new TemplateController($template_page);
         $array['results'] = $datas;
-        $template->call($array);
+        $this->renderHtml([], 'login');
     }
     public function displayRegisterForm(): void
     {
-        $template_page = $this->prefix . 'register';
-        $template = new TemplateController($template_page);
-        $template->call([]);
+        $this->renderHtml([], 'register');
     }
     public function displayLoginForm(): void
     {
-        $template_page = $this->prefix . 'login';
-        $template = new TemplateController($template_page);
-        $template->call([]);
+        $this->renderHtml([], 'login');
     }
     public function displayLogOut(): void
     {
-        $template_page = $this->prefix . 'login';
-        $template = new TemplateController($template_page);
-        $template->call([]);
+        $this->renderHtml([], 'login');
     }
     public function loginRoot(): void
     {
@@ -71,15 +60,11 @@ class UserController
 
     public function registerUser(): void
     {
-        $template_page = $this->prefix . 'login';
-        $template = new TemplateController($template_page);
-        $template->call([]);
+        $this->renderHtml([], 'login');
     }
     public function loginUser(): void
     {
-        $template_page = $this->prefix . 'login';
-        $template = new TemplateController($template_page);
-        $template->call([]);
+        $this->renderHtml([], 'login');
     }
 
 

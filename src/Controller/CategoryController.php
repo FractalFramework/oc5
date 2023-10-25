@@ -7,16 +7,15 @@ namespace App\Controller;
 use App\Controller\TemplateController;
 use App\Service\CategoryService;
 
-class CategoryController
+class CategoryController extends BaseController
 {
-    private $prefix = '';
     private static $instance;
     private CategoryService $categoryService;
 
     private function __construct(string $prefix)
     {
-        $this->prefix = $prefix;
         $this->categoryService = CategoryService::getInstance();
+        parent::__construct($prefix);
     }
 
     public static function getInstance(string $target): self
@@ -30,8 +29,6 @@ class CategoryController
     public function displayCategories(): void
     {
         $categories = $this->categoryService->getCategories(); //vd($datas);
-        $template_page = $this->prefix . 'categories';
-        $template = new TemplateController($template_page);
         /*$datas = [];
         foreach ($categories as $k => $obj) {
             $datas[] = [
@@ -41,7 +38,7 @@ class CategoryController
             ];
         }*/
         $array['results'] = $categories;
-        $template->call($array);
+        $this->renderHtml($array, 'categories');
     }
 
     public function displayCategory(int $cat_id): string
