@@ -14,11 +14,11 @@ class Rooter
         //boot
     }
 
-    public function index(array $params): void
+    public function index(array $gets): void
     {
-        //pr($params);
-        $com = $params['com'] ?? 'home'; //default
-        $id = $params['p1'] ?? 1; //default
+        //pr($gets);
+        $com = $gets['com'] ?? 'home'; //default
+        $id = $gets['p1'] ?? 1; //default
         $target = get('_tg');
         $ajaxMode = $target ? 'true' : 'false';
         $articleController = ArticleController::getInstance($ajaxMode);
@@ -35,9 +35,10 @@ class Rooter
             'user' => $userController->displayName($id),
             'profile' => $userController->displayProfile($id),
             'register' => $userController->displayRegisterForm(),
-            'registerUser' => $userController->registerUser(),
+            'registerUser' => $userController->registerUser($gets),
             'login' => $userController->loginRoot(),
-            'logon' => $userController->loginUser(),
+            'logon' => $userController->authentification($gets),
+            'logout' => $userController->logout($gets),
             default => $articleController->displayPost(1)
         };
     }

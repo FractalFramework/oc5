@@ -1,9 +1,8 @@
 <?php
 //ini_set('display_errors', '1');
 //error_reporting(E_ALL);
-//session_start();
-
 declare(strict_types=1);
+session_start();
 
 require 'vendor/autoload.php';
 require 'src/Common/lib.php';

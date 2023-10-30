@@ -36,8 +36,7 @@ class ArticleRepository extends MainPdo
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
         $stmt->execute([$id]);
-        $array = $stmt->fetch();
-        return $array;
+        return $stmt->fetch();
     }
 
     public function getAll(int $limit = 10): array

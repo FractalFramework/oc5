@@ -35,6 +35,18 @@ class UserService
         return $this->userRepository->userInfos($id);
     }
 
+    public function getUserFromName(string $name): UserEntity|bool
+    {
+        return $this->userRepository->findUserFromName($name);
+    }
+
+    public function registerUser(string $name, string $mail, string $pswd): string
+    {
+        $pswd = password_hash($pswd, PASSWORD_DEFAULT);
+        $values = ['name' => $name, 'mail' => $mail, 'pswd' => $pswd];
+        return $this->userRepository->registerUser($values);
+    }
+
     public function getLinks(int $id): array
     {
         return $this->userRepository->userLinks($id);

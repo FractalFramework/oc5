@@ -7,6 +7,7 @@ class UserEntity
     public ?string $id = '';
     public ?string $name = '';
     public ?string $mail = '';
+    public ?string $pswd = '';
     public ?string $surname = '';
     public ?string $slogan = '';
     public ?string $banner = '';
@@ -20,6 +21,10 @@ class UserEntity
     public function getName(): string
     {
         return $this->name;
+    }
+    public function getPswd(): string
+    {
+        return $this->pswd;
     }
     public function getMail(): string
     {
