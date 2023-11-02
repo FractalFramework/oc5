@@ -6,11 +6,15 @@ namespace App\Controller;
 
 use App\Controller\TemplateController;
 use App\Service\UserService;
+use App\Model\ErrorModel;
+use App\Model\UserModel;
+
 
 class UserController extends BaseController
 {
     private static $instance;
     private UserService $userService;
+    private string $error;
 
     private function __construct(string $ajaxMode)
     {
@@ -40,33 +44,42 @@ class UserController extends BaseController
         $this->renderHtml([], 'login');
     }
 
-    public function registerUser($gets): void
+    public function registerUser($requests): void
     {
-        $name = $gets['name'];
-        $mail = $gets['mail'];
-        $pswd = $gets['pswd'];
-        $psw2 = $gets['psw2'];
-        $error = '';
+        $name = $requests['name'];
+        $mail = $requests['mail'];
+        $pswd = $requests['pswd'];
+        $psw2 = $requests['psw2'];
 
-        if ($pswd != $psw2)
-            $error = 'Les mots de passe ne correspondent pas';
-        elseif (!$pswd)
-            $error = 'Spécifier un mot de passe';
-        elseif (!$mail)
-            $error = 'Spécifier un e-mail';
-        elseif (!$name)
-            $error = 'Spécifier un nom d\'utilisateur';
-        if ($error)
-            $this->renderHtml(['error' => $error, 'name' => $name], 'login');
+        $error = match (true) {
+            !$name && !$pswd => 'Spécifier nom d\'utilisateur et le mot de passe',
+            !$name => 'Spécifier nom d\'utilisateur',
+            !$pswd => 'Spécifier mot de passe',
+            $pswd != $psw2 => 'Les mots de passe ne correspondent pas',
+            !$mail => 'Spécifier un e-mail',
+            default => ''
+        };
+
+        if ($error) {
+            $this->renderHtml(['name' => $name, 'error' => $error], 'login');
+            return;
+        }
+
+        //user already exists //prevent double registering
+        $result = $this->userService->getUserLoged($name, $pswd);
+        if ($result instanceof UserModel) {
+            $this->logon($result->name, $result->uid);
+            $this->renderHtml(['name' => $result->name, 'welcome' => 'Authentification réussie'], 'loged');
+            return;
+        }
+
+        //register user
+        $uid = $this->userService->registerUser($name, $mail, $pswd);
+        if (!$uid)
+            $this->renderHtml(['name' => $name, 'error' => 'Echec de l\'enregistrement'], 'notloged');
         else {
-            $uid = $this->userService->registerUser($name, $mail, $pswd);
-            $error = $uid ? 0 : 1;
-            if ($error)
-                $this->renderHtml(['name' => $name, 'error' => 'Echec de l\'enregistrement'], 'notloged');
-            else {
-                $this->logon($name, $uid);
-                $this->renderHtml(['name' => $name, 'welcome' => 'Inscription réussie'], 'loged');
-            }
+            $this->logon($name, $uid);
+            $this->renderHtml(['name' => $name, 'welcome' => 'Inscription réussie'], 'loged');
         }
     }
 
@@ -83,31 +96,38 @@ class UserController extends BaseController
         $_SESSION['uid'] = $uid;
     }
 
-    public function authentification(array $gets): void
+    /*
+    "tambouille" signifie qu'il faut :
+        - identifier les erreurs (d'inputs) avant de lancer l'enquête
+        - lancer l'enquête pour identifier les erreurs de validation
+    */
+    public function authentification(array $requests): void
     {
-        $name = $gets['name'];
-        $pswd = $gets['pswd'];
-        $error = '';
-        if (!$name)
-            $error = 'Spécifier nom d\'utilisateur';
-        elseif (!$pswd)
-            $error = 'Spécifier mot de passe';
-        else {
-            $userEntity = $this->userService->getUserFromName($name);
-            $isUser = $userEntity->name ?? '' == $name ? 1 : 0;
-            $uid = $userEntity->id ?? '';
-            $isGoodPassword = password_verify($pswd, $userEntity->pswd ?? '');
-            if (!$isUser)
-                $error = 'Utilisateur inconnu';
-            elseif (!$isGoodPassword)
-                $error = 'Mot de passe non reconnu';
-            else
-                $this->logon($name, $uid);
-        }
-        if ($error)
+        $name = $requests['name'];
+        $pswd = $requests['pswd'];
+
+        $error = match (true) {
+            !$name && !$pswd => 'Spécifier nom d\'utilisateur et le mot de passe',
+            !$name => 'Spécifier nom d\'utilisateur',
+            !$pswd => 'Spécifier mot de passe',
+            default => ''
+        };
+
+        if ($error) {
             $this->renderHtml(['name' => $name, 'error' => $error], 'login');
-        else
-            $this->renderHtml(['name' => $name, 'welcome' => 'Authentification réussie'], 'loged');
+            return;
+        }
+
+        $result = $this->userService->getUserLoged($name, $requests['pswd']);
+
+        if ($result instanceof ErrorModel) {
+            $this->renderHtml(['name' => $name, 'error' => $result->message], 'login');
+            return;
+        }
+
+        //all is ok
+        $this->logon($result->name, $result->uid);
+        $this->renderHtml(['name' => $result->name, 'welcome' => 'Authentification réussie'], 'loged');
     }
 
     public function displayRegisterForm(): void
