@@ -7,18 +7,15 @@ namespace App\Controller;
 use App\Controller\TemplateController;
 use App\Service\CommentsService;
 
-class CommentsController
+class CommentsController extends BaseController
 {
-    private $prefix = '';
     private static $instance;
     private CommentsService $commentsService;
 
-    private function __construct(string $target)
+    private function __construct(string $ajaxMode)
     {
-        if ($target) {
-            $this->prefix = 'alone_';
-        }
         $this->commentsService = CommentsService::getInstance();
+        parent::__construct($ajaxMode);
     }
 
     public static function getInstance(string $target): self
@@ -32,19 +29,14 @@ class CommentsController
     public function displayComment(int $id = 1): void
     {
         $datas = $this->commentsService->getComment($id);
-        $template_page = $this->prefix . 'comments';
-        $template = new TemplateController($template_page);
         $array['result'] = $datas;
-        $template->call($array);
+        $this->renderHtml($array, 'comments');
     }
 
     public function displayComments(int $id = 1): void
     {
         $datas = $this->commentsService->getComments($id);
-        $template_page = $this->prefix . 'comments';
-        $template = new TemplateController($template_page);
-        $array['results'] = $datas;
-        $template->call($array);
+        $this->renderHtml($datas, 'comments');
     }
 
 }

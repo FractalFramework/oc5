@@ -60,3 +60,6 @@ Running a Sql query.
 
 ## Issue 7 : Comments
 - reading comments from id
+
+## Issue 8 : Forms
+- user controls : login, logout, register

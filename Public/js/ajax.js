@@ -74,6 +74,22 @@ function bjcall(val) {//if(typeof x!='undefined')clearTimeout(x);
     ajax_req(dn[0], dn[1], fd, pp, tp);
 }
 
+//inputs
+function capture(tg) {
+    var ty, vl, type = '';
+    var ob = getbyid(tg); if (ob == null) ob = document.getElementsByName(tg)[0]; if (ob == null) return;
+    var ty = ob.type; if (ty) var type = ty.split('-')[0];
+    if (type == 'checkbox') vl = ob.checked ? 1 : 0;
+    else if (type == 'select') vl = ob.selectedIndex != -1 ? ob.options[ob.selectedIndex].value : '';
+    else if (type == 'radio') {
+        var el = document.getElementsByName(tg);
+        for (var io = 0; io < el.length; io++)if (el[io].checked) vl = el[io].value;
+    }
+    else if (ty == undefined && ob != null) { vl = ob.innerHTML; }// localStorage['revert']=vl;
+    else if (ob != null) vl = ob.value;
+    return vl;
+}
+
 //target{,tg2}|app|p1=a,p2=b|inp1,inp2 //app called by Rooter
 function bj(ob) { var val = ob.dataset.bj; bjcall(val); }
 

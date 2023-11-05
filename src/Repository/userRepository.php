@@ -53,6 +53,32 @@ class UserRepository extends MainPdo
         return $stmt->fetch();
     }
 
+    public function findUserFromName(string $name): UserEntity|bool
+    {
+        $sql = 'select id,name,pswd from ' . self::$table . ' where name=?';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
+        $stmt->execute([$name]);
+        $array = $stmt->fetch();
+        //vd($stmt);
+        return $array;
+    }
+
+    public function registerUser(array $values): string
+    {
+        $sql = 'insert into ' . self::$table . ' values (null, :name, 1, :mail, :pswd, now())';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
+        //$stmt->bindParam(':name', $name, PDO::PARAM_STR);
+        //$stmt->bindParam(':mail', $mail, PDO::PARAM_STR);
+        //$stmt->bindParam(':pswd', $pswd, PDO::PARAM_STR);
+        $stmt->execute($values);
+        $id = $pdo->lastInsertId();
+        return $id;
+    }
+
     public function userLinks(int $id): array
     {
         $sql = 'select url from socials where uid=?';
