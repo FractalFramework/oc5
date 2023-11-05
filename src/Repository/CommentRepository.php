@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Model\MainPdo;
-use App\Entity\CommentsEntity;
+use App\Entity\CommentEntity;
 use App\Model\Connect;
 use PDO;
 
-class CommentsRepository extends MainPdo
+class CommentRepository extends MainPdo
 {
     protected static string $table = 'tracks';
     private static $instance;
@@ -28,16 +28,16 @@ class CommentsRepository extends MainPdo
         return self::$instance;
     }
 
-    public function findCommentsFromId(int $id): CommentsEntity
+    public function findCommentsFromId(int $id): CommentEntity
     {
-        $sql = 'select uid,bid,txt,pub,surname
+        $sql = 'select profile.uid,bid,txt,pub,surname
         from ' . self::$table . '
         left join profile
-        on tracks.id=uid
+        on tracks.id=profile.uid
         where tracks.id=?';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentsEntity::class, null);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
         $stmt->execute([$id]);
         return $stmt->fetch();
     }
@@ -51,7 +51,7 @@ class CommentsRepository extends MainPdo
         where tracks.bid=?';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentsEntity::class, null);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
         $stmt->execute([$id]);
         return $stmt->fetchAll();
     }

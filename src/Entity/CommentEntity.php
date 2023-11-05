@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-class CommentsEntity
+class CommentEntity
 {
     public ?int $id;
     public ?int $uid;
@@ -46,7 +46,7 @@ class CommentsEntity
     {
         return $this->pub;
     }
-    public function getDate(): int
+    public function getDate(): string
     {
         return $this->date;
     }

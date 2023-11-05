@@ -6,6 +6,7 @@ use App\Controller\ArticleController;
 use App\Controller\CategoryController;
 use App\Controller\HomeController;
 use App\Controller\UserController;
+use App\Controller\CommentController;
 
 class Rooter
 {
@@ -25,6 +26,7 @@ class Rooter
         $categoryController = CategoryController::getInstance($ajaxMode);
         $userController = UserController::getInstance($ajaxMode);
         $homeController = HomeController::getInstance($ajaxMode);
+        $commentController = CommentController::getInstance($ajaxMode);
         match ($com) {
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
@@ -39,6 +41,9 @@ class Rooter
             'login' => $userController->loginRoot(),
             'logon' => $userController->authentification($gets),
             'logout' => $userController->logout($gets),
+            'newPost' => $articleController->newPost(),
+            'postSave' => $articleController->postSave($gets),
+            'postComment' => $commentController->commentSave($gets),
             default => $articleController->displayPost(1)
         };
     }

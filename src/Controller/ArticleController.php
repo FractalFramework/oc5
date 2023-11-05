@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ArticleService;
-use App\Service\CommentsService;
+use App\Service\commentService;
 
 class ArticleController extends BaseController
 {
     private static $instance;
     private ArticleService $articleService;
-    private CommentsService $commentsService;
+    private commentService $commentService;
     private CategoryController $categoryController;
 
 
     private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
-        $this->commentsService = CommentsService::getInstance();
+        $this->commentService = commentService::getInstance();
         $this->categoryController = CategoryController::getInstance($ajaxMode);
         parent::__construct($ajaxMode);
     }
@@ -34,7 +34,7 @@ class ArticleController extends BaseController
     public function displayPost(string $id): void
     {
         $datas['article'] = $this->articleService->getPost((int) $id);
-        $datas['comments'] = $this->commentsService->getComments((int) $id);
+        $datas['comments'] = $this->commentService->getcomments((int) $id);
         if (!count($datas['comments']))
             $datas['nocomment'] = 'Aucun commentaire';
         $this->renderHtml($datas, 'post');
@@ -76,7 +76,6 @@ class ArticleController extends BaseController
     public function displayCategory(int $cat_id): void
     {
         $results = $this->articleService->getPostsCategory($cat_id);
-        //pr($datas);
         $datas = [];
         foreach ($results as $k => $obj) {
             $datas['results'][] = [
@@ -90,6 +89,30 @@ class ArticleController extends BaseController
         $datas['category'] = $category;
         $datas['pageTitle'] = 'Articles de ' . $category;
         $this->renderHtml($datas, 'posts');
+    }
+
+    public function newPost(): void
+    {
+        $this->renderHtml([], 'formpost');
+    }
+
+    public function postSave($requests): void
+    {
+        $title = $requests['title'];
+        $excerpt = $requests['excerpt'];
+        $content = $requests['content'];
+
+        $error = match (true) {
+            !$title => 'N\'oubliez pas le titre quand même',
+            !$excerpt => 'Un résumé permet d\'y voir clair',
+            !$content => 'Sans contenu, point de salut',
+            default => ''
+        };
+
+        if ($error) {
+            $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
+            return;
+        }
     }
 
 }

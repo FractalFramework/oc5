@@ -1,0 +1,20 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Inscription</h2>
+    
+    {% if error %}
+        <div class="frame-red">{{error}}</div>
+    {% endif %}
+
+        <div class="frame-white">
+            <input type="hidden" id="userId" value="{{uid}}">
+            <input type="hidden" id="postId" value="{{uid}}">
+            <div class="">
+                <textarea id="comment" placeholder="Commentaire"></textarea>
+            </div>
+            <a class="btsav" onclick="bj(this)" data-bj="postTest|postComment||userId,postId,comment">
+                Envoyer</a>
+
+            <div id="CommentTest"></div>
+        </div>
+{% endblock %}
