@@ -62,4 +62,7 @@ Running a Sql query.
 - reading comments from id
 
 ## Issue 8 : Forms
+- user controls : login, logout, register (archi)
+
+## Issue 9 : Login
 - user controls : login, logout, register
