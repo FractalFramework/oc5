@@ -25,14 +25,24 @@ class CategoryService
         return self::$instance;
     }
 
+    public function getCategory(int $id): CategoryEntity
+    {
+        return $this->categoryRepository->findCategoryFromId($id);
+    }
+
     public function getCategories(): array
     {
         return $this->categoryRepository->allCategories();
     }
 
-    public function getCategory(int $id): CategoryEntity
+    public function getCategoriesArray(): array
     {
-        return $this->categoryRepository->findCategoryFromId($id);
+        $result = $this->categoryRepository->allCategories();
+        $categories = [];
+        foreach ($result as $category) {
+            $categories[$category->id] = $category->value;
+        }
+        return $categories;
     }
 
 }

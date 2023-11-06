@@ -238,7 +238,7 @@ nav a.admin:hover {
 }
 
 .grid {
-    grid-template-columns: 280px auto auto;
+    grid-template-columns: 280px 720px auto;
     grid-template-rows: 60px auto auto
 }
 

@@ -11,14 +11,14 @@ class ArticleController extends BaseController
 {
     private static $instance;
     private ArticleService $articleService;
-    private commentService $commentService;
+    private CommentService $commentService;
     private CategoryController $categoryController;
 
 
     private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
-        $this->commentService = commentService::getInstance();
+        $this->commentService = CommentService::getInstance();
         $this->categoryController = CategoryController::getInstance($ajaxMode);
         parent::__construct($ajaxMode);
     }
@@ -93,11 +93,18 @@ class ArticleController extends BaseController
 
     public function newPost(): void
     {
-        $this->renderHtml([], 'formpost');
+        if (!isset($_SESSION['uid']))
+            $this->renderHtml([], 'login');
+        else {
+            $categories = $this->categoryController->getCategories();
+            $datas['categories'] = $categories;
+            $this->renderHtml($datas, 'formpost');
+        }
     }
 
     public function postSave($requests): void
     {
+        $catid = $requests['catid'];
         $title = $requests['title'];
         $excerpt = $requests['excerpt'];
         $content = $requests['content'];
@@ -112,6 +119,9 @@ class ArticleController extends BaseController
         if ($error) {
             $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
             return;
+        } else {
+            $id = $this->articleService->postSave($catid, $title, $excerpt, $content);
+            $this->renderHtml(['id' => $id, 'title' => $title], 'publishedpost');
         }
     }
 

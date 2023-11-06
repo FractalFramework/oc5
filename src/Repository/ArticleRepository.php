@@ -86,4 +86,15 @@ class ArticleRepository extends MainPdo
         return $stmt->fetchAll();
     }
 
+    public function postSave(array $values): string
+    {
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        $stmt->execute($values);
+        $id = $pdo->lastInsertId();
+        return $id;
+    }
+
 }

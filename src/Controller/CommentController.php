@@ -39,6 +39,14 @@ class CommentController extends BaseController
         $this->renderHtml($datas, 'comments');
     }
 
+    public function newComment(): void
+    {
+        if (!isset($_SESSION['uid']))
+            $this->renderHtml([], 'login');
+        else
+            $this->renderHtml([], 'formcomment');
+    }
+
     public function commentSave($requests): void
     {
         $userId = $requests['userId'];

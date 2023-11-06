@@ -50,4 +50,17 @@ class ArticleService
         return $this->articleRepository->getByCategory($id);
     }
 
+    public function postSave(string $catid, string $title, string $excerpt, string $content): string
+    {
+        $values = [
+            'uid' => $_SESSION['uid'],
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content,
+            'pub' => 0
+        ];
+        return $this->articleRepository->postSave($values);
+    }
+
 }
