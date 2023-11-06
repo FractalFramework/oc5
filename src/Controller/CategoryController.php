@@ -28,23 +28,14 @@ class CategoryController extends BaseController
 
     public function displayCategories(): void
     {
-        $categories = $this->categoryService->getCategories(); //vd($datas);
-        /*$datas = [];
-        foreach ($categories as $k => $obj) {
-            $datas[] = [
-                'id' => $obj->id,
-                'url' => $obj->url,
-                'category' => $obj->category,
-            ];
-        }*/
+        $categories = $this->categoryService->getCategories();
         $array['results'] = $categories;
         $this->renderHtml($array, 'categories');
     }
 
     public function displayCategory(int $cat_id): string
     {
-        $category = $this->categoryService->getCategory($cat_id);
-        return $category->category;
+        return $this->categoryService->getCategory($cat_id)->category;
     }
 
     public function getCategories(): array

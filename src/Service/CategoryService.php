@@ -38,10 +38,17 @@ class CategoryService
     public function getCategoriesArray(): array
     {
         $result = $this->categoryRepository->allCategories();
-        $categories = [];
+        /*$categories = [];
         foreach ($result as $category) {
             $categories[$category->id] = $category->value;
-        }
+        }*/
+        $categories = array_map(
+            function ($category) {
+                return [$category->id => $category->value];
+            }
+            ,
+            $result
+        );
         return $categories;
     }
 

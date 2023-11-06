@@ -20,6 +20,16 @@
 			</p>
 			<p>{{comment.txt | raw }}</p>
 		{% endfor %}
-		<div class="">{{nocomment | raw }}</div>
+
+		{%if ( comments | length == 0 ) %}
+		<div class="frame-white">{{nocomment | raw }}</div>
+		{% endif %}
+
+		<div class="">
+			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{id}}">
+			Poster un commentaire
+			</a>
+		</div>
+		<div id="newComment"></div>
 	</div>
 {% endblock comments %}

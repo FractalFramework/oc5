@@ -10,7 +10,7 @@ use App\Entity\CommentEntity;
 class CommentService
 {
     private static $instance;
-    private CommentRepository $commentRepository;
+    private readonly CommentRepository $commentRepository;
 
     private function __construct()
     {
@@ -33,6 +33,18 @@ class CommentService
     public function getComments(int $id): array
     {
         return $this->commentRepository->commentsByPost($id);
+    }
+
+
+    public function commentSave(string $postId, string $comment): string
+    {
+        $values = [
+            'uid' => $_SESSION['uid'],
+            'bid' => $postId,
+            'txt' => $comment,
+            'pub' => 1
+        ];
+        return $this->commentRepository->commentSave($values);
     }
 
 }

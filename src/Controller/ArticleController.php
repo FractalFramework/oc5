@@ -14,7 +14,6 @@ class ArticleController extends BaseController
     private CommentService $commentService;
     private CategoryController $categoryController;
 
-
     private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
@@ -33,6 +32,7 @@ class ArticleController extends BaseController
 
     public function displayPost(string $id): void
     {
+        $datas['id'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
         if (!count($datas['comments']))
@@ -43,51 +43,26 @@ class ArticleController extends BaseController
     public function displayPosts(): void
     {
         $results = $this->articleService->getPosts(20);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
-        //pr($articles);
         $datas['pageTitle'] = 'Tous les articles';
+        $datas['results'] = $results;
         $this->renderHtml($datas, 'posts');
     }
 
     public function displayLasts(): void
     {
         $results = $this->articleService->getLasts(10);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
         $datas['pageTitle'] = 'Derniers articles';
+        $datas['results'] = $results;
         $this->renderHtml($datas, 'posts');
     }
 
     public function displayCategory(int $cat_id): void
     {
-        $results = $this->articleService->getPostsCategory($cat_id);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
+        $potCategories = $this->articleService->getPostsCategory($cat_id);
         $category = $this->categoryController->displayCategory($cat_id); //unuseful
         $datas['category'] = $category;
-        $datas['pageTitle'] = 'Articles de ' . $category;
+        $datas['pageTitle'] = $category;
+        $datas['results'] = $potCategories;
         $this->renderHtml($datas, 'posts');
     }
 
@@ -119,10 +94,9 @@ class ArticleController extends BaseController
         if ($error) {
             $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
             return;
-        } else {
-            $id = $this->articleService->postSave($catid, $title, $excerpt, $content);
-            $this->renderHtml(['id' => $id, 'title' => $title], 'publishedpost');
         }
+        $id = $this->articleService->postSave($catid, $title, $excerpt, $content);
+        $this->renderHtml(['id' => $id, 'title' => $title], 'publishedpost');
     }
 
 }

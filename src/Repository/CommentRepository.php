@@ -56,4 +56,15 @@ class CommentRepository extends MainPdo
         return $stmt->fetchAll();
     }
 
+    public function commentSave(array $values): string
+    {
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :txt, :pub, now())';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
+        $stmt->execute($values);
+        $id = $pdo->lastInsertId();
+        return $id;
+    }
+
 }

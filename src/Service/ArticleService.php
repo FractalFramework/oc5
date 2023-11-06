@@ -58,7 +58,7 @@ class ArticleService
             'title' => $title,
             'excerpt' => $excerpt,
             'content' => $content,
-            'pub' => 0
+            'pub' => 1
         ];
         return $this->articleRepository->postSave($values);
     }

@@ -7,12 +7,11 @@
     {% endif %}
 
         <div class="frame-white">
-            <input type="hidden" id="userId" value="{{uid}}">
-            <input type="hidden" id="postId" value="{{uid}}">
-            <div class="">
-                <textarea id="comment" placeholder="Commentaire"></textarea>
+            <input type="hidden" id="postId" value="{{postId}}">
+            <div class="area">
+                <textarea id="comment" placeholder="Commentaire">{{comment}}</textarea>
             </div>
-            <a class="btsav" onclick="bj(this)" data-bj="postTest|postComment||userId,postId,comment">
+            <a class="btsav" onclick="bj(this)" data-bj="CommentTest|postComment||postId,comment">
                 Envoyer</a>
 
             <div id="CommentTest"></div>

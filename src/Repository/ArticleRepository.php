@@ -93,8 +93,7 @@ class ArticleRepository extends MainPdo
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
         $stmt->execute($values);
-        $id = $pdo->lastInsertId();
-        return $id;
+        return $pdo->lastInsertId();
     }
 
 }

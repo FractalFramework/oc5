@@ -10,7 +10,7 @@ use App\Service\CommentService;
 class CommentController extends BaseController
 {
     private static $instance;
-    private CommentService $commentService;
+    private readonly CommentService $commentService;
 
     private function __construct(string $ajaxMode)
     {
@@ -26,30 +26,32 @@ class CommentController extends BaseController
         return self::$instance;
     }
 
-    public function displayComment(int $id = 1): void
+    public function displayComment(int $id): void
     {
-        $datas = $this->commentService->getComment($id);
-        $array['result'] = $datas;
+        $array['result'] = $this->commentService->getComment($id);
         $this->renderHtml($array, 'comments');
     }
 
     public function displayComments(int $id = 1): void
     {
-        $datas = $this->commentService->getComments($id);
-        $this->renderHtml($datas, 'comments');
+        $this->renderHtml(
+            $this->commentService->getComments($id),
+            'comments'
+        );
     }
 
-    public function newComment(): void
+    public function newComment(array $requests): void
     {
+        $postId = $requests['postId'];
         if (!isset($_SESSION['uid']))
             $this->renderHtml([], 'login');
         else
-            $this->renderHtml([], 'formcomment');
+            $this->renderHtml(['postId' => $postId], 'formcomment');
     }
 
     public function commentSave($requests): void
     {
-        $userId = $requests['userId'];
+        $userId = $_SESSION['uid'];
         $postId = $requests['postId'];
         $comment = $requests['comment'];
 
@@ -61,8 +63,13 @@ class CommentController extends BaseController
         };
 
         if ($error) {
-            $this->renderHtml(['userId' => $userId, 'postId' => $postId, 'comment' => $comment, 'error' => $error], 'commentpost');
-            return;
+            $datas = ['postId' => $postId, 'comment' => $comment, 'error' => $error];
+            $this->renderHtml($datas, 'formcomment');
+        } else {
+            $id = $this->commentService->commentSave($postId, $comment);
+            //todo recup username,date... if we let that like that
+            $datas = ['surname' => $userId, 'txt' => $comment, 'date' => ''];
+            $this->renderHtml($datas, 'publishedcomment');
         }
     }
 
