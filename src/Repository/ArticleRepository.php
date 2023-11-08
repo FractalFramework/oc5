@@ -31,7 +31,9 @@ class ArticleRepository extends MainPdo
 
     public function getById(int $id): ArticleEntity
     {
-        $sql = 'select id,title,content from posts where id=?';
+        $sql = 'select posts.id,uid,title,excerpt,content,pub,name,date_format(posts.lastup,"%d/%m/%Y") as date from posts 
+        left join users on posts.uid=users.id
+        where posts.id=?';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
@@ -89,6 +91,16 @@ class ArticleRepository extends MainPdo
     public function postSave(array $values): string
     {
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        $stmt->execute($values);
+        return $pdo->lastInsertId();
+    }
+
+    public function postUpdate(array $values): string
+    {
+        $sql = 'update ' . self::$table . ' set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);

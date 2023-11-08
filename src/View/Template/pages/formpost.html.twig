@@ -1,6 +1,11 @@
 {% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
 {%  block main %}
+
+	{%if ( modif == 1 ) %}
+    <h2>Modifier article</h2>
+	{% else %}
     <h2>Nouvel article</h2>
+	{% endif %}
     
     {% if error %}
         <div class="frame-red">{{error}}</div>
@@ -16,16 +21,23 @@
                 <label for="catid">Catégorie</label>
             </div>
             <div class="area">
-                <input type="text" id="title" placeholder="Titre" value="{{title}}">
+                <input type="text" id="title" placeholder="Titre" value="{{article.title}}">
             </div>
             <div class="area">
-                <textarea id="excerpt" placeholder="Résumé">{{excerpt}}</textarea>
+                <textarea id="excerpt" placeholder="Résumé">{{article.excerpt}}</textarea>
             </div>
             <div class="area">
-                <textarea id="content" placeholder="Article" rows="12">{{content}}</textarea>
+                <textarea id="content" placeholder="Article" rows="12">{{article.content}}</textarea>
             </div>
-            <a class="btsav" onclick="bj(this)" data-bj="main|postSave||catid,title,excerpt,content">
+			{%if ( modif == 1 ) %}
+            <a class="btdel" onclick="bj(this)" 
+                data-bj="main|postUpdate|postId={{postId}}|catid,title,excerpt,content">
+                Modifier</a>
+			{% else %}
+            <a class="btsav" onclick="bj(this)" 
+                data-bj="main|postSave||catid,title,excerpt,content">
                 Enregistrer</a>
+			{% endif %}
 
             <div id="postTest"></div>
         </div>

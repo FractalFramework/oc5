@@ -32,12 +32,14 @@ class ArticleController extends BaseController
 
     public function displayPost(string $id): void
     {
-        $datas['id'] = $id;
+        $datas['postId'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
-        if (!count($datas['comments']))
-            $datas['nocomment'] = 'Aucun commentaire';
-        $this->renderHtml($datas, 'post');
+        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
+        if (!$datas['article']->pub)
+            $this->renderHtml($datas, 'nopost');
+        else
+            $this->renderHtml($datas, 'post');
     }
 
     public function displayPosts(): void
@@ -71,8 +73,7 @@ class ArticleController extends BaseController
         if (!isset($_SESSION['uid']))
             $this->renderHtml([], 'login');
         else {
-            $categories = $this->categoryController->getCategories();
-            $datas['categories'] = $categories;
+            $datas['categories'] = $this->categoryController->getCategories();
             $this->renderHtml($datas, 'formpost');
         }
     }
@@ -95,8 +96,47 @@ class ArticleController extends BaseController
             $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
             return;
         }
-        $id = $this->articleService->postSave($catid, $title, $excerpt, $content);
-        $this->renderHtml(['id' => $id, 'title' => $title], 'publishedpost');
+        $postId = $this->articleService->postSave($catid, $title, $excerpt, $content);
+        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+    }
+
+    public function postEdit($requests): void
+    {
+        $postId = $requests['postId'];
+        $datas['postId'] = $postId;
+        $datas['article'] = $this->articleService->getPost((int) $postId);
+        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
+        $datas['modif'] = 1;
+        if ($datas['editable']) {
+            $datas['categories'] = $this->categoryController->getCategories();
+            $this->renderHtml($datas, 'formpost');
+        } else { //show post
+            $datas['comments'] = $this->commentService->getcomments((int) $postId);
+            $this->renderHtml($datas, 'post');
+        }
+    }
+
+    public function postUpdate($requests): void
+    {
+        $postId = $requests['postId'];
+        $catid = $requests['catid'];
+        $title = $requests['title'];
+        $excerpt = $requests['excerpt'];
+        $content = $requests['content'];
+
+        $error = match (true) {
+            !$title => 'N\'oubliez pas le titre quand même',
+            !$excerpt => 'Un résumé permet d\'y voir clair',
+            !$content => 'Sans contenu, point de salut',
+            default => ''
+        };
+
+        if ($error) {
+            $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
+            return;
+        }
+        $id = $this->articleService->postUpdate((int) $postId, $catid, $title, $excerpt, $content);
+        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
     }
 
 }

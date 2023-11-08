@@ -62,15 +62,16 @@ class CommentController extends BaseController
             default => ''
         };
 
+        $datas = ['postId' => $postId];
         if ($error) {
-            $datas = ['postId' => $postId, 'comment' => $comment, 'error' => $error];
-            $this->renderHtml($datas, 'formcomment');
+            $datas['comment'] = $comment;
+            $datas['error'] = $error;
         } else {
             $id = $this->commentService->commentSave($postId, $comment);
-            //todo recup username,date... if we let that like that
-            $datas = ['surname' => $userId, 'txt' => $comment, 'date' => ''];
-            $this->renderHtml($datas, 'publishedcomment');
         }
+        //render is sent in div id=comments
+        $datas['comments'] = $this->commentService->getcomments((int) $postId);
+        $this->renderHtml($datas, 'comments');
     }
 
 }

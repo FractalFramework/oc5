@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Repository\articleRepository;
-use App\Entity\ArticleEntity;
 use App\Model\ArticleModel;
-use App\Model\ArticleModel2;
 
 class ArticleService
 {
@@ -61,6 +59,18 @@ class ArticleService
             'pub' => 1
         ];
         return $this->articleRepository->postSave($values);
+    }
+
+    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): string
+    {
+        $values = [
+            'id' => $postId,
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content
+        ];
+        return $this->articleRepository->postUpdate($values);
     }
 
 }

@@ -9,6 +9,7 @@ class CommentEntity
     public ?int $bid;
     public ?string $name = '';
     public ?string $mail = '';
+    public ?string $auth = '';
     public ?string $surname = '';
     public ?string $txt = '';
     public ?int $pub;
@@ -33,6 +34,10 @@ class CommentEntity
     public function getMail(): string
     {
         return $this->mail;
+    }
+    public function getAuth(): string
+    {
+        return $this->auth;
     }
     public function getSurname(): string
     {

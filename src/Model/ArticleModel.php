@@ -8,9 +8,13 @@ use App\Entity\ArticleEntity;
 
 class ArticleModel
 {
+    public int $uid;
     public string $title;
     public string $content;
     public string $excerpt;
+    public string $name;
+    public string $date;
+    public int $pub;
     public array $results;
 
     private function __construct()
@@ -20,18 +24,26 @@ class ArticleModel
     public static function fromFetch(ArticleEntity $entity): self
     {
         $articleModel = new self();
+        $articleModel->uid = $entity->uid;
         $articleModel->title = $entity->title;
         $articleModel->content = $entity->content;
         $articleModel->excerpt = $entity->excerpt;
+        $articleModel->name = $entity->name;
+        $articleModel->date = $entity->date;
+        $articleModel->pub = $entity->pub;
         return $articleModel;
     }
 
     public static function fromFetchAll(ArticleEntity $entity): self
     {
         $articleModel = new self();
+        $articleModel->uid = $entity->uid;
         $articleModel->title = $entity->title;
         $articleModel->content = $entity->content;
         $articleModel->excerpt = $entity->excerpt;
+        $articleModel->name = $entity->name;
+        $articleModel->date = $entity->date;
+        $articleModel->pub = $entity->pub;
         return $articleModel;
     }
 }
