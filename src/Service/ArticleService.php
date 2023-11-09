@@ -61,7 +61,7 @@ class ArticleService
         return $this->articleRepository->postSave($values);
     }
 
-    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): string
+    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
     {
         $values = [
             'id' => $postId,

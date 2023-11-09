@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\MainPdo;
 use App\Entity\CommentEntity;
-use App\Model\Connect;
-use PDO;
+use App\Service\DbService;
 
-class CommentRepository extends MainPdo
+class CommentRepository
 {
     protected static string $table = 'tracks';
     private static $instance;
-    private Connect $connect;
+    private DbService $dbService;
 
     private function __construct()
     {
-        $this->connect = Connect::getInstance();
+        $this->dbService = DbService::getInstance();
     }
 
     public static function getInstance(): self
@@ -35,36 +33,23 @@ class CommentRepository extends MainPdo
         left join profile
         on tracks.id=profile.uid
         where tracks.id=?';
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
-        $stmt->execute([$id]);
-        return $stmt->fetch();
+        return $this->dbService->fetchComment($sql, [$id]);
     }
 
     public function commentsByPost(int $id): array
     {
-        $sql = 'select profile.uid,bid,txt,pub,name,surname,auth,date_format(tracks.up,"%d/%m/%Y") as date
+        $sql = 'select tracks.id,profile.uid,bid,txt,pub,name,surname,auth,date_format(tracks.up,"%d/%m/%Y") as date
         from ' . self::$table . '
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
-        where tracks.bid=?';
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
-        $stmt->execute([$id]);
-        return $stmt->fetchAll();
+        where pub=1 and tracks.bid=?';
+        return $this->dbService->fetchAllComments($sql, [$id]);
     }
 
-    public function commentSave(array $values): string
+    public function commentSave(array $blind): string
     {
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :txt, :pub, now())';
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
-        $stmt->execute($values);
-        $id = $pdo->lastInsertId();
-        return $id;
+        return $this->dbService->insertComment($sql, $blind);
     }
 
 }

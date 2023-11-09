@@ -1,11 +1,13 @@
 
 		<h3>Commentaires</h3>
 		{% for comment in comments %}
-			<p>
-				<strong>{{comment.name | raw }}</strong>
-				<span class="date">{{comment.date | raw }}</strong>
-			</p>
-			<p>{{comment.txt | raw }}</p>
+			<div id="track{{comment.id}}" class="track">
+				<div class="headline">
+					<strong>{{comment.name | raw }}</strong>
+					<span class="date">{{comment.date | raw }}</strong>
+				</div>
+				<div class="track-content" style="white-space:break-spaces">{{comment.txt | raw }}</div>
+			</div>
 		{% endfor %}
 
 		{%if ( comments | length == 0 ) %}

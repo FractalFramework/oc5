@@ -63,7 +63,6 @@ class ArticleController extends BaseController
         $potCategories = $this->articleService->getPostsCategory($cat_id);
         $category = $this->categoryController->displayCategory($cat_id); //unuseful
         $datas['category'] = $category;
-        $datas['pageTitle'] = $category;
         $datas['results'] = $potCategories;
         $this->renderHtml($datas, 'posts');
     }
@@ -78,7 +77,7 @@ class ArticleController extends BaseController
         }
     }
 
-    public function postSave($requests): void
+    public function postSave(array $requests): void
     {
         $catid = $requests['catid'];
         $title = $requests['title'];
@@ -98,25 +97,25 @@ class ArticleController extends BaseController
         }
         $postId = $this->articleService->postSave($catid, $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+        //$this->displayPost($postId);
     }
 
-    public function postEdit($requests): void
+    public function postEdit(int $postId): void
     {
-        $postId = $requests['postId'];
         $datas['postId'] = $postId;
-        $datas['article'] = $this->articleService->getPost((int) $postId);
+        $datas['article'] = $this->articleService->getPost($postId);
         $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
-        $datas['modif'] = 1;
+        $datas['modif'] = true;
         if ($datas['editable']) {
             $datas['categories'] = $this->categoryController->getCategories();
             $this->renderHtml($datas, 'formpost');
         } else { //show post
-            $datas['comments'] = $this->commentService->getcomments((int) $postId);
+            $datas['comments'] = $this->commentService->getcomments($postId);
             $this->renderHtml($datas, 'post');
         }
     }
 
-    public function postUpdate($requests): void
+    public function postUpdate(array $requests): void
     {
         $postId = $requests['postId'];
         $catid = $requests['catid'];
@@ -130,13 +129,23 @@ class ArticleController extends BaseController
             !$content => 'Sans contenu, point de salut',
             default => ''
         };
-
         if ($error) {
-            $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
+            $this->renderHtml([
+                'editable' => true,
+                //cheat
+                'modif' => true,
+                'article' => [
+                    'title' => $title,
+                    'excerpt' => $excerpt,
+                    'content' => $content
+                ],
+                'error' => $error
+            ], 'formpost');
             return;
         }
-        $id = $this->articleService->postUpdate((int) $postId, $catid, $title, $excerpt, $content);
+        $ok = $this->articleService->postUpdate((int) $postId, $catid, $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+        //$this->displayPost($postId);
     }
 
 }

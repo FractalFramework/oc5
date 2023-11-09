@@ -12,6 +12,7 @@ class ArticleModel
     public string $title;
     public string $content;
     public string $excerpt;
+    public string $category;
     public string $name;
     public string $date;
     public int $pub;
@@ -28,6 +29,7 @@ class ArticleModel
         $articleModel->title = $entity->title;
         $articleModel->content = $entity->content;
         $articleModel->excerpt = $entity->excerpt;
+        $articleModel->category = $entity->category;
         $articleModel->name = $entity->name;
         $articleModel->date = $entity->date;
         $articleModel->pub = $entity->pub;
@@ -39,8 +41,9 @@ class ArticleModel
         $articleModel = new self();
         $articleModel->uid = $entity->uid;
         $articleModel->title = $entity->title;
-        $articleModel->content = $entity->content;
+        $articleModel->content = nl2br($entity->content);
         $articleModel->excerpt = $entity->excerpt;
+        $articleModel->category = $entity->category;
         $articleModel->name = $entity->name;
         $articleModel->date = $entity->date;
         $articleModel->pub = $entity->pub;

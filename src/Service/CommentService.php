@@ -6,6 +6,7 @@ namespace App\Service;
 
 use App\Repository\CommentRepository;
 use App\Entity\CommentEntity;
+use App\Model\CommentModel;
 
 class CommentService
 {
@@ -25,14 +26,16 @@ class CommentService
         return self::$instance;
     }
 
-    public function getComment(int $id): CommentEntity
+    public function getComment(int $id): CommentModel
     {
-        return $this->commentRepository->findCommentsFromId($id);
+        $commentEntity = $this->commentRepository->findCommentsFromId($id);
+        return CommentModel::fromFetch($commentEntity);
     }
 
     public function getComments(int $id): array
     {
-        return $this->commentRepository->commentsByPost($id);
+        return $commentEntity = $this->commentRepository->commentsByPost($id);
+        //return CommentModel::fromFetchAll($commentEntity);
     }
 
 

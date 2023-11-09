@@ -11,6 +11,16 @@
         <div class="frame-red">{{error}}</div>
     {% endif %}
 
+			{%if ( modif == true ) %}
+            <a class="btdel" onclick="bj(this)" 
+                data-bj="main|postUpdate|postId={{postId}}|catid,title,excerpt,content">
+                Modifier</a>
+                <a class="btn" href="/post/{{postId}}" onclick="bh(this)">Annuler</a>
+			{% else %}
+            <a class="btsav" onclick="bj(this)" 
+                data-bj="main|postSave||catid,title,excerpt,content">
+                Enregistrer</a>
+			{% endif %}
         <div class="frame-white">
             <div class="area">
                 <select id="catid">
@@ -29,15 +39,7 @@
             <div class="area">
                 <textarea id="content" placeholder="Article" rows="12">{{article.content}}</textarea>
             </div>
-			{%if ( modif == 1 ) %}
-            <a class="btdel" onclick="bj(this)" 
-                data-bj="main|postUpdate|postId={{postId}}|catid,title,excerpt,content">
-                Modifier</a>
-			{% else %}
-            <a class="btsav" onclick="bj(this)" 
-                data-bj="main|postSave||catid,title,excerpt,content">
-                Enregistrer</a>
-			{% endif %}
+
 
             <div id="postTest"></div>
         </div>

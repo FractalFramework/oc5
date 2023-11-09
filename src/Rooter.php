@@ -43,7 +43,7 @@ class Rooter
             'logout' => $userController->logout($gets),
             'newPost' => $articleController->newPost(),
             'postSave' => $articleController->postSave($gets),
-            'postEdit' => $articleController->postEdit($gets),
+            'postEdit' => $articleController->postEdit((int) $id),
             'postUpdate' => $articleController->postUpdate($gets),
             'newComment' => $commentController->newComment($gets),
             'postComment' => $commentController->commentSave($gets),

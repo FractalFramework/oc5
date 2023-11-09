@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Repository\userRepository;
+use App\Repository\UserRepository;
 use App\Entity\UserEntity;
 use App\Model\UserModel;
 use App\Model\ErrorModel;
