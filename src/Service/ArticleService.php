@@ -50,27 +50,12 @@ class ArticleService
 
     public function postSave(string $catid, string $title, string $excerpt, string $content): string
     {
-        $values = [
-            'uid' => $_SESSION['uid'],
-            'catid' => $catid,
-            'title' => $title,
-            'excerpt' => $excerpt,
-            'content' => $content,
-            'pub' => 1
-        ];
-        return $this->articleRepository->postSave($values);
+        return $this->articleRepository->postSave($catid, $title, $excerpt, $content);
     }
 
     public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
     {
-        $values = [
-            'id' => $postId,
-            'catid' => $catid,
-            'title' => $title,
-            'excerpt' => $excerpt,
-            'content' => $content
-        ];
-        return $this->articleRepository->postUpdate($values);
+        return $this->articleRepository->postUpdate($postId, $catid, $title, $excerpt, $content);
     }
 
 }

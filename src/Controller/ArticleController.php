@@ -79,7 +79,6 @@ class ArticleController extends BaseController
 
     public function postSave(array $requests): void
     {
-        $catid = $requests['catid'];
         $title = $requests['title'];
         $excerpt = $requests['excerpt'];
         $content = $requests['content'];
@@ -103,7 +102,7 @@ class ArticleController extends BaseController
             );
             return;
         }
-        $postId = $this->articleService->postSave($catid, $title, $excerpt, $content);
+        $postId = $this->articleService->postSave($requests['catid'], $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
         //$this->displayPost($postId);
     }
@@ -126,7 +125,6 @@ class ArticleController extends BaseController
     public function postUpdate(array $requests): void
     {
         $postId = $requests['postId'];
-        $catid = $requests['catid'];
         $title = $requests['title'];
         $excerpt = $requests['excerpt'];
         $content = $requests['content'];
@@ -151,7 +149,7 @@ class ArticleController extends BaseController
             ], 'formpost');
             return;
         }
-        $ok = $this->articleService->postUpdate((int) $postId, $catid, $title, $excerpt, $content);
+        $ok = $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
         //$this->displayPost($postId);
     }

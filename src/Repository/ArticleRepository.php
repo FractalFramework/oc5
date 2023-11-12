@@ -68,14 +68,29 @@ class ArticleRepository
         return $this->dbService->fetchAllArticles($sql, [$catid]);
     }
 
-    public function postSave(array $blind): string
+    public function postSave(string $catid, string $title, string $excerpt, string $content): string
     {
+        $blind = [
+            'uid' => $_SESSION['uid'],
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content,
+            'pub' => 1
+        ];
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
         return $this->dbService->insertArticle($sql, $blind);
     }
 
-    public function postUpdate(array $blind): bool
+    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
     {
+        $blind = [
+            'id' => $postId,
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content
+        ];
         $sql = 'update ' . self::$table . ' set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
         return $this->dbService->updateArticle($sql, $blind);
     }
