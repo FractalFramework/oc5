@@ -72,3 +72,5 @@ Running a Sql query.
 - create comment
 - edit article
 - edit visibility
+
+## Issue 11 : Contact
