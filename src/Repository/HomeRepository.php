@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\MainPdo;
+use App\Service\DbService;
 use App\Entity\UserEntity;
-use App\Model\Connect;
-use PDO;
 
-class HomeRepository extends MainPdo
+class HomeRepository
 {
     protected static string $table = 'tracks';
     private static $instance;
-    private Connect $connect;
+    private DbService $dbService;
 
     private function __construct()
     {
-        $this->connect = Connect::getInstance();
+        $this->dbService = DbService::getInstance();
     }
 
     public static function getInstance(): self
@@ -35,11 +33,12 @@ class HomeRepository extends MainPdo
         left join profile
         on tracks.id=uid
         where tracks.id=?';
-        $pdo = $this->connect->pdo;
+        return $this->dbService->fetchUserProfile($sql, [$id]);
+        /*$pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
         $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
         $stmt->execute([$id]);
-        return $stmt->fetch();
+        return $stmt->fetch();*/
     }
 
 }

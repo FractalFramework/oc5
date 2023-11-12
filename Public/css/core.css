@@ -130,7 +130,8 @@ nav a.admin:hover {
     border-width: 1px;
     text-decoration: none;
     background-color: white;
-    line-height: 22px
+    line-height: 22px;
+    user-select: none;
 }
 
 .menu a:hover,
@@ -238,7 +239,7 @@ nav a.admin:hover {
 }
 
 .grid {
-    grid-template-columns: 280px auto auto;
+    grid-template-columns: 280px 720px auto;
     grid-template-rows: 60px auto auto
 }
 

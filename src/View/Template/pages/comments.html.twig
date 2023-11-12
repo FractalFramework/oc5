@@ -1,0 +1,27 @@
+
+		<h3>Commentaires</h3>
+		{% for comment in comments %}
+			<div id="track{{comment.id}}" class="track">
+				<div class="headline">
+					<strong>{{comment.name | raw }}</strong>
+					<span class="date">{{comment.date | raw }}</strong>
+				</div>
+				<div class="track-content" style="white-space:break-spaces">{{comment.txt | raw }}</div>
+			</div>
+		{% endfor %}
+
+		{%if ( comments | length == 0 ) %}
+		<div class="frame-white">{{nocomment | raw }}</div>
+		{% endif %}
+
+		<div class="">
+			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			Poster un commentaire
+			</a>
+		</div>
+		<div id="newComment">		
+			{% if error %}
+				<div class="frame-red">{{error}}</div>
+			{% endif %}
+		</div>
+	</div>

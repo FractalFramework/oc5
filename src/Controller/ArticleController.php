@@ -5,20 +5,19 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ArticleService;
-use App\Service\CommentsService;
+use App\Service\commentService;
 
 class ArticleController extends BaseController
 {
     private static $instance;
     private ArticleService $articleService;
-    private CommentsService $commentsService;
+    private CommentService $commentService;
     private CategoryController $categoryController;
-
 
     private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
-        $this->commentsService = CommentsService::getInstance();
+        $this->commentService = CommentService::getInstance();
         $this->categoryController = CategoryController::getInstance($ajaxMode);
         parent::__construct($ajaxMode);
     }
@@ -33,63 +32,126 @@ class ArticleController extends BaseController
 
     public function displayPost(string $id): void
     {
+        $datas['postId'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
-        $datas['comments'] = $this->commentsService->getComments((int) $id);
-        if (!count($datas['comments']))
-            $datas['nocomment'] = 'Aucun commentaire';
-        $this->renderHtml($datas, 'post');
+        $datas['comments'] = $this->commentService->getcomments((int) $id);
+        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
+        if (!$datas['article']->pub)
+            $this->renderHtml($datas, 'nopost');
+        else
+            $this->renderHtml($datas, 'post');
     }
 
     public function displayPosts(): void
     {
         $results = $this->articleService->getPosts(20);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
-        //pr($articles);
         $datas['pageTitle'] = 'Tous les articles';
+        $datas['results'] = $results;
         $this->renderHtml($datas, 'posts');
     }
 
     public function displayLasts(): void
     {
         $results = $this->articleService->getLasts(10);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
         $datas['pageTitle'] = 'Derniers articles';
+        $datas['results'] = $results;
         $this->renderHtml($datas, 'posts');
     }
 
     public function displayCategory(int $cat_id): void
     {
-        $results = $this->articleService->getPostsCategory($cat_id);
-        //pr($datas);
-        $datas = [];
-        foreach ($results as $k => $obj) {
-            $datas['results'][] = [
-                'id' => $obj->id,
-                'title' => $obj->title,
-                'excerpt' => $obj->excerpt,
-                'category' => $obj->category,
-            ];
-        }
+        $potCategories = $this->articleService->getPostsCategory($cat_id);
         $category = $this->categoryController->displayCategory($cat_id); //unuseful
         $datas['category'] = $category;
-        $datas['pageTitle'] = 'Articles de ' . $category;
+        $datas['results'] = $potCategories;
         $this->renderHtml($datas, 'posts');
+    }
+
+    public function newPost(): void
+    {
+        if (!isset($_SESSION['uid']))
+            $this->renderHtml([], 'login');
+        else {
+            $datas['categories'] = $this->categoryController->getCategories();
+            $this->renderHtml($datas, 'formpost');
+        }
+    }
+
+    public function postSave(array $requests): void
+    {
+        $title = $requests['title'];
+        $excerpt = $requests['excerpt'];
+        $content = $requests['content'];
+
+        $error = match (true) {
+            !$title => 'N\'oubliez pas le titre quand même',
+            !$excerpt => 'Un résumé permet d\'y voir clair',
+            !$content => 'Sans contenu, point de salut',
+            default => ''
+        };
+
+        if ($error) {
+            $this->renderHtml(
+                [
+                    'title' => $title,
+                    'excerpt' => $excerpt,
+                    'content' => $content,
+                    'error' => $error
+                ],
+                'formpost'
+            );
+            return;
+        }
+        $postId = $this->articleService->postSave($requests['catid'], $title, $excerpt, $content);
+        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+        //$this->displayPost($postId);
+    }
+
+    public function postEdit(int $postId): void
+    {
+        $datas['postId'] = $postId;
+        $datas['article'] = $this->articleService->getPost($postId);
+        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
+        $datas['modif'] = true;
+        if ($datas['editable']) {
+            $datas['categories'] = $this->categoryController->getCategories();
+            $this->renderHtml($datas, 'formpost');
+        } else { //show post
+            $datas['comments'] = $this->commentService->getcomments($postId);
+            $this->renderHtml($datas, 'post');
+        }
+    }
+
+    public function postUpdate(array $requests): void
+    {
+        $postId = $requests['postId'];
+        $title = $requests['title'];
+        $excerpt = $requests['excerpt'];
+        $content = $requests['content'];
+
+        $error = match (true) {
+            !$title => 'N\'oubliez pas le titre quand même',
+            !$excerpt => 'Un résumé permet d\'y voir clair',
+            !$content => 'Sans contenu, point de salut',
+            default => ''
+        };
+        if ($error) {
+            $this->renderHtml([
+                'editable' => true,
+                //cheat
+                'modif' => true,
+                'article' => [
+                    'title' => $title,
+                    'excerpt' => $excerpt,
+                    'content' => $content
+                ],
+                'error' => $error
+            ], 'formpost');
+            return;
+        }
+        $ok = $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
+        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+        //$this->displayPost($postId);
     }
 
 }

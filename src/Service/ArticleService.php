@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Repository\articleRepository;
-use App\Entity\ArticleEntity;
 use App\Model\ArticleModel;
-use App\Model\ArticleModel2;
 
 class ArticleService
 {
@@ -48,6 +46,16 @@ class ArticleService
     public function getPostsCategory(int $id): array
     {
         return $this->articleRepository->getByCategory($id);
+    }
+
+    public function postSave(string $catid, string $title, string $excerpt, string $content): string
+    {
+        return $this->articleRepository->postSave($catid, $title, $excerpt, $content);
+    }
+
+    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
+    {
+        return $this->articleRepository->postUpdate($postId, $catid, $title, $excerpt, $content);
     }
 
 }

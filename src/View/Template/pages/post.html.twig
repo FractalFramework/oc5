@@ -1,25 +1,44 @@
 {% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
 {% block posts %}{% endblock %}
 {% block post %}
-	<div class="post">
-	{{ dump(article) }}
+	<div id="post{{results.postId}}" class="post">
 		{{results.title }}
 		<h1>{{article.title | raw }}</h1>
+		<div class="headline">
+			<span class="author">{{article.name }}</span>
+			<span class="date">{{article.date }}</span>
+			<strong class="category">[{{article.category | raw }}]</strong>
+			{%if ( editable == 1 ) %}
+			<a class="btsav" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
+			{% endif %}
+		</div>
 		<div class="excerpt">{{article.excerpt | raw }}</div>
-		<div class="content">{{article.content | raw }}</div>
+		<div class="content" style="white-space:break-spaces">{{article.content | raw }}</div>
 	</div>
 {% endblock post %}
 
 {% block comments %}
-	<div class="comments">
+	<div id="comments" class="comments">
 		<h3>Commentaires</h3>
 		{% for comment in comments %}
-			<p>
-				<strong>{{comment.surname | raw }}</strong>
-				<span class="date">{{comment.date | raw }}</strong>
-			</p>
-			<p>{{comment.txt | raw }}</p>
+			<div id="track{{comment.id}}" class="track">
+				<div class="headline">
+					<strong>{{comment.name | raw }}</strong>
+					<span class="date">{{comment.date | raw }}</strong>
+				</div>
+				<div class="track-content" style="white-space:break-spaces">{{comment.txt | raw }}</div>
+			</div>
 		{% endfor %}
-		<div class="">{{nocomment | raw }}</div>
+
+		{%if ( comments | length == 0 ) %}
+		<div class="frame-white">Aucun commentaire pour le moment</div>
+		{% endif %}
+
+		<div class="">
+			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			Poster un commentaire
+			</a>
+		</div>
+		<div id="newComment"></div>
 	</div>
 {% endblock comments %}

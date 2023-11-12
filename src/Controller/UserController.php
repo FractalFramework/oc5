@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Controller\TemplateController;
 use App\Service\UserService;
 use App\Model\ErrorModel;
 use App\Model\UserModel;

@@ -66,3 +66,9 @@ Running a Sql query.
 
 ## Issue 9 : Login
 - user controls : login, logout, register
+
+## Issue 10 : Edition
+- create article
+- create comment
+- edit article
+- edit visibility

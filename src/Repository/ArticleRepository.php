@@ -4,21 +4,19 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\MainPdo;
-use App\Model\Connect;
 use App\Entity\ArticleEntity;
-use App\Model\ArticleModel;
+use App\Service\DbService;
 use PDO;
 
-class ArticleRepository extends MainPdo
+class ArticleRepository
 {
     protected static string $table = 'posts';
     private static $instance;
-    private Connect $connect;
+    private DbService $dbService;
 
     private function __construct()
     {
-        $this->connect = Connect::getInstance();
+        $this->dbService = DbService::getInstance();
     }
 
     public static function getInstance(): self
@@ -31,12 +29,11 @@ class ArticleRepository extends MainPdo
 
     public function getById(int $id): ArticleEntity
     {
-        $sql = 'select id,title,content from posts where id=?';
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
-        $stmt->execute([$id]);
-        return $stmt->fetch();
+        $sql = 'select posts.id,uid,title,excerpt,content,category,pub,name,date_format(posts.lastup,"%d/%m/%Y") as date from posts 
+        left join cats on posts.catid=cats.id
+        left join users on posts.uid=users.id
+        where posts.id=?';
+        return $this->dbService->fetchArticle($sql, [$id]);
     }
 
     public function getAll(int $limit = 10): array
@@ -47,12 +44,7 @@ class ArticleRepository extends MainPdo
         on cats.id=catid
         order by ' . self::$table . '.up desc
         limit ' . $limit;
-
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $this->dbService->fetchAllArticles($sql, []);
     }
 
     public function getLasts(int $limit = 10): array
@@ -62,12 +54,7 @@ class ArticleRepository extends MainPdo
         left join cats
         on cats.id=catid
         limit ' . $limit;
-
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
-        $stmt->execute();
-        return $stmt->fetchAll();
+        return $this->dbService->fetchAllArticles($sql, []);
     }
 
     public function getByCategory(int $catid = 1): array
@@ -78,12 +65,34 @@ class ArticleRepository extends MainPdo
         on cats.id=catid
         where catid=?
         order by ' . self::$table . '.up desc';
+        return $this->dbService->fetchAllArticles($sql, [$catid]);
+    }
 
-        $pdo = $this->connect->pdo;
-        $stmt = $pdo->prepare($sql);
-        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
-        $stmt->execute([$catid]);
-        return $stmt->fetchAll();
+    public function postSave(string $catid, string $title, string $excerpt, string $content): string
+    {
+        $blind = [
+            'uid' => $_SESSION['uid'],
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content,
+            'pub' => 1
+        ];
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
+        return $this->dbService->insertArticle($sql, $blind);
+    }
+
+    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
+    {
+        $blind = [
+            'id' => $postId,
+            'catid' => $catid,
+            'title' => $title,
+            'excerpt' => $excerpt,
+            'content' => $content
+        ];
+        $sql = 'update ' . self::$table . ' set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
+        return $this->dbService->updateArticle($sql, $blind);
     }
 
 }
