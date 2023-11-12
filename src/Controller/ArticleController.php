@@ -92,7 +92,15 @@ class ArticleController extends BaseController
         };
 
         if ($error) {
-            $this->renderHtml(['title' => $title, 'excerpt' => $excerpt, 'content' => $content, 'error' => $error], 'formpost');
+            $this->renderHtml(
+                [
+                    'title' => $title,
+                    'excerpt' => $excerpt,
+                    'content' => $content,
+                    'error' => $error
+                ],
+                'formpost'
+            );
             return;
         }
         $postId = $this->articleService->postSave($catid, $title, $excerpt, $content);

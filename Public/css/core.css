@@ -130,7 +130,8 @@ nav a.admin:hover {
     border-width: 1px;
     text-decoration: none;
     background-color: white;
-    line-height: 22px
+    line-height: 22px;
+    user-select: none;
 }
 
 .menu a:hover,

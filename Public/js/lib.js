@@ -44,3 +44,15 @@ function startstate(st) {
 //window.addEventListener('popstate',function(e){restorestate(e.state);});
 window.onpopstate = function (e) { restorestate(e.state); }
 window.onload = function (e) { startstate(state); }
+
+//edit
+function execom(d) {
+    var u = null;
+    if (d == 'createLink') u = prompt('Url');
+    document.execCommand(d, false, u);
+}
+
+function execom2(d) {
+    document.execCommand('formatBlock', false, '<' + d + '>');
+    getbyid('content').value = 'no';
+}

@@ -59,7 +59,7 @@ select:focus-visible {
 }
 
 div:focus-visible {
-    outline: 2px dashed darkorange
+    outline: 0px dashed darkorange
 }
 
 form {
