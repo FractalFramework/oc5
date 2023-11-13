@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ArticleService;
-use App\Service\commentService;
+use App\Service\CommentService;
 
 class ArticleController extends BaseController
 {

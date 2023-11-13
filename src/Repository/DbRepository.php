@@ -6,9 +6,10 @@ namespace App\Repository;
 
 use App\Model\MainPdo;
 use App\Model\Connect;
-use PDO;
 
-class DbRepository extends MainPdo
+//use PDO;
+
+class DbRepository //extends MainPdo
 {
     private static $instance;
     private Connect $connect;

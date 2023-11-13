@@ -7,6 +7,7 @@ use App\Controller\CategoryController;
 use App\Controller\HomeController;
 use App\Controller\UserController;
 use App\Controller\CommentController;
+use App\Controller\ContactController;
 
 class Rooter
 {
@@ -27,6 +28,7 @@ class Rooter
         $userController = UserController::getInstance($ajaxMode);
         $homeController = HomeController::getInstance($ajaxMode);
         $commentController = CommentController::getInstance($ajaxMode);
+        $contactController = ContactController::getInstance($ajaxMode);
         match ($com) {
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost((int) $id),
@@ -47,6 +49,7 @@ class Rooter
             'postUpdate' => $articleController->postUpdate($gets),
             'newComment' => $commentController->newComment($gets),
             'postComment' => $commentController->commentSave($gets),
+            'newContact' => $contactController->newContact($gets),
             default => $articleController->displayPost(1)
         };
     }

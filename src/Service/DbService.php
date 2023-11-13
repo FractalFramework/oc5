@@ -11,11 +11,13 @@ use App\Entity\ArticleEntity;
 use App\Entity\CommentEntity;
 use App\Entity\CategoryEntity;
 use App\Entity\UserEntity;
+use App\Entity\ContactEntity;
 use PDO;
 
-class DbService extends MainPdo
+class DbService //extends MainPdo
 {
     private static $instance;
+    private static $class;
     private Connect $connect;
 
     private function __construct()
@@ -158,6 +160,35 @@ class DbService extends MainPdo
         $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
         $stmt->execute($blind);
         return $stmt->fetchAll();
+    }
+
+    #Contacts
+
+    public function fetchContact(string $sql, array $blind): ContactEntity
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetch();
+    }
+
+    public function fetchAllContacts(string $sql, array $blind): array
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    public function insertContact(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
     }
 
 }

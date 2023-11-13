@@ -4,12 +4,12 @@
 - database ✔
 - sqlconnection ✔
 - navigation ✔
-- templating 
-- posts 
-- comments 
-- forms 
-- login 
-- edition 
+- templating ✔
+- posts ✔
+- comments ✔
+- forms ✔
+- login ✔
+- edition ✔
 - contacts 
 - admin 
 - security 
