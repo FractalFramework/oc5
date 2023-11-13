@@ -4,10 +4,7 @@ declare(strict_types=1);
 
 namespace App\Repository;
 
-use App\Model\MainPdo;
 use App\Model\Connect;
-
-//use PDO;
 
 class DbRepository
 {

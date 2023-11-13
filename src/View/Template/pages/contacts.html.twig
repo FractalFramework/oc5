@@ -3,14 +3,12 @@
 	<div class="posts">
 		<h1>Contacts</h1>
 		{% block body %}
-			{% for result in results %}
 				<div class="contact{{result.id}}">
 				<a href="/contact/{{result.id}}" onclick="return bh(this)">
 					<h2>{{result.name | raw }}</h2>
 				</a>
 				<p>{{result.message | raw }}</p>
 				</div>
-			{% endfor %}
 		{% endblock body %}
 	</div>
 {% endblock posts %}

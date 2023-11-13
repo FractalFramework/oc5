@@ -50,13 +50,13 @@ class ContactRepository
     public function contactSave(string $name, string $mail, string $message): string
     {
         $blind = [
-            'uid' => $_SESSION['uid'],
+            'uid' => $_SESSION['uid'] ?? 0,
             'name' => $name,
             'mail' => $mail,
             'message' => $message,
             'pub' => 1
         ];
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :name, :mail, :message, :pub, now())';
         return $this->dbService->insertContact($sql, $blind);
     }
 

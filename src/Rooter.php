@@ -20,7 +20,8 @@ class Rooter
     {
         //pr($gets);
         $com = $gets['com'] ?? 'home'; //default
-        $id = $gets['p1'] ?? 1; //default
+        $id = $gets['p1'] ?? 1; //from param "p1"
+        $id = (int) $id;
         $target = get('_tg');
         $ajaxMode = $target ? 'true' : 'false';
         $articleController = ArticleController::getInstance($ajaxMode);
@@ -31,10 +32,10 @@ class Rooter
         $contactController = ContactController::getInstance($ajaxMode);
         match ($com) {
             'home' => $homeController->displayHome(1),
-            'post' => $articleController->displayPost((int) $id),
+            'post' => $articleController->displayPost($id),
             'posts' => $articleController->displayPosts(),
             'lasts' => $articleController->displayLasts(),
-            'category' => $articleController->displayCategory((int) $id),
+            'category' => $articleController->displayCategory($id),
             'categories' => $categoryController->displayCategories(),
             'user' => $userController->displayName($id),
             'profile' => $userController->displayProfile($id),
@@ -45,11 +46,14 @@ class Rooter
             'logout' => $userController->logout($gets),
             'newPost' => $articleController->newPost(),
             'postSave' => $articleController->postSave($gets),
-            'postEdit' => $articleController->postEdit((int) $id),
+            'postEdit' => $articleController->postEdit($id),
             'postUpdate' => $articleController->postUpdate($gets),
             'newComment' => $commentController->newComment($gets),
             'postComment' => $commentController->commentSave($gets),
-            'newContact' => $contactController->newContact($gets),
+            'displayContact' => $contactController->displayContact($id),
+            'displayContacts' => $contactController->displayContacts(),
+            'contact' => $contactController->newContact(),
+            'contactSave' => $contactController->contactSave($gets),
             default => $articleController->displayPost(1)
         };
     }

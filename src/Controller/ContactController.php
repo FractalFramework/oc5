@@ -25,10 +25,10 @@ class ContactController extends BaseController
         return self::$instance;
     }
 
-    public function displayContact(string $id): void
+    public function displayContact(int $id): void
     {
         $datas['contactId'] = $id;
-        $datas['contact'] = $this->contactService->getContact((int) $id);
+        $datas['contact'] = $this->contactService->getContact($id);
         $this->renderHtml($datas, 'contact');
     }
 
@@ -45,6 +45,7 @@ class ContactController extends BaseController
 
     public function contactSave(array $requests): void
     {
+        $uid = $requests['name'];
         $name = $requests['name'];
         $mail = $requests['mail'];
         $message = $requests['message'];
@@ -52,6 +53,7 @@ class ContactController extends BaseController
         $error = match (true) {
             !$name => 'Indiquez votre nom',
             !$mail => 'Indiquez votre mail',
+            !filter_var($mail, FILTER_VALIDATE_EMAIL) => 'Votre e-mail est incorrect',
             !$message => 'Sans contenu, point de salut',
             default => ''
         };
