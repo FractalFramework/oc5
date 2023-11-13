@@ -9,7 +9,7 @@ use App\Model\Connect;
 
 //use PDO;
 
-class DbRepository //extends MainPdo
+class DbRepository
 {
     private static $instance;
     private Connect $connect;

@@ -14,7 +14,7 @@ use App\Entity\UserEntity;
 use App\Entity\ContactEntity;
 use PDO;
 
-class DbService //extends MainPdo
+class DbService
 {
     private static $instance;
     private static $class;
