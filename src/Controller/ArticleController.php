@@ -39,11 +39,14 @@ class ArticleController extends BaseController
         $datas['postId'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
-        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
-        if (!$datas['article']->pub)
-            $this->renderHtml($datas, 'nopost');
-        else
+        $datas['editable'] = $datas['article']->uid == ($_SESSION['uid'] ?? 0);
+        $uid = $_SESSION['uid'] ?? 0;
+
+        $isPublic = $datas['article']->pub ?? 0;
+        if ($isPublic || (!$isPublic && $uid)) //==1 superadmin
             $this->renderHtml($datas, 'post');
+        else
+            $this->renderHtml($datas, 'nopost');
     }
 
     public function displayPosts(): void

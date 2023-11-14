@@ -5,15 +5,18 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\CommentService;
+use App\Service\UserService;
 
 class CommentController extends BaseController
 {
     private static $instance;
     private readonly CommentService $commentService;
+    private readonly UserService $userService;
 
     private function __construct(string $ajaxMode)
     {
         $this->commentService = CommentService::getInstance();
+        $this->userService = UserService::getInstance();
         parent::__construct($ajaxMode);
     }
 
@@ -28,7 +31,7 @@ class CommentController extends BaseController
     public function displayComment(int $id): void
     {
         $array['result'] = $this->commentService->getComment($id);
-        $this->renderHtml($array, 'comments');
+        $this->renderHtml($array, 'comment');
     }
 
     public function displayComments(int $id = 1): void
@@ -41,36 +44,41 @@ class CommentController extends BaseController
 
     public function newComment(array $requests): void
     {
-        $postId = $requests['postId'];
-        if (!isset($_SESSION['uid']))
-            $this->renderHtml([], 'login');
-        else
-            $this->renderHtml(['postId' => $postId], 'formcomment');
+        $requests['loged'] = $_SESSION['uid'] ?? false;
+        $this->renderHtml($requests, 'formcomment');
     }
 
     public function commentSave($requests): void
     {
-        $userId = $_SESSION['uid'];
+        $userId = ($_SESSION['uid'] ?? 0);
         $postId = $requests['postId'];
+        $name = $requests['name'];
+        $mail = $requests['mail'];
         $comment = $requests['comment'];
 
+        if ($userId) {
+            $user = $this->userService->getUserFromUid((int) $userId);
+            $name = $user->name;
+            $mail = $user->mail;
+        }
+
         $error = match (true) {
-            !$userId => 'Vous n\'êtes pas identifié',
             !$postId => 'Une erreur est survenue : pas d\'article référant',
+            !$name => 'Indiquez votre nom',
+            !$mail => 'Indiquez votre mail',
+            !filter_var($mail, FILTER_VALIDATE_EMAIL) => 'Votre e-mail est incorrect',
             !$comment => 'Si rien à dire c\'est pas la peine',
             default => ''
         };
 
-        $datas = ['postId' => $postId];
         if ($error) {
-            $datas['comment'] = $comment;
-            $datas['error'] = $error;
+            $requests['error'] = $error;
+            $this->renderHtml($requests, 'formcomment');
         } else {
-            $id = $this->commentService->commentSave($postId, $comment);
+            $id = $this->commentService->commentSave($postId, $name, $mail, $comment);
+            $requests['justPosted'] = $id;
+            $this->renderHtml($requests, 'publishedcomment');
         }
-        //render is sent in div id=comments
-        $datas['comments'] = $this->commentService->getcomments((int) $postId);
-        $this->renderHtml($datas, 'comments');
     }
 
 }

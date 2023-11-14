@@ -66,12 +66,11 @@ class CommentRepository
         on tracks.id=profile.uid
         where tracks.id=?';
         return $this->fetchComment($sql, [$id]);
-        return $this->fetchComment($sql, [$id]);
     }
 
     public function commentsByPost(int $id): array
     {
-        $sql = 'select tracks.id,profile.uid,bid,txt,pub,name,surname,auth,date_format(tracks.up,"%d/%m/%Y") as date
+        $sql = 'select tracks.id,profile.uid,bid,txt,pub,tracks.name,surname,date_format(tracks.up,"%d/%m/%Y") as date
         from ' . self::$table . '
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
@@ -81,7 +80,7 @@ class CommentRepository
 
     public function commentSave(array $blind): string
     {
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :txt, :pub, now())';
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :name, :mail, :txt, :pub, now())';
         return $this->insertComment($sql, $blind);
     }
 

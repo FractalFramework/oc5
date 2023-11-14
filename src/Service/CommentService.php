@@ -39,13 +39,16 @@ class CommentService
     }
 
 
-    public function commentSave(string $postId, string $comment): string
+    public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {
+        $uid = $_SESSION['uid'] ?? 0;
         $values = [
-            'uid' => $_SESSION['uid'],
+            'uid' => $uid,
             'bid' => $postId,
+            'name' => $name,
+            'mail' => $mail,
             'txt' => $comment,
-            'pub' => 1
+            'pub' => $uid ? 1 : 0
         ];
         return $this->commentRepository->commentSave($values);
     }

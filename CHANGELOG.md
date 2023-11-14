@@ -81,11 +81,16 @@ Running a Sql query.
 - todo : send by mail
 
 ## Issue 29 : Fetches
-- todo: correction source of fetches (from DbService to each repositories)
-- todo: use BaseRep
+- correction source of fetches (from DbService to each repositories)
+- use BaseRep
 
 ## Issue 31 : fixcomments
-- todo: publish comment without being loged
+- publish comment without being loged
+- comment in loged mode
+- set publicity to 0
+- improve behaviour on errors
+- let see not published articles if loged as superadmin
+- add publishedcomment.html (thanks message)
 
 ## Issue 12 : Admin
 - todo: table of posts and comments
