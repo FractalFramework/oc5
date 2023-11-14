@@ -46,7 +46,7 @@
 }
 
 .shutter {
-    max-wifth: 280px
+    max-width: 280px
 }
 
 .content {
@@ -153,7 +153,7 @@ nav a.admin:hover {
 
 .title-small {
     margin: 6px 0;
-    font-transform: capitalize
+    text-transform: capitalize
 }
 
 .excerpt {

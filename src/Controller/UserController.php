@@ -56,6 +56,7 @@ class UserController extends BaseController
             !$pswd => 'Spécifier mot de passe',
             $pswd != $psw2 => 'Les mots de passe ne correspondent pas',
             !$mail => 'Spécifier un e-mail',
+            !filter_var($mail, FILTER_VALIDATE_EMAIL) => 'Votre e-mail est incorrect',
             default => ''
         };
 

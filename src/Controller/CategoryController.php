@@ -33,14 +33,4 @@ class CategoryController extends BaseController
         $this->renderHtml($array, 'categories');
     }
 
-    public function displayCategory(int $cat_id): string
-    {
-        return $this->categoryService->getCategory($cat_id)->category;
-    }
-
-    public function getCategories(): array
-    {
-        return $this->categoryService->getCategories();
-    }
-
 }

@@ -1,0 +1,16 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}
+	<div class="posts">
+		<h1>Contacts</h1>
+		{% block body %}
+				<div class="contact{{result.id}}">
+				<a href="/contact/{{result.id}}" onclick="return bh(this)">
+					<h2>{{result.name | raw }}</h2>
+				</a>
+				<p>{{result.message | raw }}</p>
+				</div>
+		{% endblock body %}
+	</div>
+{% endblock posts %}
+{% block post %}{% endblock %}
+{% block comments %}{% endblock %}

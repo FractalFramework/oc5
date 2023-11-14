@@ -4,12 +4,12 @@
 - database ✔
 - sqlconnection ✔
 - navigation ✔
-- templating 
-- posts 
-- comments 
-- forms 
-- login 
-- edition 
+- templating ✔
+- posts ✔
+- comments ✔
+- forms ✔
+- login ✔
+- edition ✔
 - contacts 
 - admin 
 - security 
@@ -72,3 +72,5 @@ Running a Sql query.
 - create comment
 - edit article
 - edit visibility
+
+## Issue 11 : Contact

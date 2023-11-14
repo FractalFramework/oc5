@@ -5,20 +5,24 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use App\Service\ArticleService;
-use App\Service\commentService;
+use App\Service\CommentService;
+use App\Service\CategoryService;
+use App\Controller\CategoryController;
 
 class ArticleController extends BaseController
 {
     private static $instance;
     private ArticleService $articleService;
     private CommentService $commentService;
-    private CategoryController $categoryController;
+    private CategoryService $categoryService;
+    private CategoryController $CategoryController;
 
     private function __construct(string $ajaxMode)
     {
         $this->articleService = ArticleService::getInstance();
         $this->commentService = CommentService::getInstance();
-        $this->categoryController = CategoryController::getInstance($ajaxMode);
+        $this->categoryService = CategoryService::getInstance();
+        $this->CategoryController = CategoryController::getInstance($ajaxMode);
         parent::__construct($ajaxMode);
     }
 
@@ -61,7 +65,7 @@ class ArticleController extends BaseController
     public function displayCategory(int $cat_id): void
     {
         $potCategories = $this->articleService->getPostsCategory($cat_id);
-        $category = $this->categoryController->displayCategory($cat_id); //unuseful
+        $category = $this->categoryService->getCategory($cat_id)->category;
         $datas['category'] = $category;
         $datas['results'] = $potCategories;
         $this->renderHtml($datas, 'posts');
@@ -72,7 +76,7 @@ class ArticleController extends BaseController
         if (!isset($_SESSION['uid']))
             $this->renderHtml([], 'login');
         else {
-            $datas['categories'] = $this->categoryController->getCategories();
+            $datas['categories'] = $this->categoryService->getCategories(); //to generalize
             $this->renderHtml($datas, 'formpost');
         }
     }
@@ -114,7 +118,7 @@ class ArticleController extends BaseController
         $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
         $datas['modif'] = true;
         if ($datas['editable']) {
-            $datas['categories'] = $this->categoryController->getCategories();
+            $datas['categories'] = $this->categoryService->getCategories();
             $this->renderHtml($datas, 'formpost');
         } else { //show post
             $datas['comments'] = $this->commentService->getcomments($postId);

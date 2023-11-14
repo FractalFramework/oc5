@@ -4,32 +4,71 @@ declare(strict_types=1);
 
 namespace App\Service;
 
-use App\Model\MainPdo;
 use App\Model\Connect;
-use App\Repository\DbRepository;
+use PDO;
 use App\Entity\ArticleEntity;
 use App\Entity\CommentEntity;
 use App\Entity\CategoryEntity;
 use App\Entity\UserEntity;
-use PDO;
+use App\Entity\ContactEntity;
 
-class DbService extends MainPdo
+class DbService
 {
     private static $instance;
+    private static $className;
     private Connect $connect;
 
-    private function __construct()
+    private function __construct(string $className = '')
     {
+        self::$className = $className;
         $this->connect = Connect::getInstance();
     }
 
-    public static function getInstance(): self
+    public static function getInstance(string $className = ''): self
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self();
+            self::$instance = new self($className);
         }
         return self::$instance;
     }
+
+    #Basic actions
+
+    public function fetch(string $sql, array $blind): object
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::$className, null);
+        $stmt->execute($blind);
+        return $stmt->fetch();
+    }
+
+    public function fetchAll(string $sql, array $blind): array
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::$className, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    public function insert(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::$className, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
+    }
+
+    public function update(string $sql, array $blind): bool
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, self::$className, null);
+        return $stmt->execute($blind);
+    }
+
 
     #Articles
 
@@ -158,6 +197,35 @@ class DbService extends MainPdo
         $stmt->setFetchMode(PDO::FETCH_CLASS, UserEntity::class, null);
         $stmt->execute($blind);
         return $stmt->fetchAll();
+    }
+
+    #Contacts
+
+    public function fetchContact(string $sql, array $blind): ContactEntity
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetch();
+    }
+
+    public function fetchAllContacts(string $sql, array $blind): array
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    public function insertContact(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
     }
 
 }
