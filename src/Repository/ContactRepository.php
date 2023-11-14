@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\ContactEntity;
-use App\Service\DbService;
+use App\Model\Connect;
 use PDO;
 
 class ContactRepository
 {
     protected static string $table = 'contacts';
     private static $instance;
-    private DbService $dbService;
+    private Connect $connect;
 
     private function __construct()
     {
-        $this->dbService = DbService::getInstance();
+        $this->connect = Connect::getInstance();
     }
 
     public static function getInstance(): self
@@ -27,13 +27,44 @@ class ContactRepository
         return self::$instance;
     }
 
+    # fetches 
+
+    private function fetchContact(string $sql, array $blind): ContactEntity
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetch();
+    }
+
+    private function fetchAllContacts(string $sql, array $blind): array
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    private function insertContact(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
+    }
+
+    # sql
+
     public function getById(int $id): ContactEntity
     {
         $sql = 'select contacts.id,uid,title,excerpt,content,category,pub,name,date_format(contacts.lastup,"%d/%m/%Y") as date from contacts 
         left join cats on contacts.catid=cats.id
         left join users on contacts.uid=users.id
         where contacts.id=?';
-        return $this->dbService->fetchContact($sql, [$id]);
+        return $this->fetchContact($sql, [$id]);
     }
 
     public function getAll(int $limit = 10): array
@@ -44,7 +75,7 @@ class ContactRepository
         on cats.id=catid
         order by ' . self::$table . '.up desc
         limit ' . $limit;
-        return $this->dbService->fetchAllContacts($sql, []);
+        return $this->fetchAllContacts($sql, []);
     }
 
     public function contactSave(string $name, string $mail, string $message): string
@@ -57,7 +88,7 @@ class ContactRepository
             'pub' => 1
         ];
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :name, :mail, :message, :pub, now())';
-        return $this->dbService->insertContact($sql, $blind);
+        return $this->insertContact($sql, $blind);
     }
 
 }

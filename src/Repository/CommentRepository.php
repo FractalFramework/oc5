@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\CommentEntity;
-use App\Service\DbService;
 use App\Model\Connect;
 use PDO;
 
@@ -13,12 +12,10 @@ class CommentRepository
 {
     protected static string $table = 'tracks';
     private static $instance;
-    private DbService $dbService;
     private Connect $connect;
 
     private function __construct()
     {
-        $this->dbService = DbService::getInstance();
         $this->connect = Connect::getInstance();
     }
 
@@ -30,6 +27,8 @@ class CommentRepository
         return self::$instance;
     }
 
+    # fetches
+
     private function fetchComment(string $sql, array $blind): CommentEntity
     {
         $pdo = $this->connect->pdo;
@@ -38,6 +37,26 @@ class CommentRepository
         $stmt->execute($blind);
         return $stmt->fetch();
     }
+
+    private function fetchAllComments(string $sql, array $blind): array|int
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    private function insertComment(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
+    }
+
+    # sql
 
     public function findCommentsFromId(int $id): CommentEntity
     {
@@ -56,13 +75,13 @@ class CommentRepository
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
         where pub=1 and tracks.bid=?';
-        return $this->dbService->fetchAllComments($sql, [$id]);
+        return $this->fetchAllComments($sql, [$id]);
     }
 
     public function commentSave(array $blind): string
     {
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :txt, :pub, now())';
-        return $this->dbService->insertComment($sql, $blind);
+        return $this->insertComment($sql, $blind);
     }
 
 }

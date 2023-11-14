@@ -5,18 +5,18 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\ArticleEntity;
-use App\Service\DbService;
+use App\Model\Connect;
 use PDO;
 
 class ArticleRepository
 {
     protected static string $table = 'posts';
     private static $instance;
-    private DbService $dbService;
+    private Connect $connect;
 
     private function __construct()
     {
-        $this->dbService = DbService::getInstance();
+        $this->connect = Connect::getInstance();
     }
 
     public static function getInstance(): self
@@ -27,13 +27,52 @@ class ArticleRepository
         return self::$instance;
     }
 
+    # fetches
+
+    private function fetchArticle(string $sql, array $blind): ArticleEntity
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetch();
+    }
+
+    private function fetchAllArticles(string $sql, array $blind): array
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        $stmt->execute($blind);
+        return $stmt->fetchAll();
+    }
+
+    private function insertArticle(string $sql, array $blind): string
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
+    }
+
+    public function updateArticle(string $sql, array $blind): bool
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ArticleEntity::class, null);
+        return $stmt->execute($blind);
+    }
+
+    # Sql
+
     public function getById(int $id): ArticleEntity
     {
         $sql = 'select posts.id,uid,title,excerpt,content,category,pub,name,date_format(posts.lastup,"%d/%m/%Y") as date from posts 
         left join cats on posts.catid=cats.id
         left join users on posts.uid=users.id
         where posts.id=?';
-        return $this->dbService->fetchArticle($sql, [$id]);
+        return $this->fetchArticle($sql, [$id]);
     }
 
     public function getAll(int $limit = 10): array
@@ -44,7 +83,7 @@ class ArticleRepository
         on cats.id=catid
         order by ' . self::$table . '.up desc
         limit ' . $limit;
-        return $this->dbService->fetchAllArticles($sql, []);
+        return $this->fetchAllArticles($sql, []);
     }
 
     public function getLasts(int $limit = 10): array
@@ -54,7 +93,7 @@ class ArticleRepository
         left join cats
         on cats.id=catid
         limit ' . $limit;
-        return $this->dbService->fetchAllArticles($sql, []);
+        return $this->fetchAllArticles($sql, []);
     }
 
     public function getByCategory(int $catid = 1): array
@@ -65,7 +104,7 @@ class ArticleRepository
         on cats.id=catid
         where catid=?
         order by ' . self::$table . '.up desc';
-        return $this->dbService->fetchAllArticles($sql, [$catid]);
+        return $this->fetchAllArticles($sql, [$catid]);
     }
 
     public function postSave(string $catid, string $title, string $excerpt, string $content): string
@@ -79,7 +118,7 @@ class ArticleRepository
             'pub' => 1
         ];
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
-        return $this->dbService->insertArticle($sql, $blind);
+        return $this->insertArticle($sql, $blind);
     }
 
     public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
@@ -92,7 +131,7 @@ class ArticleRepository
             'content' => $content
         ];
         $sql = 'update ' . self::$table . ' set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
-        return $this->dbService->updateArticle($sql, $blind);
+        return $this->updateArticle($sql, $blind);
     }
 
 }
