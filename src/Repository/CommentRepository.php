@@ -66,6 +66,7 @@ class CommentRepository
         on tracks.id=profile.uid
         where tracks.id=?';
         return $this->fetchComment($sql, [$id]);
+        return $this->fetchComment($sql, [$id]);
     }
 
     public function commentsByPost(int $id): array
