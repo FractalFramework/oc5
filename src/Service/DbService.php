@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Model\Connect;
+use PDO;
 use App\Entity\ArticleEntity;
 use App\Entity\CommentEntity;
 use App\Entity\CategoryEntity;
 use App\Entity\UserEntity;
 use App\Entity\ContactEntity;
-use PDO;
 
 class DbService
 {
