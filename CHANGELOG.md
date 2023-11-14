@@ -11,9 +11,10 @@
 - login ✔
 - edition ✔
 - contacts ✔
+- fetches ✔
+- fixcomments 
 - admin 
 - security 
-- fetches 
 - bootstrap
 
 ## Issue 1 : sqlconnection
@@ -79,9 +80,12 @@ Running a Sql query.
 - save form
 - todo : send by mail
 
-## Issue 14 : Fetches
+## Issue 29 : Fetches
 - todo: correction source of fetches (from DbService to each repositories)
 - todo: use BaseRep
+
+## Issue 31 : fixcomments
+- todo: publish comment without being loged
 
 ## Issue 12 : Admin
 - todo: table of posts and comments
