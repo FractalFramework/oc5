@@ -10,9 +10,11 @@
 - forms ✔
 - login ✔
 - edition ✔
-- contacts 
+- contacts ✔
 - admin 
 - security 
+- fetches 
+- bootstrap
 
 ## Issue 1 : sqlconnection
 
@@ -74,3 +76,21 @@ Running a Sql query.
 - edit visibility
 
 ## Issue 11 : Contact
+- save form
+- todo : send by mail
+
+## Issue 14 : Fetches
+- todo: correction source of fetches (from DbService to each repositories)
+- todo: use BaseRep
+
+## Issue 12 : Admin
+- todo: table of posts and comments
+- todo: set visibility
+- todo: moderation of comments
+- todo: comments without being loged
+
+## Issue 15 : Css (bootstrap)
+- todo: use Bootstrap
+- todo: rereform all views
+
+## Issue 13 : Security
