@@ -11,7 +11,6 @@ class ContactService
 {
     private static $instance;
     private ContactRepository $contactRepository;
-    private ContactModel $contactModel;
 
     private function __construct()
     {
