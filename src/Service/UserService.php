@@ -42,6 +42,11 @@ class UserService
         return $this->userRepository->findUserFromName($name);
     }
 
+    public function getUserFromUid(int $uid): UserEntity|bool
+    {
+        return $this->userRepository->findUserFromId($uid);
+    }
+
     public function getUserLoged(string $name, string $pswd): UserModel|ErrorModel
     {
         $userEntity = $this->userRepository->findUserFromName($name);

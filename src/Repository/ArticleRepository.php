@@ -66,7 +66,7 @@ class ArticleRepository
 
     # Sql
 
-    public function getById(int $id): ArticleEntity
+    public function getById(int $id): ArticleEntity|bool
     {
         $sql = 'select posts.id,uid,title,excerpt,content,category,pub,name,date_format(posts.lastup,"%d/%m/%Y") as date from posts 
         left join cats on posts.catid=cats.id

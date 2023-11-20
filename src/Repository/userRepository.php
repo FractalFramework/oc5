@@ -74,7 +74,7 @@ class UserRepository
 
     public function findUserFromId(int $id): UserEntity
     {
-        $sql = 'select name from ' . self::$table . ' where id=?';
+        $sql = 'select name,mail from ' . self::$table . ' where id=?';
         return $this->fetchUser($sql, [$id]);
     }
 
