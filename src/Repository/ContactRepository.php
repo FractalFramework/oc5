@@ -60,19 +60,16 @@ class ContactRepository
 
     public function getById(int $id): ContactEntity
     {
-        $sql = 'select contacts.id,uid,title,excerpt,content,category,pub,name,date_format(contacts.lastup,"%d/%m/%Y") as date from contacts 
-        left join cats on contacts.catid=cats.id
-        left join users on contacts.uid=users.id
+        $sql = 'select ' . self::$table . '.id,uid,' . self::$table . '.name,contacts.mail,msg,pub,name,date_format(' . self::$table . '.lastup,"%d/%m/%Y") as date from ' . self::$table . ' 
+        left join users on ' . self::$table . '.uid=users.id
         where contacts.id=?';
         return $this->fetchContact($sql, [$id]);
     }
 
-    public function getAll(int $limit = 10): array
+    public function getAll(int $limit = 40): array
     {
-        $sql = 'select ' . self::$table . '.id,title,excerpt,category
+        $sql = 'select ' . self::$table . '.id,uid,name,mail,msg,pub
         from ' . self::$table . '
-        left join cats
-        on cats.id=catid
         order by ' . self::$table . '.up desc
         limit ' . $limit;
         return $this->fetchAllContacts($sql, []);
@@ -84,10 +81,10 @@ class ContactRepository
             'uid' => $_SESSION['uid'] ?? 0,
             'name' => $name,
             'mail' => $mail,
-            'message' => $message,
+            'msg' => $message,
             'pub' => 1
         ];
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :name, :mail, :message, :pub, now())';
+        $sql = 'insert into ' . self::$table . ' values (null, :uid, :name, :mail, :msg, :pub, now())';
         return $this->insertContact($sql, $blind);
     }
 

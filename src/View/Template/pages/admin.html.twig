@@ -1,0 +1,40 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Admin</h2>
+    
+    {% if (admin == true) %}
+		<div class="menus">
+			<a class="btsav" onclick="bj(this)" data-bj="admin|adminArticles|">
+			Articles
+			</a>
+			<a class="btsav" onclick="bj(this)" data-bj="admin|adminComments|">
+			Commentaires
+			</a>
+			<a class="btsav" onclick="bj(this)" data-bj="admin|adminContacts|">
+			Contacts
+			</a>
+		</div>
+		<div id="admin">
+            <table>
+                <th>
+                    <td>id</td>
+                    <td>titre</td>
+                    <td>contenu</td>
+                    <td>Publié</td>
+                    <td>Voir</td>
+                </th>
+            {% for result in results %}
+                <td>
+                    <td>{{result.id}}</td>
+                    <td>{{result.title}}</td>
+                    <td>{{result.content}}</td>
+                    <td>{{result.published}}</td>
+                    <td><a href="/post/{{result.id}}" onclick="return bh(this)">Voir</a></td>
+                </td>
+            {% endfor %}
+            </table>
+        </div>
+    {% else %}
+        <div class="frame-red">Vous n'êtes pas autorisé à siéger ici.</div>
+    {% endif %}
+{% endblock %}

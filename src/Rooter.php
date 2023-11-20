@@ -8,6 +8,7 @@ use App\Controller\HomeController;
 use App\Controller\UserController;
 use App\Controller\CommentController;
 use App\Controller\ContactController;
+use App\Controller\AdminController;
 
 class Rooter
 {
@@ -30,11 +31,12 @@ class Rooter
         $homeController = HomeController::getInstance($ajaxMode);
         $commentController = CommentController::getInstance($ajaxMode);
         $contactController = ContactController::getInstance($ajaxMode);
+        $adminController = AdminController::getInstance($ajaxMode);
         match ($com) {
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost($id),
             'posts' => $articleController->displayPosts(),
-            'lasts' => $articleController->displayLasts(),
+            'lasts' => $articleController->displayPosts(),
             'category' => $articleController->displayCategory($id),
             'categories' => $categoryController->displayCategories(),
             'user' => $userController->displayName($id),
@@ -54,6 +56,10 @@ class Rooter
             'displayContacts' => $contactController->displayContacts(),
             'contact' => $contactController->newContact(),
             'contactSave' => $contactController->contactSave($gets),
+            'admin' => $adminController->dashboard($gets),
+            'adminArticles' => $adminController->reviewArticles(),
+            'adminComments' => $adminController->reviewComments(),
+            'adminContacts' => $adminController->reviewContacts(),
             default => $articleController->displayPost(1)
         };
     }

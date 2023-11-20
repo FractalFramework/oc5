@@ -8,7 +8,7 @@ class ContactEntity
     public int $uid;
     public string $name;
     public string $mail;
-    public string $message;
+    public string $msg;
     public string $date;
     public int $pub;
 

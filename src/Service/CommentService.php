@@ -38,6 +38,10 @@ class CommentService
         //return CommentModel::fromFetchAll($commentEntity);
     }
 
+    public function getAllComments(int $limit): array
+    {
+        return $commentEntity = $this->commentRepository->allComments($limit);
+    }
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {

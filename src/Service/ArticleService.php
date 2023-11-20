@@ -38,11 +38,6 @@ class ArticleService
         //ArticleModel::fromFetchAll($articleEntity);
     }
 
-    public function getLasts(int $number): array
-    {
-        return $this->articleRepository->getLasts($number);
-    }
-
     public function getPostsCategory(int $id): array
     {
         return $this->articleRepository->getByCategory($id);

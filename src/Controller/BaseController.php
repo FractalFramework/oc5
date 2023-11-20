@@ -22,6 +22,7 @@ class BaseController
     {
         $params['mtime'] = microtime(true);
         $params['ajaxMode'] = $this->ajaxMode;
+        $params['admin'] = ($_SESSION['uid'] ?? 0) == 1 ? true : false;
         $this->template = 'pages/' . $htmlPage . TemplateService::ARTICLE_VIEW;
         $this->twigService->twig->display($this->template, $params);
     }

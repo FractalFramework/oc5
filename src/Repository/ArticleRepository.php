@@ -77,21 +77,11 @@ class ArticleRepository
 
     public function getAll(int $limit = 10): array
     {
-        $sql = 'select ' . self::$table . '.id,title,excerpt,category
+        $sql = 'select ' . self::$table . '.id,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
         from ' . self::$table . '
-        left join cats
-        on cats.id=catid
+        left join cats on cats.id=catid
+        left join users on users.id=uid
         order by ' . self::$table . '.up desc
-        limit ' . $limit;
-        return $this->fetchAllArticles($sql, []);
-    }
-
-    public function getLasts(int $limit = 10): array
-    {
-        $sql = 'select ' . self::$table . '.id,title,excerpt,category
-        from ' . self::$table . '
-        left join cats
-        on cats.id=catid
         limit ' . $limit;
         return $this->fetchAllArticles($sql, []);
     }

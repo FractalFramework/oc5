@@ -51,26 +51,15 @@ class ArticleController extends BaseController
 
     public function displayPosts(): void
     {
-        $results = $this->articleService->getPosts(20);
-        $datas['pageTitle'] = 'Tous les articles';
-        $datas['results'] = $results;
-        $this->renderHtml($datas, 'posts');
-    }
-
-    public function displayLasts(): void
-    {
-        $results = $this->articleService->getLasts(10);
-        $datas['pageTitle'] = 'Derniers articles';
-        $datas['results'] = $results;
+        $datas['results'] = $this->articleService->getPosts(20);
+        $datas['pageTitle'] = 'Articles';
         $this->renderHtml($datas, 'posts');
     }
 
     public function displayCategory(int $cat_id): void
     {
-        $potCategories = $this->articleService->getPostsCategory($cat_id);
-        $category = $this->categoryService->getCategory($cat_id)->category;
-        $datas['category'] = $category;
-        $datas['results'] = $potCategories;
+        $datas['results'] = $this->articleService->getPostsCategory($cat_id);
+        $datas['category'] = $this->categoryService->getCategory($cat_id)->category;
         $this->renderHtml($datas, 'posts');
     }
 

@@ -78,6 +78,17 @@ class CommentRepository
         return $this->fetchAllComments($sql, [$id]);
     }
 
+    public function allComments(int $limit = 40): array
+    {
+        $sql = 'select tracks.id,profile.uid,bid,txt,pub,tracks.name,surname,pub,date_format(tracks.up,"%d/%m/%Y") as date
+        from ' . self::$table . '
+        left join posts on tracks.id=posts.uid
+        left join profile on tracks.uid=profile.uid
+        left join users on tracks.uid=users.id
+        limit ' . $limit;
+        return $this->fetchAllComments($sql, []);
+    }
+
     public function commentSave(array $blind): string
     {
         $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :name, :mail, :txt, :pub, now())';
