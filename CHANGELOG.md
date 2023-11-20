@@ -12,7 +12,7 @@
 - edition ✔
 - contacts ✔
 - fetches ✔
-- fixcomments 
+- fixcomments ✔
 - admin 
 - security 
 - bootstrap
@@ -103,3 +103,4 @@ Running a Sql query.
 - todo: rereform all views
 
 ## Issue 13 : Security
+- behaviour in unexcepted conditions (no id, attempts to hack)
