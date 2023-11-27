@@ -34,29 +34,54 @@ class AdminController extends BaseController
 
     public function dashboard(array $requests): void
     {
-        $array['result'] = $this->articleService->getPosts(20);
+        $tab = $requests['p2'] ?? 'articles';
+        if (!$tab)
+            $tab = 'articles';
+        $array['result'] = match ($tab) {
+            'articles' => $this->articleService->getDashboardPosts(20),
+            'comments' => $this->commentService->getDashboardComments(40),
+            'contacts' => $this->contactService->getDashboardContacts(40),
+            default => $this->articleService->getDashboardPosts(20),
+        };
+        $array['tab'] = $tab;
         $this->renderHtml($array, 'admin');
     }
 
     public function reviewArticles(): void
     {
-        $articleEntity = $this->articleService->getPosts(20);
-        $array['results'] = AdminModel::fetchArticles($articleEntity);
-        $this->renderHtml($array, 'admin');
+        $array['results'] = $this->articleService->getDashboardPosts(20);
+        $this->renderHtml($array, 'adminArticles');
     }
 
     public function reviewComments(): void
     {
-        $commentEntity = $this->commentService->getAllComments(40);
-        $array['results'] = AdminModel::fetchComments($commentEntity);
-        $this->renderHtml($array, 'admin');
+        $array['results'] = $this->commentService->getDashboardComments(40);
+        //pr($array);
+        $this->renderHtml($array, 'adminComments');
     }
 
     public function reviewContacts(): void
     {
-        $contactEntity = $this->contactService->getContacts(40);
-        $array['results'] = AdminModel::fetchContacts($contactEntity);
-        $this->renderHtml($array, 'admin');
+        $array['results'] = $this->contactService->getDashboardContacts(40);
+        $this->renderHtml($array, 'adminContacts');
+    }
+
+    public function articlePub(array $requests): void
+    {
+        $this->articleService->articlePub((int) $requests['id'], (int) $requests['publish']);
+        $this->reviewArticles();
+    }
+
+    public function commentPub(array $requests): void
+    {
+        $this->commentService->commentPub((int) $requests['id'], (int) $requests['publish']);
+        $this->reviewComments();
+    }
+
+    public function contactPub(array $requests): void
+    {
+        $this->contactService->contactPub((int) $requests['id'], (int) $requests['publish']);
+        $this->reviewContacts();
     }
 
 }

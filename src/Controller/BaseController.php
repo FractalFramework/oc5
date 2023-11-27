@@ -21,6 +21,7 @@ class BaseController
     public function renderHtml(array $params, $htmlPage): void
     {
         $params['mtime'] = microtime(true);
+        $params['page'] = $_GET['com'] ?? 'home';
         $params['ajaxMode'] = $this->ajaxMode;
         $params['admin'] = ($_SESSION['uid'] ?? 0) == 1 ? true : false;
         $this->template = 'pages/' . $htmlPage . TemplateService::ARTICLE_VIEW;

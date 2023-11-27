@@ -28,13 +28,13 @@ class ContactController extends BaseController
     public function displayContact(int $id): void
     {
         $datas['contactId'] = $id;
-        $datas['contact'] = $this->contactService->getContact($id);
+        $datas['result'] = $this->contactService->getContact($id);
         $this->renderHtml($datas, 'contact');
     }
 
     public function displayContacts(): void
     {
-        $datas['contacts'] = $this->contactService->getContacts(20);
+        $datas['results'] = $this->contactService->getContacts(20);
         $this->renderHtml($datas, 'contacts');
     }
 
@@ -72,5 +72,13 @@ class ContactController extends BaseController
         }
         $datas['contactId'] = $this->contactService->contactSave($name, $mail, $message);
         $this->renderHtml($datas, 'publishedcontact');
+    }
+
+    public function contactPub(array $requests): void
+    {
+        $this->contactService->contactPub((int) $requests['id'], (int) $requests['publish']);
+        $datas['result'] = $this->contactService->getContact((int) $requests['id']);
+        $this->renderHtml($datas, 'contactpub');
+
     }
 }

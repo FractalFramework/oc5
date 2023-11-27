@@ -93,10 +93,10 @@ Running a Sql query.
 - add publishedcomment.html (thanks message)
 
 ## Issue 12 : Admin
-- todo: table of posts and comments
-- todo: set visibility
-- todo: moderation of comments
-- todo: comments without being loged
+- comments without being loged
+- display posts comments and contacts
+- moderation of comments
+- set visibility of posts comments and contacts
 
 ## Issue 15 : Css (bootstrap)
 - todo: use Bootstrap

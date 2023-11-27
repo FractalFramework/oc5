@@ -52,6 +52,7 @@ class Rooter
             'postUpdate' => $articleController->postUpdate($gets),
             'newComment' => $commentController->newComment($gets),
             'postComment' => $commentController->commentSave($gets),
+            'displayComment' => $commentController->displayComment($id),
             'displayContact' => $contactController->displayContact($id),
             'displayContacts' => $contactController->displayContacts(),
             'contact' => $contactController->newContact(),
@@ -60,6 +61,10 @@ class Rooter
             'adminArticles' => $adminController->reviewArticles(),
             'adminComments' => $adminController->reviewComments(),
             'adminContacts' => $adminController->reviewContacts(),
+            'adminArticlePub' => $adminController->articlePub($gets),
+            'adminCommentPub' => $adminController->commentPub($gets),
+            'adminContactPub' => $adminController->contactPub($gets),
+            'contactPub' => $contactController->contactPub($gets),
             default => $articleController->displayPost(1)
         };
     }

@@ -8,11 +8,12 @@ use App\Entity\ContactEntity;
 
 class ContactModel
 {
+    public int $id;
     public int $uid;
     public string $name;
     public string $mail;
-    public string $message;
-    public string $date;
+    public string $msg;
+    public ?string $date;
     public int $pub;
     public array $results;
 
@@ -23,24 +24,43 @@ class ContactModel
     public static function fromFetch(ContactEntity $entity): self
     {
         $contactModel = new self();
+        $contactModel->id = $entity->id;
         $contactModel->uid = $entity->uid;
         $contactModel->name = $entity->name;
         $contactModel->mail = $entity->mail;
-        $contactModel->message = $entity->message;
+        $contactModel->msg = $entity->msg;
         $contactModel->date = $entity->date;
         $contactModel->pub = $entity->pub;
         return $contactModel;
     }
 
-    public static function fromFetchAll(ContactEntity $entity): self
+    public static function fromFetchAll(array $entities): array
     {
-        $contactModel = new self();
-        $contactModel->uid = $entity->uid;
-        $contactModel->name = $entity->name;
-        $contactModel->mail = $entity->mail;
-        $contactModel->message = $entity->message;
-        $contactModel->date = $entity->date;
-        $contactModel->pub = $entity->pub;
+        $contactModel = array_map(
+            function ($entity) {
+                return self::fromFetch($entity);
+            },
+            $entities
+        );
         return $contactModel;
+    }
+
+    public static function forDashboard(array $entities): array
+    {
+        $articleModels = array_map(
+            function ($entity) {
+                $contactModel = new self();
+                $contactModel->id = $entity->id;
+                $contactModel->uid = $entity->uid;
+                $contactModel->name = $entity->name;
+                $contactModel->mail = $entity->mail;
+                $contactModel->msg = $entity->msg;
+                $contactModel->date = $entity->date;
+                $contactModel->pub = $entity->pub;
+                return $contactModel;
+            },
+            $entities
+        );
+        return $articleModels;
     }
 }

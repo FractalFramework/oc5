@@ -37,9 +37,19 @@ class ContactService
         //ContactModel::fromFetchAll($contactEntity);
     }
 
+    public function getDashboardContacts(int $number): array
+    {
+        $contactEntities = $this->contactRepository->getAll($number);
+        return ContactModel::forDashboard($contactEntities); //transformer
+    }
+
     public function contactSave(string $name, string $mail, string $message): string
     {
         return $this->contactRepository->contactSave($name, $mail, $message);
+    }
+    public function contactPub(int $id, int $publish): void
+    {
+        $this->contactRepository->contactPub($id, $publish);
     }
 
 }

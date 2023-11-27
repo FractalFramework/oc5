@@ -38,6 +38,12 @@ class ArticleService
         //ArticleModel::fromFetchAll($articleEntity);
     }
 
+    public function getDashboardPosts(int $number): array
+    {
+        $articleEntities = $this->articleRepository->getAll($number);
+        return ArticleModel::forDashboard($articleEntities); //transformer
+    }
+
     public function getPostsCategory(int $id): array
     {
         return $this->articleRepository->getByCategory($id);
@@ -51,6 +57,11 @@ class ArticleService
     public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
     {
         return $this->articleRepository->postUpdate($postId, $catid, $title, $excerpt, $content);
+    }
+
+    public function articlePub(int $id, int $publish): void
+    {
+        $this->articleRepository->articlePub($id, $publish);
     }
 
 }

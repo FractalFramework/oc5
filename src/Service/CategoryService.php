@@ -42,6 +42,7 @@ class CategoryService
         foreach ($result as $category) {
             $categories[$category->id] = $category->value;
         }
+
         /*$categories = array_map(
             function ($category) {
                 return [$category->id => $category->value];

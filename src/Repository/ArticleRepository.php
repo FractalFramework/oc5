@@ -77,23 +77,23 @@ class ArticleRepository
 
     public function getAll(int $limit = 10): array
     {
-        $sql = 'select ' . self::$table . '.id,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
-        from ' . self::$table . '
+        $sql = 'select posts.id,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
+        from posts
         left join cats on cats.id=catid
         left join users on users.id=uid
-        order by ' . self::$table . '.up desc
+        order by posts.up desc
         limit ' . $limit;
         return $this->fetchAllArticles($sql, []);
     }
 
     public function getByCategory(int $catid = 1): array
     {
-        $sql = 'select ' . self::$table . '.id,title,excerpt,content,category
-        from ' . self::$table . '
+        $sql = 'select posts.id,title,excerpt,content,category
+        from posts
         left join cats
         on cats.id=catid
         where catid=?
-        order by ' . self::$table . '.up desc';
+        order by posts.up desc';
         return $this->fetchAllArticles($sql, [$catid]);
     }
 
@@ -107,7 +107,7 @@ class ArticleRepository
             'content' => $content,
             'pub' => 1
         ];
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
+        $sql = 'insert into posts values (null, :uid, :catid, :title, :excerpt, :content, :pub, now(), now())';
         return $this->insertArticle($sql, $blind);
     }
 
@@ -120,8 +120,14 @@ class ArticleRepository
             'excerpt' => $excerpt,
             'content' => $content
         ];
-        $sql = 'update ' . self::$table . ' set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
+        $sql = 'update posts set catid=:catid, title=:title, excerpt=:excerpt, content=:content where id=:id';
         return $this->updateArticle($sql, $blind);
+    }
+
+    public function articlePub(int $id, int $publish): bool
+    {
+        $sql = 'update posts set pub=:pub where id=:id';
+        return $this->updateArticle($sql, ['id' => $id, 'pub' => $publish]);
     }
 
 }

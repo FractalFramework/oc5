@@ -56,12 +56,20 @@ class CommentRepository
         return $pdo->lastInsertId();
     }
 
+    public function updateComment(string $sql, array $blind): bool
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CommentEntity::class, null);
+        return $stmt->execute($blind);
+    }
+
     # sql
 
     public function findCommentsFromId(int $id): CommentEntity
     {
         $sql = 'select profile.uid,bid,txt,pub,surname
-        from ' . self::$table . '
+        from tracks
         left join profile
         on tracks.id=profile.uid
         where tracks.id=?';
@@ -70,29 +78,37 @@ class CommentRepository
 
     public function commentsByPost(int $id): array
     {
-        $sql = 'select tracks.id,profile.uid,bid,txt,pub,tracks.name,surname,date_format(tracks.up,"%d/%m/%Y") as date
-        from ' . self::$table . '
+        $sql = 'select tracks.id,tracks.uid,tracks.mail,bid,txt,pub,bid,tracks.name,surname,date_format(tracks.up,"%d/%m/%Y") as date
+        from tracks
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
         where pub=1 and tracks.bid=?';
         return $this->fetchAllComments($sql, [$id]);
     }
 
-    public function allComments(int $limit = 40): array
+    public function getAll(int $limit = 40): array
     {
-        $sql = 'select tracks.id,profile.uid,bid,txt,pub,tracks.name,surname,pub,date_format(tracks.up,"%d/%m/%Y") as date
-        from ' . self::$table . '
+        $sql = 'select tracks.id,tracks.uid,tracks.name,bid,title,txt,tracks.mail,tracks.name,surname,tracks.pub,date_format(tracks.up,"%d/%m/%Y") as date
+        from tracks
         left join posts on tracks.id=posts.uid
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
+        group by tracks.id 
+        order by date desc
         limit ' . $limit;
         return $this->fetchAllComments($sql, []);
     }
 
     public function commentSave(array $blind): string
     {
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :bid, :name, :mail, :txt, :pub, now())';
+        $sql = 'insert into tracks values (null, :uid, :bid, :name, :mail, :txt, :pub, now())';
         return $this->insertComment($sql, $blind);
+    }
+
+    public function commentPub(int $id, int $publish): bool
+    {
+        $sql = 'update tracks set pub=:pub where id=:id';
+        return $this->updateComment($sql, ['id' => $id, 'pub' => $publish]);
     }
 
 }

@@ -31,22 +31,26 @@ class AdminModel
     }
 
     //id,name,title,excerpt,category,pub,date_format
-    public static function fetchArticles(ArticleEntity $entity): self
+    public static function fetchArticles(array $entities): self
     {
         $model = new self();
-        $model->uid = $entity->uid;
-        $model->title = $entity->title;
-        $model->content = $entity->content;
-        $model->excerpt = $entity->excerpt;
-        $model->category = $entity->category;
-        $model->name = $entity->name;
-        $model->date = $entity->date;
-        $model->pub = $entity->pub;
+        foreach ($entities as $entity) {
+            $model->results[] = [
+                'uid' => $entity->uid,
+                'title' => $entity->title,
+                'content' => $entity->content,
+                'excerpt' => $entity->excerpt,
+                'category' => $entity->category,
+                'name' => $entity->name,
+                'date' => $entity->date,
+                'pub' => $entity->pub
+            ];
+        }
         return $model;
     }
 
     //tracks.id,profile.uid,bid,txt,pub,tracks.name,surname,pub,date
-    public static function fetchComments(CommentEntity $entity): self
+    public static function fetchComments(array $entity): self
     {
         $model = new self();
         $model->id = $entity->id;
@@ -60,7 +64,7 @@ class AdminModel
     }
 
     //uid,name,mail,msg,pub
-    public static function fetchContacts(ContactEntity $entity): self
+    public static function fetchContacts(array $entity): self
     {
         $model = new self();
         $model->uid = $entity->uid;

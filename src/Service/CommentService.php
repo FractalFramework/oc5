@@ -34,13 +34,20 @@ class CommentService
 
     public function getComments(int $id): array
     {
-        return $commentEntity = $this->commentRepository->commentsByPost($id);
-        //return CommentModel::fromFetchAll($commentEntity);
+        $commentEntity = $this->commentRepository->commentsByPost($id);
+        return CommentModel::fromFetchAll($commentEntity);
+    }
+
+    public function getDashboardComments(int $number): array
+    {
+        $articleEntities = $this->commentRepository->getAll($number);
+        return CommentModel::forDashboard($articleEntities); //transformer
     }
 
     public function getAllComments(int $limit): array
     {
-        return $commentEntity = $this->commentRepository->allComments($limit);
+        $commentEntity = $this->commentRepository->getAll($limit);
+        return CommentModel::fromFetchAll($commentEntity);
     }
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
@@ -55,6 +62,11 @@ class CommentService
             'pub' => $uid ? 1 : 0
         ];
         return $this->commentRepository->commentSave($values);
+    }
+
+    public function commentPub(int $id, int $publish): void
+    {
+        $this->commentRepository->commentPub($id, $publish);
     }
 
 }

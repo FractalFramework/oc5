@@ -56,21 +56,29 @@ class ContactRepository
         return $pdo->lastInsertId();
     }
 
+    public function updateContact(string $sql, array $blind): bool
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, ContactEntity::class, null);
+        return $stmt->execute($blind);
+    }
+
     # sql
 
     public function getById(int $id): ContactEntity
     {
-        $sql = 'select ' . self::$table . '.id,uid,' . self::$table . '.name,contacts.mail,msg,pub,name,date_format(' . self::$table . '.lastup,"%d/%m/%Y") as date from ' . self::$table . ' 
-        left join users on ' . self::$table . '.uid=users.id
+        $sql = 'select contacts.id,uid,contacts.name,contacts.mail,msg,pub,date_format(contacts.up,"%d/%m/%Y") as date from contacts 
+        left join users on contacts.uid=users.id
         where contacts.id=?';
         return $this->fetchContact($sql, [$id]);
     }
 
     public function getAll(int $limit = 40): array
     {
-        $sql = 'select ' . self::$table . '.id,uid,name,mail,msg,pub
-        from ' . self::$table . '
-        order by ' . self::$table . '.up desc
+        $sql = 'select contacts.id,uid,name,mail,msg,pub,date_format(contacts.up,"%d/%m/%Y") as date
+        from contacts
+        order by pub desc, contacts.up desc
         limit ' . $limit;
         return $this->fetchAllContacts($sql, []);
     }
@@ -84,8 +92,14 @@ class ContactRepository
             'msg' => $message,
             'pub' => 1
         ];
-        $sql = 'insert into ' . self::$table . ' values (null, :uid, :name, :mail, :msg, :pub, now())';
+        $sql = 'insert into contacts values (null, :uid, :name, :mail, :msg, :pub, now())';
         return $this->insertContact($sql, $blind);
+    }
+
+    public function contactPub(int $id, int $publish): bool
+    {
+        $sql = 'update contacts set pub=:pub where id=:id';
+        return $this->updateContact($sql, ['id' => $id, 'pub' => $publish]);
     }
 
 }
