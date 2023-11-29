@@ -6,16 +6,18 @@ namespace App\Service;
 
 use App\Repository\articleRepository;
 use App\Model\ArticleModel;
+use App\Mapper\ArticleMapper;
 
 class ArticleService
 {
     private static $instance;
     private ArticleRepository $articleRepository;
-    private ArticleModel $articleModel;
+    private ArticleMapper $articleMapper;
 
     private function __construct()
     {
         $this->articleRepository = ArticleRepository::getInstance();
+        $this->articleMapper = ArticleMapper::getInstance();
     }
 
     public static function getInstance(): self
@@ -29,19 +31,18 @@ class ArticleService
     public function getPost(int $id): ArticleModel
     {
         $articleEntity = $this->articleRepository->getById($id);
-        return ArticleModel::fromFetch($articleEntity);
+        return $this->articleMapper->fromFetch($articleEntity);
     }
 
     public function getPosts(int $number): array
     {
-        return $articleEntity = $this->articleRepository->getAll($number);
-        //ArticleModel::fromFetchAll($articleEntity);
+        return $this->articleRepository->getAll($number);
     }
 
     public function getDashboardPosts(int $number): array
     {
         $articleEntities = $this->articleRepository->getAll($number);
-        return ArticleModel::forDashboard($articleEntities); //transformer
+        return $this->articleMapper->forDashboard($articleEntities);
     }
 
     public function getPostsCategory(int $id): array

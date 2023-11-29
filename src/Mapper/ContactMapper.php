@@ -2,28 +2,30 @@
 
 declare(strict_types=1);
 
-namespace App\Model;
+namespace App\Mapper;
 
+use App\Model\ContactModel;
 use App\Entity\ContactEntity;
 
-class ContactModel
+class ContactMapper
 {
-    public int $id;
-    public int $uid;
-    public string $name;
-    public string $mail;
-    public string $msg;
-    public ?string $date;
-    public int $pub;
-    public array $results;
+    private static $instance;
 
-    public function __construct()
+    private function __construct()
     {
     }
 
-    public static function fromFetch(ContactEntity $entity): self
+    public static function getInstance(): self
     {
-        $contactModel = new self();
+        if (!isset(self::$instance)) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    public function fromFetch(ContactEntity $entity): ContactModel
+    {
+        $contactModel = new ContactModel();
         $contactModel->id = $entity->id;
         $contactModel->uid = $entity->uid;
         $contactModel->name = $entity->name;
@@ -34,7 +36,7 @@ class ContactModel
         return $contactModel;
     }
 
-    public static function fromFetchAll(array $entities): array
+    public function fromFetchAll(array $entities): array
     {
         $contactModel = array_map(
             function ($entity) {
@@ -45,11 +47,11 @@ class ContactModel
         return $contactModel;
     }
 
-    public static function forDashboard(array $entities): array
+    public function forDashboard(array $entities): array
     {
         $articleModels = array_map(
             function ($entity) {
-                $contactModel = new self();
+                $contactModel = new ContactModel();
                 $contactModel->id = $entity->id;
                 $contactModel->uid = $entity->uid;
                 $contactModel->name = $entity->name;

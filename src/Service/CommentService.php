@@ -5,17 +5,19 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Repository\CommentRepository;
-use App\Entity\CommentEntity;
 use App\Model\CommentModel;
+use App\Mapper\CommentMapper;
 
 class CommentService
 {
     private static $instance;
     private readonly CommentRepository $commentRepository;
+    private readonly CommentMapper $commentMapper;
 
     private function __construct()
     {
         $this->commentRepository = CommentRepository::getInstance();
+        $this->commentMapper = CommentMapper::getInstance();
     }
 
     public static function getInstance(): self
@@ -29,25 +31,25 @@ class CommentService
     public function getComment(int $id): CommentModel
     {
         $commentEntity = $this->commentRepository->findCommentsFromId($id);
-        return CommentModel::fromFetch($commentEntity);
+        return $this->commentMapper->fromFetch($commentEntity);
     }
 
     public function getComments(int $id): array
     {
         $commentEntity = $this->commentRepository->commentsByPost($id);
-        return CommentModel::fromFetchAll($commentEntity);
+        return $this->commentMapper->fromFetchAll($commentEntity);
     }
 
     public function getDashboardComments(int $number): array
     {
         $articleEntities = $this->commentRepository->getAll($number);
-        return CommentModel::forDashboard($articleEntities); //transformer
+        return $this->commentMapper->forDashboard($articleEntities); //transformer
     }
 
     public function getAllComments(int $limit): array
     {
         $commentEntity = $this->commentRepository->getAll($limit);
-        return CommentModel::fromFetchAll($commentEntity);
+        return $this->commentMapper->fromFetchAll($commentEntity);
     }
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string

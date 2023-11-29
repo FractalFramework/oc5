@@ -6,15 +6,18 @@ namespace App\Service;
 
 use App\Repository\ContactRepository;
 use App\Model\ContactModel;
+use App\Mapper\ContactMapper;
 
 class ContactService
 {
     private static $instance;
     private ContactRepository $contactRepository;
+    private ContactMapper $contactMapper;
 
     private function __construct()
     {
         $this->contactRepository = ContactRepository::getInstance();
+        $this->contactMapper = ContactMapper::getInstance();
     }
 
     public static function getInstance(): self
@@ -28,19 +31,18 @@ class ContactService
     public function getContact(int $id): ContactModel
     {
         $contactEntity = $this->contactRepository->getById($id);
-        return ContactModel::fromFetch($contactEntity);
+        return $this->contactMapper->fromFetch($contactEntity);
     }
 
     public function getContacts(int $number): array
     {
-        return $contactEntity = $this->contactRepository->getAll($number);
-        //ContactModel::fromFetchAll($contactEntity);
+        return $$this->contactRepository->getAll($number);
     }
 
     public function getDashboardContacts(int $number): array
     {
         $contactEntities = $this->contactRepository->getAll($number);
-        return ContactModel::forDashboard($contactEntities); //transformer
+        return $this->contactMapper->forDashboard($contactEntities);
     }
 
     public function contactSave(string $name, string $mail, string $message): string
