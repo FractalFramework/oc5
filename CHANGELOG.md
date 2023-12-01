@@ -98,7 +98,7 @@ Running a Sql query.
 - moderation of comments
 - set visibility of posts comments and contacts
 
-## Issue 15 : Css (bootstrap)
+## Issue 32 : Css (bootstrap)
 - todo: use Bootstrap
 - todo: rereform all views
 
