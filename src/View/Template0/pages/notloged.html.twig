@@ -1,0 +1,10 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Inscription</h2>
+        <div class="frame-red">
+        {{error}}
+        </div>
+    
+    <a class="btsav" onclick="bj(this)" data-bj="main|login">
+            Se connecter</a>
+{% endblock %}

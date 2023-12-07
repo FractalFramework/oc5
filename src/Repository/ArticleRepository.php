@@ -29,7 +29,7 @@ class ArticleRepository
 
     # fetches
 
-    private function fetchArticle(string $sql, array $blind): ArticleEntity
+    private function fetchArticle(string $sql, array $blind): ArticleEntity|bool
     {
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);

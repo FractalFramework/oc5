@@ -1,0 +1,6 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block post %}
+	<div class="profile">
+		<h1>{{results.name | raw }}</h1>
+	</div>
+{% endblock post %}

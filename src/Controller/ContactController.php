@@ -47,7 +47,7 @@ class ContactController extends BaseController
     {
         $uid = $requests['name'];
         $name = $requests['name'];
-        $mail = $requests['mail'];
+        $mail = $requests['email'];
         $message = $requests['message'];
 
         $error = match (true) {

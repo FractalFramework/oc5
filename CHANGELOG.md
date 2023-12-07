@@ -99,8 +99,8 @@ Running a Sql query.
 - set visibility of posts comments and contacts
 
 ## Issue 32 : Css (bootstrap)
-- todo: use Bootstrap
-- todo: rereform all views
+- use Bootstrap
+- rereform all views
 
 ## Issue 13 : Security
 - behaviour in unexcepted conditions (no id, attempts to hack)

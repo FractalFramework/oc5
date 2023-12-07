@@ -1,0 +1,20 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Admin</h2>
+    
+    {% if (admin == true) %}
+		<div class="menus">
+			<a class="btn" onclick="bj(this)" data-bj="admin|adminArticles|">
+			Articles</a>
+			<a class="btn" onclick="bj(this)" data-bj="admin|adminComments|">
+			Commentaires</a>
+			<a class="btn" onclick="bj(this)" data-bj="admin|adminContacts|">
+			Contacts</a>
+		</div>
+    {% else %}
+        <div class="frame-red">Vous n'êtes pas autorisé à siéger ici.</div>
+    {% endif %}
+		<div id="admin">
+			{% block table %}{% endblock %}
+        </div>
+{% endblock %}

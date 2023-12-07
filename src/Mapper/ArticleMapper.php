@@ -23,9 +23,10 @@ class ArticleMapper
         return self::$instance;
     }
 
-    public function fromFetch(ArticleEntity $entity): ArticleModel
+    public function fromFetch(ArticleEntity $entity): ArticleModel|bool
     {
         $articleModel = new ArticleModel();
+        $articleModel->id = $entity->id;
         $articleModel->uid = $entity->uid ?? null;
         $articleModel->title = $entity->title;
         $articleModel->content = $entity->content ?? '';
@@ -48,7 +49,7 @@ class ArticleMapper
         return $articleModels;
     }
 
-    public function forDashboard(array $entities): array
+    public function forDashboard(array $entities): array|bool
     {
         $articleModels = array_map(
             function ($entity) {
