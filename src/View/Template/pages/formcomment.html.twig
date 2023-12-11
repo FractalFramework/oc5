@@ -24,9 +24,9 @@
             {% endif %}
 
             <div class="area">
-                <textarea id="comment" placeholder="Commentaire">{{comment}}</textarea>
+                <textarea class="form-control" id="comment" placeholder="Commentaire">{{comment}}</textarea>
             </div>
-            <a class="btsav" onclick="bj(this)" data-bj="newComment|postComment||postId,name,mail,comment">
+            <a class="btn btn-success" onclick="bj(this)" data-bj="newComment|postComment||postId,name,mail,comment">
                 Envoyer</a>
 
             <div id="commentTest"></div>

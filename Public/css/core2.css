@@ -10,6 +10,7 @@ select {
     padding: 3px 5px;
     background-color: #eee;
     border: 1px solid #bbb;
+    margin: 10px;
 }
 
 input:hover,
@@ -103,4 +104,71 @@ div:focus-visible {
 .category {
     border: 0px solid silver;
     padding: 2px 4px;
+}
+
+.menu {
+    padding: 0px;
+    margin: 6px 0
+}
+
+.menu a {
+    color: #333;
+    margin: 2px 1px;
+    padding: 2px 4px;
+    font-size: small;
+    border-color: #d9d9d9;
+    border-style: solid;
+    border-width: 1px;
+    text-decoration: none;
+    background-color: white;
+    line-height: 22px;
+    user-select: none;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #111;
+    border-color: #797979
+}
+
+.frame-white,
+.frame-blue,
+.frame-red,
+.frame-green {
+    font-size: big;
+    padding: 4px 8px;
+    margin: 4px 0px 9px 0px;
+    background-color: #ffffff5e;
+    border-color: #6c6c6ca1;
+    border-style: solid;
+    border-width: 1px
+}
+
+.frame-white {
+    background-color: #ffffff5e;
+    border-color: #6c6c6ca1
+}
+
+.frame-blue {
+    background-color: #0064ff4a;
+    border-color: #0064ff
+}
+
+.frame-red {
+    background-color: #dc143c4a;
+    border-color: #dc143c
+}
+
+.frame-green {
+    background-color: #9acd3273;
+    border-color: #608e00
+}
+
+.bigbt {
+    display: inline-block;
+    border: 1px solid #ffffffe5;
+    padding: 2px 8px;
+    margin: 0px 0;
+    border-radius: 16px;
+    background: #dddddd75
 }

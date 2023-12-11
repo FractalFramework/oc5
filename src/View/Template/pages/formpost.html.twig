@@ -12,12 +12,12 @@
     {% endif %}
 
 			{%if ( modif == true ) %}
-            <a class="btdel" onclick="bj(this)" 
+            <a class="btn btn-warning" onclick="bj(this)" 
                 data-bj="main|postUpdate|postId={{postId}}|catid,title,excerpt,content">
                 Modifier</a>
-                <a class="btn" href="/post/{{postId}}" onclick="bh(this)">Annuler</a>
+                <a class="btn btn-outline-warning" href="/post/{{postId}}" onclick="bh(this)">Annuler</a>
 			{% else %}
-            <a class="btsav" onclick="bj(this)" 
+            <a class="btn btn-success" onclick="bj(this)" 
                 data-bj="main|postSave||catid,title,excerpt,content">
                 Enregistrer</a>
 			{% endif %}
@@ -34,7 +34,7 @@
                 <input type="text" id="title" placeholder="Titre" value="{{article.title}}">
             </div>
             <div class="area">
-                <textarea id="excerpt" placeholder="Résumé">{{article.excerpt}}</textarea>
+                <textarea class="form-control" id="excerpt" placeholder="Résumé">{{article.excerpt}}</textarea>
             </div>
 
             <div class="menu">

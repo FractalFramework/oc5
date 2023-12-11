@@ -11,7 +11,7 @@
 			<span class="date">{{article.date }}</span>
 			<strong class="category">[{{article.category | raw }}]</strong>
 			{%if ( editable == 1 ) %}
-			<a class="btsav" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
+			<a class="btn btn-success" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
 			{% endif %}
 		</div>
 		<div class="excerpt">{{article.excerpt | raw }}</div>
@@ -37,7 +37,7 @@
 		{% endif %}
 
 		<div class="">
-			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			<a class="btn btn-success" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
 			Poster un commentaire
 			</a>
 		</div>
