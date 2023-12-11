@@ -1,0 +1,106 @@
+a {
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    transition: all 0.3s ease;
+    font-size: small;
+    padding: 3px 5px;
+    background-color: #eee;
+    border: 1px solid #bbb;
+}
+
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus,
+select:hover,
+select:focus {
+    border: 1px solid #777;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+}
+
+div:focus-visible {
+    outline: 0px dashed darkorange;
+}
+
+.content {
+    margin: 0px;
+    padding: 16px;
+    background-color: #fffa;
+    border: 0px solid #7777;
+    font-family: Georgia;
+    font-size: 22px;
+}
+
+.excerpt {
+    font-family: Lucida Arial;
+    font-size: x-large;
+    padding: 4px 0px;
+    color: blueviolet;
+}
+
+.tracks {
+    padding: 0px;
+}
+
+.track {
+    padding: 6px 0px;
+    color: #444;
+}
+
+.track-content {
+    padding: 6px 16px;
+    color: #444;
+    background-color: #9f9f9f2e;
+}
+
+.tracks-title {
+    padding: 10px 0 0;
+}
+
+.main {
+    padding: 20px;
+}
+
+.area textarea {
+    font-family: Lucida Console;
+    width: calc(100% - 12px);
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.area input {
+    width: calc(100% - 12px)
+}
+
+.editarea {
+    font-family: Lucida Console;
+    word-wrap: break-word;
+    padding: 16px;
+    background-color: #ddd;
+    min-height: 20px;
+    border: 1px dotted #77777777;
+}
+
+.author {
+    font-weight: bold;
+    padding: 2px;
+}
+
+.date {
+    color: gray;
+    padding: 2px;
+}
+
+.category {
+    border: 0px solid silver;
+    padding: 2px 4px;
+}

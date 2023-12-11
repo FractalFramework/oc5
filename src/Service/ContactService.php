@@ -45,10 +45,23 @@ class ContactService
         return $this->contactMapper->forDashboard($contactEntities);
     }
 
+    public function sendmail($message): void
+    {
+        mail(
+            'agence2dav@gmail.com',
+            'contact from oc5',
+            $message,
+            $additional_headers = [],
+            $additional_params = ""
+        );
+    }
+
     public function contactSave(string $name, string $mail, string $message): string
     {
+        $this->sendmail($message);
         return $this->contactRepository->contactSave($name, $mail, $message);
     }
+
     public function contactPub(int $id, int $publish): void
     {
         $this->contactRepository->contactPub($id, $publish);
