@@ -158,11 +158,15 @@ function cookiz(string $d): void
     unset($_COOKIE[$d]);
     setcookie($d, '', time() - 3600);
 }
-function ses(string $d, string $v = null): string
+function ses(string $d, mixed $v = ''): mixed //default
 {
-    if (isset($v)) //assign
+    return isset($_SESSION[$d]) ? $_SESSION[$d] : $v;
+}
+function sesa(string $d, mixed $v = null): mixed //assign
+{
+    if (isset($v))
         $_SESSION[$d] = $v;
-    return $_SESSION[$d] ?? '';
+    return ses($d);
 }
 function sesz(string $d): void
 {

@@ -86,7 +86,7 @@ class ContactRepository
     public function contactSave(string $name, string $mail, string $message): string
     {
         $blind = [
-            'uid' => filter_var($_SESSION['uid'] ?? 0),
+            'uid' => ses('uid'),
             'name' => $name,
             'mail' => $mail,
             'msg' => $message,

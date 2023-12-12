@@ -85,10 +85,8 @@ class UserController extends BaseController
 
     public function logout(): void
     {
-        if (filter_var($_SESSION['usr'] ?? 0))
-            unset($_SESSION['usr']);
-        if (filter_var($_SESSION['uid'] ?? 0))
-            unset($_SESSION['uid']);
+        sesz('uid');
+        sesz('usr');
         $this->loginRoot();
     }
 
@@ -144,12 +142,12 @@ class UserController extends BaseController
 
     public function displayLogOut(): void
     {
-        $this->renderHtml(['name' => $_SESSION['usr']], 'logout');
+        $this->renderHtml(['name' => ses('usr')], 'logout');
     }
 
     public function loginRoot(): void
     {
-        if (isset($_SESSION['usr']))
+        if (ses('uid'))
             $this->displayLogOut();
         else
             $this->displayLoginForm();

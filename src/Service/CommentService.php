@@ -54,14 +54,14 @@ class CommentService
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {
-        $uid = filter_var($_SESSION['uid'] ?? 0);
+        $uid = ses('uid', 0);
         $values = [
             'uid' => $uid,
             'bid' => $postId,
             'name' => $name,
             'mail' => $mail,
             'txt' => $comment,
-            'pub' => $uid ? 1 : 0
+            'pub' => $uid ? true : false
         ];
         return $this->commentRepository->commentSave($values);
     }

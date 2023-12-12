@@ -44,13 +44,13 @@ class CommentController extends BaseController
 
     public function newComment(array $requests): void
     {
-        $requests['loged'] = filter_var($_SESSION['uid'] ?? false);
+        $requests['loged'] = ses('uid') ? true : false;
         $this->renderHtml($requests, 'formcomment');
     }
 
     public function commentSave($requests): void
     {
-        $userId = filter_var($_SESSION['uid'] ?? 0);
+        $userId = ses('uid');
         $postId = $requests['postId'];
         $name = $requests['name'];
         $mail = $requests['mail'];

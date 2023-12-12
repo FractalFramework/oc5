@@ -39,11 +39,10 @@ class ArticleController extends BaseController
         $datas['postId'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
-        $uid = filter_var($_SESSION['uid'] ?? 0);
-        $datas['editable'] = $datas['article']->uid == !empty($uid) ? $uid : 0;
+        $datas['editable'] = $datas['article']->uid == ses('uid') ? true : false;
 
         $isPublic = $datas['article']->pub ?? 0;
-        if ($isPublic || (!$isPublic && $uid)) //==1 superadmin
+        if ($isPublic || (!$isPublic && ses('uid'))) //==1 superadmin
             $this->renderHtml($datas, 'post');
         else
             $this->renderHtml($datas, 'nopost');
@@ -65,8 +64,7 @@ class ArticleController extends BaseController
 
     public function newPost(): void
     {
-        $uid = filter_var($_SESSION['uid'] ?? 0);
-        if (!empty($uid))
+        if (!ses('uid'))
             $this->renderHtml([], 'login');
         else {
             $datas['categories'] = $this->categoryService->getCategories(); //to generalize
@@ -108,7 +106,7 @@ class ArticleController extends BaseController
     {
         $datas['postId'] = $postId;
         $datas['article'] = $this->articleService->getPost($postId);
-        $datas['editable'] = $datas['article']->uid == filter_var($_SESSION['uid'] ?? 0) ? 1 : 0;
+        $datas['editable'] = $datas['article']->uid == ses('uid') ? 1 : 0;
         $datas['modif'] = true;
         if ($datas['editable']) {
             $datas['categories'] = $this->categoryService->getCategories();

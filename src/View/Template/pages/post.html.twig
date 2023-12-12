@@ -10,7 +10,7 @@
 			<span class="author">{{article.name }}</span>
 			<span class="date">{{article.date }}</span>
 			<strong class="category">[{{article.category | raw }}]</strong>
-			{%if ( editable == 1 ) %}
+			{%if ( editable == true ) %}
 			<a class="btn btn-success" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
 			{% endif %}
 		</div>
