@@ -3,10 +3,10 @@
     <h2>Inscription</h2>
     
     {% if error %}
-        <div class="frame-red">{{error}}</div>
+        <div class="alert alert-warning">{{error}}</div>
     {% endif %}
 
-        <div class="frame-white">
+        <div class="alert alert-primary">
             <div class="">
                 <input type="text" id="name" placeholder="Pseudo" value="{{name}}" required>
                 <label for="name">Pseudo</label>

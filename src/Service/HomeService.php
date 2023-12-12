@@ -30,7 +30,6 @@ class HomeService
     public function getHome(int $id): UserEntity //HomeModel
     {
         return $userEntity = $this->userRepository->userInfos($id);
-        //return HomeModel::getInstance($userEntity);
     }
 
 }

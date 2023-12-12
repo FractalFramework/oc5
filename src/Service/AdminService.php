@@ -5,8 +5,6 @@ declare(strict_types=1);
 namespace App\Service;
 
 use App\Repository\AdminRepository;
-use App\Entity\AdminEntity;
-use App\Model\AdminModel;
 use App\Model\ErrorModel;
 
 class AdminService

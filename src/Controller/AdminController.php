@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Model\AdminModel;
 use App\Service\ArticleService;
 use App\Service\CommentService;
 use App\Service\ContactService;

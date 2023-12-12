@@ -4,7 +4,7 @@
 	<div id="post{{article.postId}}" class="post">
 		<h1>{{article.title | raw }}</h1>
     {% if (article.pub == 0) %}
-        <div class="frame-red">Non public</div>
+        <div class="alert alert-warning">Non public</div>
     {% endif %}
 		<div class="headline">
 			<span class="author">{{article.name }}</span>
@@ -33,7 +33,7 @@
 		{% endfor %}
 
 		{%if ( comments | length == 0 ) %}
-		<div class="frame-white">Aucun commentaire pour le moment</div>
+		<div class="alert alert-primary">Aucun commentaire pour le moment</div>
 		{% endif %}
 
 		<div class="">

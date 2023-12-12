@@ -8,7 +8,7 @@
 		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/home" onclick="return bh(this)">Home</a>
 	</li>
 	<li class="nav-item mx-0 mx-lg-1">
-		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/lasts" onclick="return bh(this)">Derniers articles</a>
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/lasts" onclick="return bh(this)">Articles</a>
 	</li>
 	<li class="nav-item mx-0 mx-lg-1">
 		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/login" onclick="return bh(this)">Login</a>
@@ -25,10 +25,10 @@
 		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact" onclick="return bh(this)">Contact</a>
 	</li>
 	<li class="nav-item mx-0 mx-lg-1">
-		<a class="nav-link py-3 px-0 px-lg-3 rounded" onclick="return bg(this)" data-bj="target|categories" class="ajaxCall">Catégories</a>
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" onclick="return bg(this)" data-bj="secondarymenu|categories" class="ajaxCall">Catégories</a>
 	</li>
 
-	<div id="target"></div>
+	<span id="secondarymenu"></span>
 {% endblock nav %}
 {% block main %}
 

@@ -3,10 +3,10 @@
     <h2>Nouveau commentaire</h2>
     
     {% if (error) %}
-        <div class="frame-red">{{error}}</div>
+        <div class="alert alert-warning">{{error}}</div>
     {% endif %}
 
-        <div class="frame-white">
+        <div class="alert alert-primary">
             <input type="hidden" id="postId" value="{{postId}}">
             
             {% if (loged == false) %}

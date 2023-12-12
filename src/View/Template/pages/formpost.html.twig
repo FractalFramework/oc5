@@ -8,7 +8,7 @@
 	{% endif %}
     
     {% if error %}
-        <div class="frame-red">{{error}}</div>
+        <div class="alert alert-warning">{{ error | raw }}</div>
     {% endif %}
 
 			{%if ( modif == true ) %}
@@ -21,20 +21,20 @@
                 data-bj="main|postSave||catid,title,excerpt,content">
                 Enregistrer</a>
 			{% endif %}
-        <div class="frame-white">
+        <div class="alert alert-primary">
             <div class="area">
                 <select id="catid">
 			    {% for category in categories %}
-                    <option value="{{category.id}}">{{category.category}}</option>
+                    <option value="{{category.id}}">{{category.category | raw }}</option>
 			    {% endfor %}
                 </select>
                 <label for="catid">Catégorie</label>
             </div>
             <div class="area">
-                <input type="text" id="title" placeholder="Titre" value="{{article.title}}">
+                <input type="text" id="title" placeholder="Titre" value="{{article.title | raw }}">
             </div>
             <div class="area">
-                <textarea class="form-control" id="excerpt" placeholder="Résumé">{{article.excerpt}}</textarea>
+                <textarea class="form-control" id="excerpt" placeholder="Résumé">{{article.excerpt | raw }}</textarea>
             </div>
 
             <div class="menu">
