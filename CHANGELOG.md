@@ -104,4 +104,4 @@ Running a Sql query.
 
 ## Issue 13 : Security
 - behaviour in unexcepted conditions (no id, attempts to hack)
-- todo: codacy
+- en train de do: codacy
