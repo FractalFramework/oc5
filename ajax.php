@@ -4,8 +4,8 @@
 declare(strict_types=1);
 session_start();
 
-require 'vendor/autoload.php';
-require 'src/Common/lib.php';
+require('vendor/autoload.php');
+require('src/Common/lib.php');
 
 use App\Rooter;
 use Symfony\Component\Dotenv\Dotenv;
@@ -20,11 +20,11 @@ $rooter = new Rooter;
 $params = $g + $p;
 $ret = $rooter->index($params);
 
-if ($ret) {
+/*if ($ret) {
     if (is_array($ret)) {
         header('Content-Type: application/json');
         $ret = json_encode($ret, JSON_HEX_TAG);
     } else
         header('Content-Type: text/html; charset=utf-8');
     echo $ret;
-}
+}*/

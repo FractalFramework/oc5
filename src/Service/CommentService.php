@@ -54,8 +54,7 @@ class CommentService
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {
-        $uid = $_SESSION['uid'] ?? 0;
-        $uid = $_SESSION['uid'] ?? 0;
+        $uid = filter_var($_SESSION['uid'] ?? 0);
         $values = [
             'uid' => $uid,
             'bid' => $postId,

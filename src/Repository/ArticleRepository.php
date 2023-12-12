@@ -100,7 +100,7 @@ class ArticleRepository
     public function postSave(string $catid, string $title, string $excerpt, string $content): string
     {
         $blind = [
-            'uid' => $_SESSION['uid'],
+            'uid' => filter_var($_SESSION['uid'] ?? 0),
             'catid' => $catid,
             'title' => $title,
             'excerpt' => $excerpt,

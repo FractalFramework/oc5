@@ -85,8 +85,10 @@ class UserController extends BaseController
 
     public function logout(): void
     {
-        unset($_SESSION['usr']);
-        unset($_SESSION['uid']);
+        if (filter_var($_SESSION['usr'] ?? 0))
+            unset($_SESSION['usr']);
+        if (filter_var($_SESSION['uid'] ?? 0))
+            unset($_SESSION['uid']);
         $this->loginRoot();
     }
 
