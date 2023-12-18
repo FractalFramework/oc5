@@ -44,7 +44,7 @@ class CommentController extends BaseController
 
     public function newComment(array $requests): void
     {
-        $requests['loged'] = sesint('uid') ? true : false;
+        $requests['loged'] = sesint('uid') > 0 ? true : false;
         $this->renderHtml($requests, 'formcomment');
     }
 

@@ -45,7 +45,6 @@ class ContactController extends BaseController
 
     public function contactSave(array $requests): void
     {
-        $uid = $requests['name'];
         $name = $requests['name'];
         $mail = $requests['email'];
         $message = $requests['message'];

@@ -132,9 +132,8 @@ function implode_j(array $array): string
 function gets(): array
 {
     $array = $_GET;
-    foreach ($array as $k => $value) {
-        Ses::$array['get'][$k] = filter_input(INPUT_GET, $k);
-        ;
+    foreach ($array as $key => $value) {
+        Ses::$array['get'][$key] = filter_input(INPUT_GET, $key);
     }
     return Ses::$array['get'] ?? [];
 }

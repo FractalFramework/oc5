@@ -141,7 +141,7 @@ class UserController extends BaseController
 
     public function displayLogOut(): void
     {
-        $this->renderHtml(['name' => sesint('usr')], 'logout');
+        $this->renderHtml(['name' => sesvar('usr')], 'logout');
     }
 
     public function loginRoot(): void

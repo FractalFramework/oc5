@@ -54,7 +54,7 @@ class CommentService
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {
-        $uid = sesint('uid', 0);
+        $uid = sesint('uid');
         $values = [
             'uid' => $uid,
             'bid' => $postId,
