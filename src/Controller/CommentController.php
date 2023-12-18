@@ -44,13 +44,13 @@ class CommentController extends BaseController
 
     public function newComment(array $requests): void
     {
-        $requests['loged'] = ses('uid') ? true : false;
+        $requests['loged'] = sesint('uid') ? true : false;
         $this->renderHtml($requests, 'formcomment');
     }
 
     public function commentSave($requests): void
     {
-        $userId = ses('uid');
+        $userId = sesint('uid');
         $postId = $requests['postId'];
         $name = $requests['name'];
         $mail = $requests['mail'];

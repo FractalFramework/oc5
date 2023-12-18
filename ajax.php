@@ -4,8 +4,8 @@
 declare(strict_types=1);
 session_start();
 
-require('vendor/autoload.php');
-require('src/Common/lib.php');
+require 'vendor/autoload.php';
+require 'src/Common/lib.php';
 
 use App\Rooter;
 use Symfony\Component\Dotenv\Dotenv;

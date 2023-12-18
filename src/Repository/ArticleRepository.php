@@ -100,7 +100,7 @@ class ArticleRepository
     public function postSave(string $catid, string $title, string $excerpt, string $content): string
     {
         $blind = [
-            'uid' => ses('uid'),
+            'uid' => sesint('uid'),
             'catid' => $catid,
             'title' => $title,
             'excerpt' => $excerpt,

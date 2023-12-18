@@ -158,16 +158,23 @@ function cookiz(string $d): void
     unset($_COOKIE[$d]);
     setcookie($d, '', time() - 3600);
 }
-function ses(string $d, mixed $v = ''): mixed //default
+function sesvar(string $d, string $v = ''): string
 {
     return isset($_SESSION[$d]) ? $_SESSION[$d] : $v;
 }
+
+function sesint(string $d, int $v = 0): int
+{
+    return isset($_SESSION[$d]) ? $_SESSION[$d] : $v;
+}
+
 function sesa(string $d, mixed $v = null): mixed //assign
 {
     if (isset($v))
         $_SESSION[$d] = $v;
-    return ses($d);
+    return sesvar($d);
 }
+
 function sesz(string $d): void
 {
     if (isset($_SESSION[$d]))
@@ -180,7 +187,7 @@ function sesx(string $d): bool
 function sesmk(string $v, string $p = '', string $b = ''): mixed
 {
     $rid = rid($v . $p);
-    if (!isset($_SESSION[$rid]) or $b or ses('dev'))
+    if (!isset($_SESSION[$rid]) or $b or sesvar('dev'))
         $_SESSION[$rid] = $v($p);
     return $_SESSION[$rid] ?? [];
 }

@@ -86,7 +86,7 @@ class ContactRepository
     public function contactSave(string $name, string $mail, string $message): string
     {
         $blind = [
-            'uid' => ses('uid'),
+            'uid' => sesint('uid'),
             'name' => $name,
             'mail' => $mail,
             'msg' => $message,

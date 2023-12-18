@@ -2,7 +2,7 @@ body {
     background-color: #444;
     font-family: arial;
     color: #ddd;
-    margin: 0px
+    margin: 0
 }
 
 p {
@@ -59,12 +59,12 @@ select:focus-visible {
 }
 
 div:focus-visible {
-    outline: 0px dashed darkorange
+    outline: 0 dashed darkorange
 }
 
 form {
-    padding: 0px;
-    margin: 0px
+    padding: 0;
+    margin: 0
 }
 
 button {
@@ -90,13 +90,13 @@ section:hover {
 }
 
 article {
-    padding: 0px;
+    padding: 0;
     margin: 0 0 16px 0
 }
 
 figure {
-    padding: 0px;
-    margin: 0px
+    padding: 0;
+    margin: 0
 }
 
 figcaption {
@@ -117,7 +117,7 @@ label {
     font-size: small;
     padding: 2px 3px;
     background-color: #ffffff7d;
-    border-width: 0px;
+    border-width: 0;
     border-color: gray;
     border-style: solid;
     line-height: 24px;
@@ -130,7 +130,7 @@ label:hover {
 }
 
 table {
-    margin: 0px;
+    margin: 0;
     border-width: 2px;
     border-style: solid;
     border-color: #222;
@@ -157,7 +157,7 @@ th {
 .grid {
     transition: all 0.3s ease;
     display: grid;
-    gap: 0px
+    gap: 0
 }
 
 .grid-c1 {
@@ -296,7 +296,7 @@ th {
 .frame-green {
     font-size: big;
     padding: 4px 8px;
-    margin: 4px 0px 9px 0px;
+    margin: 4px 0 9px 0;
     background-color: #ffffff5e;
     border-color: #6c6c6ca1;
     border-style: solid;
@@ -327,7 +327,7 @@ th {
     display: inline-block;
     border: 1px solid #ffffffe5;
     padding: 2px 8px;
-    margin: 0px 0;
+    margin: 0 0;
     border-radius: 16px;
     background: #dddddd75
 }
@@ -347,10 +347,10 @@ a.bigbt:hover {
 .tabs span {
     transition: all 0.3s ease;
     padding: 2px 7px;
-    border-radius: 6px 6px 0px 0px;
+    border-radius: 6px 6px 0 0;
     color: #333333;
     background-color: #e9e7e8;
-    box-shadow: 0px 0px 4px -3px #777777;
+    box-shadow: 0 0 4px -3px #777777;
     border-bottom: 1px solid #777
 }
 
@@ -365,7 +365,7 @@ a.bigbt:hover {
 }
 
 .tabs span.space {
-    padding: 2px 0px;
+    padding: 2px 0;
     border-width: 0 0 1px 0;
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(68, 68, 68, 0.5))
 }
@@ -470,7 +470,7 @@ scroll {
 
 .topology li {
     color: #171717;
-    padding: 0px
+    padding: 0
 }
 
 .topology li a {
