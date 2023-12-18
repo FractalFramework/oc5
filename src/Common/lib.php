@@ -15,111 +15,111 @@ function br(): string
 
 #html
 
-function atr(array $r): string
+function atr(array $array): string
 {
     $ret = '';
-    if ($r) {
-        foreach ($r as $k => $v) {
-            if ($v || $v == 0) {
-                $ret .= ' ' . $k . '="' . $v . '"';
+    if ($array) {
+        foreach ($array as $k => $value) {
+            if ($value || $value == 0) {
+                $ret .= ' ' . $k . '="' . $value . '"';
             }
         }
     }
     return $ret;
 }
-function tag(string $b, array $p, string $d): string
+function tag(string $tag, array $params, string $data): string
 {
-    return '<' . $b . atr($p) . '>' . $d . '</' . $b . '>';
+    return '<' . $tag . atr($params) . '>' . $data . '</' . $tag . '>';
 }
 
-function lk(string $u, string $v = '', string $c = '', array $p = []): string
+function lk(string $u, string $value = '', string $class = '', array $params = []): string
 {
-    return tag('a', ['href' => $u, 'class' => $c] + $p, $v ? $v : domain($v));
+    return tag('a', ['href' => $u, 'class' => $class] + $params, $value ? $value : domain($value));
 }
-function img(string $d, string $s = '', string $o = ''): string
+function img(string $data, string $s = '', string $option = ''): string
 {
-    return taga('img', ['src' => $d, 'width' => $s, 'alt' => $o]);
+    return taga('img', ['src' => $data, 'width' => $s, 'alt' => $option]);
 }
-function div(string $v, string $c = '', string $d = '', string $s = ''): string
+function div(string $value, string $class = '', string $data = '', string $s = ''): string
 {
-    return tag('div', ['class' => $c, 'id' => $d, 'style' => $s], $v);
+    return tag('div', ['class' => $class, 'id' => $data, 'style' => $s], $value);
 }
-function span(string $v, string $c = '', string $d = '', string $s = ''): string
+function span(string $value, string $class = '', string $data = '', string $s = ''): string
 {
-    return tag('span', ['class' => $c, 'id' => $d, 'style' => $s], $v);
+    return tag('span', ['class' => $class, 'id' => $data, 'style' => $s], $value);
 }
 
 #js
 
-function atj(string $d, array $r): string
+function atj(string $attribute, array $propertiesArray): string
 {
-    return $d . '(' . implode_j($r) . ');';
+    return $attribute . '(' . implode_j($propertiesArray) . ');';
 }
-function ajaxCall(string $j, string $v, string $c = '', array $p = []): string
+function ajaxCall(string $j, string $value, string $class = '', array $params = []): string
 {
     if (cnfg('db')) {
-        $p += ['title' => $j];
+        $params += ['title' => $j];
     }
-    return tag('a', ['onclick' => 'bj(this)', 'data-bj' => $j, 'class' => $c] + $p, $v);
+    return tag('a', ['onclick' => 'bj(this)', 'data-bj' => $j, 'class' => $class] + $params, $value);
 }
-function ajaxToggle(string $j, string $v, string $c = '', array $p = []): string
+function ajaxToggle(string $j, string $value, string $class = '', array $params = []): string
 {
     if (cnfg('db')) {
-        $p += ['title' => $j];
+        $params += ['title' => $j];
     }
-    return tag('a', ['onclick' => 'bg(this)', 'data-bj' => $j, 'class' => $c] + $p, $v);
+    return tag('a', ['onclick' => 'bg(this)', 'data-bj' => $j, 'class' => $class] + $params, $value);
 }
-function ajaxLink(string $h, string $v, string $c = '', array $p = []): string
+function ajaxLink(string $h, string $value, string $class = '', array $params = []): string
 {
-    return tag('a', ['href' => '/' . $h, 'onclick' => 'return bh(this)', 'class' => $c] + $p, $v);
+    return tag('a', ['href' => '/' . $h, 'onclick' => 'return bh(this)', 'class' => $class] + $params, $value);
 }
 
 #str
 
-function delbr(string $d, string $o = ''): string
+function delbr(string $data, string $option = ''): string
 {
-    return str_replace(['<br />', '<br/>', '<br>'], $o, $d ?? '');
+    return str_replace(['<br />', '<br/>', '<br>'], $option, $data ?? '');
 }
-function deln(string $d, string $o = ''): string
+function deln(string $data, string $option = ''): string
 {
-    return str_replace("\n", $o, $d ?? '');
+    return str_replace("\n", $option, $data ?? '');
 }
-function delr(string $d, string $o = ''): string
+function delr(string $data, string $option = ''): string
 {
-    return str_replace("\r", $o, $d ?? '');
+    return str_replace("\r", $option, $data ?? '');
 }
-function delt(string $d, string $o = ''): string
+function delt(string $data, string $option = ''): string
 {
-    return str_replace("\t", $o, $d ?? '');
+    return str_replace("\t", $option, $data ?? '');
 }
-function delnl(string $d): string
+function delnl(string $data): string
 {
-    return preg_replace('/(\n){2,}/', "\n\n", $d ?? '');
+    return preg_replace('/(\n){2,}/', "\n\n", $data ?? '');
 }
-function delsp(string $d): string
+function delsp(string $data): string
 {
-    return preg_replace('/( ){2,}/', ' ', $d ?? '');
+    return preg_replace('/( ){2,}/', ' ', $data ?? '');
 }
 
 #arrays
 
-function expl(string $s, string $d, int $n = 2): array
+function expl(string $s, string $data, int $number = 2): array
 {
-    $r = explode($s, $d);
-    for ($i = 0; $i < $n; $i++) {
-        $rb[] = $r[$i] ?? '';
+    $array = explode($s, $data);
+    for ($iteration = 0; $iteration < $number; $iteration++) {
+        $rb[] = $array[$iteration] ?? '';
     }
     return $rb;
 }
-function implode_j(array $r): string
+function implode_j(array $array): string
 {
     $rb = [];
     $ret = '';
-    foreach ($r as $k => $v) {
-        if ($v == 'this' or $v == 'event') {
-            $rb[] = $v;
+    foreach ($array as $value) {
+        if ($value == 'this' or $value == 'event') {
+            $rb[] = $value;
         } else {
-            $rb[] = '\'' . $v . '\'';
+            $rb[] = '\'' . $value . '\'';
         }
     }
     if ($rb) {
@@ -131,107 +131,108 @@ function implode_j(array $r): string
 //gets
 function gets(): array
 {
-    $r = $_GET;
-    foreach ($r as $k => $v) {
-        Ses::$r['get'][$k] = filter_input(INPUT_GET, $k);
+    $array = $_GET;
+    foreach ($array as $k => $value) {
+        Ses::$array['get'][$k] = filter_input(INPUT_GET, $k);
         ;
     }
-    return Ses::$r['get'] ?? [];
+    return Ses::$array['get'] ?? [];
 }
 function posts(): array
 {
-    $r = $_POST ?? [];
-    foreach ($r as $k => $v) {
-        Ses::$r['post'][$k] = filter_input(INPUT_POST, $k);
+    $array = $_POST ?? [];
+    foreach ($array as $k => $value) {
+        Ses::$array['post'][$k] = filter_input(INPUT_POST, $k);
     }
-    return Ses::$r['post'] ?? [];
+    return Ses::$array['post'] ?? [];
 }
 
-function cookie(string $d, string $v = null): string
+function cookie(string $key, string $value = null): string
 {
-    if (isset($v))
-        setcookie($d, $v, time() + (86400 * 30));
-    return $_COOKIE[$d] ?? '';
+    if (isset($value))
+        setcookie($key, $value, time() + (86400 * 30));
+    return $_COOKIE[$key] ?? '';
 }
-function cookiz(string $d): void
+function cookiz(string $key): void
 {
-    unset($_COOKIE[$d]);
-    setcookie($d, '', time() - 3600);
+    unset($_COOKIE[$key]);
+    setcookie($key, '', time() - 3600);
 }
-function sesvar(string $d, string $v = ''): string
+function sesvar(string $key): string
 {
-    return isset($_SESSION[$d]) ? $_SESSION[$d] : $v;
-}
-
-function sesint(string $d, int $v = 0): int
-{
-    return isset($_SESSION[$d]) ? $_SESSION[$d] : $v;
+    return $_SESSION[$key] ?? '';
 }
 
-function sesa(string $d, mixed $v = null): mixed //assign
+function sesint(string $key): int
 {
-    if (isset($v))
-        $_SESSION[$d] = $v;
-    return sesvar($d);
+    return (int) $_SESSION[$key] ?? 0;
 }
 
-function sesz(string $d): void
+function sesa(string $key, mixed $value = null): mixed //assign
 {
-    if (isset($_SESSION[$d]))
-        unset($_SESSION[$d]);
+    if (isset($value)) {
+        $_SESSION[$key] = $value;
+    }
+    return sesvar($key);
 }
-function sesx(string $d): bool
+
+function sesz(string $key): void
 {
-    return isset($_SESSION[$d]) ? true : false;
+    if (isset($_SESSION[$key]))
+        unset($_SESSION[$key]);
 }
-function sesmk(string $v, string $p = '', string $b = ''): mixed
+function sesx(string $key): bool
 {
-    $rid = rid($v . $p);
-    if (!isset($_SESSION[$rid]) or $b or sesvar('dev'))
-        $_SESSION[$rid] = $v($p);
+    return isset($_SESSION[$key]) ? true : false;
+}
+function sesmk(string $functionName, string $params = '', string $option = ''): mixed
+{
+    $rid = rid($functionName . $params);
+    if (!isset($_SESSION[$rid]) or $option or sesvar('dev'))
+        $_SESSION[$rid] = $functionName($params);
     return $_SESSION[$rid] ?? [];
 }
-function get($k, $v = '')
+function get($k, $value = '')
 {
-    return Ses::$r['get'][$k] ?? Ses::$r['get'][$k] = $v;
+    return Ses::$array['get'][$k] ?? Ses::$array['get'][$k] = $value;
 }
 function post($k)
 {
-    return Ses::$r['post'][$k] ?? '';
+    return Ses::$array['post'][$k] ?? '';
 }
 
 #service
 
 //ses
-function voc(string $d): string
+function voc(string $key): string
 {
-    $r = sesmk('json::call', 'sys/voc', 0);
-    return ucfirst($r[$d] ?? $d);
+    $array = sesmk('json::call', 'sys/voc', 0);
+    return ucfirst($array[$key] ?? $key);
 }
-function ico(string $d): string
+function ico(string $key): string
 {
-    $r = sesmk('json::call', 'sys/ico', 0);
-    return span($r[$d] ?? '', 'ico');
+    $array = sesmk('json::call', 'sys/ico', 0);
+    return span($array[$key] ?? '', 'ico');
 }
-function icovoc(string $d, string $b = '', string $c = ''): string
+function icovoc(string $key, string $text = '', string $class = ''): string
 {
-    return ico($d) . thin() . span(voc($b ? $b : $d), $c);
+    return ico($key) . thin() . span(voc($text ? $text : $key), $class);
 }
 
 #params
 
 function cnfg(string $k): string
 {
-    return Ses::$r['cnfg'][$k] ?? '';
+    return Ses::$array['cnfg'][$k] ?? '';
 }
 
 #dev
 
-function pr(array $r): void
+function pr(array $array): void
 {
-    echo '<pre>' . print_r($r, true) . '</pre>';
+    echo '<pre>' . print_r($array, true) . '</pre>';
 }
-function vd(object $r): void
+function vd(object $array): void
 {
-    echo '<pre style="white-space: pre-line;">' . var_dump($r, true) . '</pre>';
+    echo '<pre style="white-space: pre-line;">' . var_dump($array, true) . '</pre>';
 }

@@ -40,6 +40,7 @@ class HomeController extends BaseController
     public function displayHome(int $id = 1): void
     {
         $profile = $this->homeService->getHome($id);
+        $array = [];
         $array['results'] = $profile;
         foreach ([1 => 1, 2, 3, 4, 18, 20] as $key => $id) {
             $array['preview']['post' . $key] = $this->previewArticle($id);

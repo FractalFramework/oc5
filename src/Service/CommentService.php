@@ -43,7 +43,7 @@ class CommentService
     public function getDashboardComments(int $number): array
     {
         $articleEntities = $this->commentRepository->getAll($number);
-        return $this->commentMapper->forDashboard($articleEntities); //transformer
+        return $this->commentMapper->forDashboard($articleEntities);
     }
 
     public function getAllComments(int $limit): array

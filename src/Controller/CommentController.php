@@ -55,8 +55,10 @@ class CommentController extends BaseController
         $name = $requests['name'];
         $mail = $requests['mail'];
         $comment = $requests['comment'];
+        $requests['isLoged'] = false;
 
         if ($userId) {
+            $requests['isLoged'] = true;
             $user = $this->userService->getUserFromUid((int) $userId);
             $name = $user->name;
             $mail = $user->mail;

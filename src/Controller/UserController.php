@@ -13,7 +13,6 @@ class UserController extends BaseController
 {
     private static $instance;
     private UserService $userService;
-    private string $error;
 
     private function __construct(string $ajaxMode)
     {
@@ -40,7 +39,7 @@ class UserController extends BaseController
     {
         $datas = $this->userService->getUser($id);
         $array['results'] = $datas;
-        $this->renderHtml([], 'login');
+        $this->renderHtml($array, 'login');
     }
 
     public function registerUser($requests): void
@@ -147,9 +146,9 @@ class UserController extends BaseController
 
     public function loginRoot(): void
     {
-        if (sesint('uid'))
+        if (sesint('uid')) {
             $this->displayLogOut();
-        else
+        } else
             $this->displayLoginForm();
     }
 

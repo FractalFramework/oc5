@@ -51,8 +51,8 @@ class ContactService
             'agence2dav@gmail.com',
             'contact from oc5',
             $message,
-            $additional_headers = [],
-            $additional_params = ""
+            [], //additional_headers
+            "" //additional_params
         );
     }
 

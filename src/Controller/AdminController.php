@@ -55,7 +55,6 @@ class AdminController extends BaseController
     public function reviewComments(): void
     {
         $array['results'] = $this->commentService->getDashboardComments(40);
-        //pr($array);
         $this->renderHtml($array, 'adminComments');
     }
 

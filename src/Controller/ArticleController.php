@@ -104,6 +104,7 @@ class ArticleController extends BaseController
 
     public function postEdit(int $postId): void
     {
+        $datas = [];
         $datas['postId'] = $postId;
         $datas['article'] = $this->articleService->getPost($postId);
         $datas['editable'] = $datas['article']->uid == sesint('uid') ? true : false;
@@ -111,7 +112,8 @@ class ArticleController extends BaseController
         if ($datas['editable']) {
             $datas['categories'] = $this->categoryService->getCategories();
             $this->renderHtml($datas, 'formpost');
-        } else { //show post
+        } else {
+            //show post
             $datas['comments'] = $this->commentService->getcomments($postId);
             $this->renderHtml($datas, 'post');
         }
@@ -131,22 +133,22 @@ class ArticleController extends BaseController
             default => ''
         };
         if ($error) {
-            $this->renderHtml([
-                'editable' => true,
-                //cheat
-                'modif' => true,
-                'article' => [
-                    'title' => $title,
-                    'excerpt' => $excerpt,
-                    'content' => $content
-                ],
-                'error' => $error
-            ], 'formpost');
+            $this->renderHtml(
+                [
+                    'editable' => true,
+                    //cheat
+                    'modif' => true,
+                    'article' => [
+                        'title' => $title,
+                        'excerpt' => $excerpt,
+                        'content' => $content
+                    ],
+                    'error' => $error
+                ], 'formpost');
             return;
         }
-        $ok = $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
+        $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
-        //$this->displayPost($postId);
     }
 
 }

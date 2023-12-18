@@ -12,7 +12,6 @@ class HomeService
 {
     private static $instance;
     private UserRepository $userRepository;
-    private HomeModel $homeModel;
 
     private function __construct()
     {
@@ -29,7 +28,7 @@ class HomeService
 
     public function getHome(int $id): UserEntity //HomeModel
     {
-        return $userEntity = $this->userRepository->userInfos($id);
+        return $this->userRepository->userInfos($id);
     }
 
 }
