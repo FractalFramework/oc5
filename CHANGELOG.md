@@ -102,7 +102,5 @@ Running a Sql query.
 - use Bootstrap
 - rereform all views
 
-## Issue 13 : Security
-- behaviour in unexcepted conditions (no id, attempts to hack)
-- en train de do: codacy
-- test 2
+## Issue 37 : Ui
+- todo: revision of the Ui
