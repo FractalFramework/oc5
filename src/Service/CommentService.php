@@ -61,7 +61,7 @@ class CommentService
             'name' => $name,
             'mail' => $mail,
             'txt' => $comment,
-            'pub' => $uid ? true : false
+            'pub' => $uid == 0 ? 0 : 1
         ];
         return $this->commentRepository->commentSave($values);
     }

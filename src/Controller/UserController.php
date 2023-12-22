@@ -126,7 +126,8 @@ class UserController extends BaseController
 
         //all is ok
         $this->logon($result->name, $result->uid);
-        $this->renderHtml(['name' => $result->name, 'welcome' => 'Authentification réussie'], 'loged');
+        $result = ['name' => $result->name, 'welcome' => 'Authentification réussie'];
+        $this->renderHtml($result, 'loged');
     }
 
     public function displayRegisterForm(): void

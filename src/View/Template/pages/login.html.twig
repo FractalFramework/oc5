@@ -8,18 +8,18 @@
 
         <div class="alert alert-primary">
             <div class="">
-                <input type="text" id="name" placeholder="Pseudo" value="{{name}}" required>
                 <label for="name">Pseudo</label>
+                <input class="form-control" type="text" id="name" placeholder="Pseudo" value="{{name}}" required>
             </div>
             <div class="">
-                <input type="password" id="pswd" placeholder="Mot de passe" required>
                 <label for="pswd">Mot de passe</label>
+                <input class="form-control" type="password" id="pswd" placeholder="Mot de passe" required>
             </div>
             <a class="btn btn-outline-primary" onclick="bj(this)" data-bj="main|logon||name,pswd">
-                Login !</a>
+                S'identifier</a>
 
             <a class="btn btn-outline-secondary" onclick="bg(this)" data-bj="register|register">
-                S'enregistrer ?</a>
+                Inscription</a>
             <div id="register"></div>
         </div>
 {% endblock %}

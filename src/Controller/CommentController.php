@@ -6,17 +6,20 @@ namespace App\Controller;
 
 use App\Service\CommentService;
 use App\Service\UserService;
+use App\Service\ArticleService;
 
 class CommentController extends BaseController
 {
     private static $instance;
     private readonly CommentService $commentService;
     private readonly UserService $userService;
+    private readonly ArticleService $articleService;
 
     private function __construct(string $ajaxMode)
     {
         $this->commentService = CommentService::getInstance();
         $this->userService = UserService::getInstance();
+        $this->articleService = ArticleService::getInstance();
         parent::__construct($ajaxMode);
     }
 

@@ -49,6 +49,9 @@ class HomeController extends BaseController
         foreach ($links as $link) {
             $array['links'][] = ['url' => $link->url];
         }
+        $array['presentation'] = $this->articleService->getPost(24);
+        $array['jobs'] = $this->articleService->getPost(25);
+        $array['uid'] = sesint('uid');
         $this->renderHtml($array, 'home');
     }
 

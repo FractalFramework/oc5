@@ -164,7 +164,7 @@ function sesvar(string $key): string
 
 function sesint(string $key): int
 {
-    return (int) $_SESSION[$key] ?? 0;
+    return (int) $key ? ($_SESSION[$key] ?? 0) : 0;
 }
 
 function sesa(string $key, mixed $value = null): mixed //assign

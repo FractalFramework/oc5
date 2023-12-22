@@ -18,15 +18,16 @@
 			state = {"page": "{{ page }}"}; var maintg = "main";
         </script>
         
-    <link href="/public/css/core2.css" rel="stylesheet" type="text/css">
-    <link href="/public/css/bs.css" rel="stylesheet" type="text/css">
-    <!-- Font Awesome icons (free version)-->
+    <!-- Font Awesome icons (free version) -->
     <script src="/public/bs/all.js" crossorigin="anonymous"></script>
     <!-- Google fonts-->
     <link href="/public/bs/css.css" rel="stylesheet" type="text/css">
     <link href="/public/bs/css_002.css" rel="stylesheet" type="text/css">
-    <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="/public/css/styles.css" rel="stylesheet" type="text/css">
+    <!-- Core theme CSS (includes Bootstrap) -->
+    <link href="/public/css/styles.css?{{mtime}}" rel="stylesheet" type="text/css">
+    <link href="/public/css/bs.css" rel="stylesheet" type="text/css">
+    <!-- Local -->
+    <link href="/public/css/core2.css?{{mtime}}" rel="stylesheet" type="text/css">
     <style>
         .d-none {
             display: none;
@@ -45,9 +46,9 @@
 
 <body id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top navbar-shrink" id="mainNav">
+    <nav class="navbar navbar-expand-lg bg-primary text-uppercase fixed-top navbar-shrink" id="mainNav">
         <div class="container">
-			<a class="navbar-brand" href="/home">{% block blogtitle %}etc{% endblock %}</a>
+			<a class="navbar-brand" href="/home">{% block blogtitle %}Accueil{% endblock %}</a>
             <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded collapsed"
                 type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,7 +71,7 @@
         </div>
     </nav>
     <!-- Masthead-->
-    <header class="masthead bg-primary text-white text-center">
+    <header class="masthead bg-secondary text-white text-center">
         <div class="container d-flex align-items-center flex-column">
             <!-- Masthead Avatar Image-->
             <!-- <img class="masthead-avatar mb-5" src="/img/15765888.png" width="320px" alt="webapps"> -->

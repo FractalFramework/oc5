@@ -40,6 +40,7 @@ class ArticleController extends BaseController
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
         $datas['editable'] = $datas['article']->uid == sesint('uid') ? true : false;
+        $datas['justPosted'] = 0;
 
         $isPublic = $datas['article']->pub ? true : false;
         if ($isPublic == true || ($isPublic == false && sesint('uid')))
@@ -52,6 +53,7 @@ class ArticleController extends BaseController
     {
         $datas['results'] = $this->articleService->getPosts(20);
         $datas['pageTitle'] = 'Articles';
+        $datas['owner'] = sesint('uid');
         $this->renderHtml($datas, 'posts');
     }
 
@@ -136,7 +138,6 @@ class ArticleController extends BaseController
             $this->renderHtml(
                 [
                     'editable' => true,
-                    //cheat
                     'modif' => true,
                     'article' => [
                         'title' => $title,

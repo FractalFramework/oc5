@@ -1,5 +1,16 @@
 
 		<h3>Commentaires</h3>
+
+		{%if ( justPosted == false ) %}
+		<div class="alert alert-success">
+			<h3>Merci pour votre commentaire</h3>
+			{%if ( isLoged == false ) %}
+			<p>On va quand même vérifier que vous ne dites pas trop de conneries, hein.</p>
+			{% endif %}
+			<a href="/post/{{postId}}" class="btn btn-outline-primary" onclick="return bh(this)">Fermer</a>
+        </div>
+		{% endif %}
+
 		{% for comment in comments %}
 			<div id="track{{comment.id}}" class="track">
 				<div class="headline">
@@ -15,7 +26,7 @@
 		{% endif %}
 
 		<div class="">
-			<a class="btn btn-success" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			<a class="btn btn-primary" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
 			Poster un commentaire
 			</a>
 		</div>
