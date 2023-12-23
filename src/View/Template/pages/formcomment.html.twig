@@ -4,19 +4,21 @@
     
     {% if (error) %}
         <div class="alert alert-warning">{{error}}</div>
+        <div class="alert alert-warning">{{error}}</div>
     {% endif %}
 
+        <div class="alert alert-primary">
         <div class="alert alert-primary">
             <input type="hidden" id="postId" value="{{postId}}">
             
             {% if (loged == false) %}
             <div class="">
-                <input type="text" id="name" placeholder="Nom" value="{{name}}">
                 <label for="name">Nom, prénom</label>
+                <input class="form-control" type="text" id="name" placeholder="Nom" value="{{name}}">
             </div>
             <div class="">
-                <input type="mail" id="mail" placeholder="E-mail" value="{{mail}}">
                 <label for="mail">E-mail</label>
+                <input class="form-control" type="mail" id="mail" placeholder="E-mail" value="{{mail}}">
             </div>
             {% else %}
             <input type="hidden" id="name" value="{{name}}">
@@ -24,6 +26,7 @@
             {% endif %}
 
             <div class="area">
+                <label for="comment">Message</label>
                 <textarea class="form-control" id="comment" placeholder="Commentaire">{{comment}}</textarea>
             </div>
             <a class="btn btn-success" onclick="bj(this)" data-bj="newComment|postComment||postId,name,mail,comment">

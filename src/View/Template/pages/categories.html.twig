@@ -3,6 +3,7 @@
     {% for result in results %}
 	<li class="nav-item mx-0 mx-lg-1">
 	    <a href="/category/{{result.id}}" onclick="return bh(this)">
+	    <a class="btn btn-primary" href="/category/{{result.id}}" onclick="return bh(this)">
             {{result.category | raw }}
         </a>
 	</li>

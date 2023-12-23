@@ -77,7 +77,7 @@ class ArticleRepository
 
     public function getAll(int $limit = 10): array
     {
-        $sql = 'select posts.id,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
+        $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
         from posts
         left join cats on cats.id=catid
         left join users on users.id=uid

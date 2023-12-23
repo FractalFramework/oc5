@@ -11,6 +11,7 @@ select {
     background-color: #eee;
     border: 1px solid #bbb;
     margin: 10px;
+    margin: 10px;
 }
 
 input:hover,
@@ -30,22 +31,48 @@ select:focus-visible {
 
 div:focus-visible {
     outline: 0 dashed darkorange;
+    outline: 0 dashed darkorange;
 }
 
 .content {
     margin: 0;
+    margin: 0;
     padding: 16px;
+    font-family: "Montserrat";
     background-color: #fffa;
     border: 0 solid #7777;
     font-family: "Georgia";
     font-size: 22px;
 }
 
-.excerpt {
-    font-family: "Lucida Arial";
-    font-size: x-large;
+.title {
+    font-family: "Lato";
+    font-size: xx-large;
     padding: 4px 0;
-    color: blueviolet;
+    color: rgb(226, 43, 165);
+}
+
+.excerpt {
+    font-family: "Montserrat";
+    font-size: 18px;
+    padding: 4px 0;
+    color: rgb(92, 43, 226);
+}
+
+.pane-article {
+    font-size: 14px;
+    padding: 6px 16px;
+    margin: 20px 0;
+    background-color: #faebd700;
+    border-bottom: 0px solid #444;
+    border-radius: 10px;
+}
+
+.article {
+    font-family: "Montserrat";
+    font-size: 16px;
+    padding: 6px 16px;
+    margin: 20px 0;
 }
 
 .tracks {

@@ -44,6 +44,7 @@ class CommentService
     {
         $articleEntities = $this->commentRepository->getAll($number);
         return $this->commentMapper->forDashboard($articleEntities);
+        return $this->commentMapper->forDashboard($articleEntities);
     }
 
     public function getAllComments(int $limit): array
@@ -61,7 +62,7 @@ class CommentService
             'name' => $name,
             'mail' => $mail,
             'txt' => $comment,
-            'pub' => $uid ? true : false
+            'pub' => $uid == 0 ? 0 : 1
         ];
         return $this->commentRepository->commentSave($values);
     }

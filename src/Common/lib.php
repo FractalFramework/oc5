@@ -16,6 +16,7 @@ function br(): string
 #html
 
 function atr(array $array): string
+function atr(array $array): string
 {
     $ret = '';
     if ($array) {
@@ -164,7 +165,8 @@ function sesvar(string $key): string
 
 function sesint(string $key): int
 {
-    return (int) $_SESSION[$key] ?? 0;
+    $value = $_SESSION[$key] ?? 0;
+    return (int) $value;
 }
 
 function sesa(string $key, mixed $value = null): mixed //assign

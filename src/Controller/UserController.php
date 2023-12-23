@@ -7,16 +7,19 @@ namespace App\Controller;
 use App\Service\UserService;
 use App\Model\ErrorModel;
 use App\Model\UserModel;
+use App\Controller\HomeController;
 
 
 class UserController extends BaseController
 {
     private static $instance;
     private UserService $userService;
+    private HomeController $homeController;
 
     private function __construct(string $ajaxMode)
     {
         $this->userService = UserService::getInstance();
+        $this->homeController = HomeController::getInstance($ajaxMode);
         parent::__construct($ajaxMode);
     }
 
@@ -78,8 +81,10 @@ class UserController extends BaseController
             $this->renderHtml(['name' => $name, 'error' => 'Echec de l\'enregistrement'], 'notloged');
         else {
             $this->logon($name, $uid);
-            $this->renderHtml(['name' => $name, 'welcome' => 'Inscription réussie'], 'loged');
+            //$this->renderHtml(['name' => $name, 'welcome' => 'Inscription réussie'], 'loged');
+            $this->homeController->displayHome(1, 'Inscription réussie');
         }
+
     }
 
     public function logout(): void
@@ -126,7 +131,9 @@ class UserController extends BaseController
 
         //all is ok
         $this->logon($result->name, $result->uid);
-        $this->renderHtml(['name' => $result->name, 'welcome' => 'Authentification réussie'], 'loged');
+        //$result = ['name' => $result->name, 'welcome' => 'Authentification réussie'];
+        //$this->renderHtml($result, 'loged');
+        $this->homeController->displayHome(1, 'Authentification réussie');
     }
 
     public function displayRegisterForm(): void

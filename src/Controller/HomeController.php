@@ -37,7 +37,7 @@ class HomeController extends BaseController
         return $this->articleService->getPost($id);
     }
 
-    public function displayHome(int $id = 1): void
+    public function displayHome(int $id = 1, string $welcome = ''): void
     {
         $profile = $this->homeService->getHome($id);
         $array = [];
@@ -49,6 +49,11 @@ class HomeController extends BaseController
         foreach ($links as $link) {
             $array['links'][] = ['url' => $link->url];
         }
+        $array['presentation'] = $this->articleService->getPost(24);
+        $array['jobs'] = $this->articleService->getPost(25);
+        $array['uid'] = sesint('uid');
+        $array['welcome'] = $welcome;
+        $array['name'] = sesvar('usr');
         $this->renderHtml($array, 'home');
     }
 
