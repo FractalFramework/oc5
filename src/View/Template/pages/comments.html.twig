@@ -11,11 +11,11 @@
 		{% endfor %}
 
 		{%if ( comments | length == 0 ) %}
-		<div class="frame-white">{{nocomment | raw }}</div>
+		<div class="alert alert-primary">{{nocomment | raw }}</div>
 		{% endif %}
 
 		<div class="">
-			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			<a class="btn btn-success" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
 			Poster un commentaire
 			</a>
 		</div>

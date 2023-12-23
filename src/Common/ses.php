@@ -6,35 +6,35 @@ namespace App\Common;
 
 class Ses
 {
-    public static array $r = [];
-    public static array $er = [];
-    public static int $n = 0;
-    public static function append(string $k, string $v): string
+    public static array $array = [];
+    public static array $error = [];
+    public static int $number = 0;
+    public static function append(string $key, string $value): string
     {
-        return self::$r[$k] = $v;
+        return self::$array[$key] = $value;
     }
-    public static function row(string $k): array
+    public static function row(string $key): array
     {
-        return self::$r[$k] ?? '';
+        return self::$array[$key] ?? '';
     }
-    public static function erase(string $k): void
+    public static function erase(string $key): void
     {
-        unset(self::$r[$k]);
+        unset(self::$array[$key]);
     }
-    public static function error($v): string
+    public static function error($value): string
     {
-        return self::$er[] = $v;
+        return self::$error[] = $value;
     }
-    public static function cnfg(string $k): string
+    public static function cnfg(string $key): string
     {
-        return self::$r['cnfg'][$k] ?? '';
+        return self::$array['cnfg'][$key] ?? '';
     }
     public static function gets(): array
     {
-        return self::$r['get'] ?? '';
+        return self::$array['get'] ?? '';
     }
-    public static function get(string $k): string
+    public static function get(string $key): string
     {
-        return self::$r['get'][$k] ?? '';
+        return self::$array['get'][$key] ?? '';
     }
 }

@@ -39,11 +39,10 @@ class ArticleController extends BaseController
         $datas['postId'] = $id;
         $datas['article'] = $this->articleService->getPost((int) $id);
         $datas['comments'] = $this->commentService->getcomments((int) $id);
-        $datas['editable'] = $datas['article']->uid == ($_SESSION['uid'] ?? 0);
-        $uid = $_SESSION['uid'] ?? 0;
+        $datas['editable'] = $datas['article']->uid == sesint('uid') ? true : false;
 
-        $isPublic = $datas['article']->pub ?? 0;
-        if ($isPublic || (!$isPublic && $uid)) //==1 superadmin
+        $isPublic = $datas['article']->pub ? true : false;
+        if ($isPublic == true || ($isPublic == false && sesint('uid')))
             $this->renderHtml($datas, 'post');
         else
             $this->renderHtml($datas, 'nopost');
@@ -65,7 +64,7 @@ class ArticleController extends BaseController
 
     public function newPost(): void
     {
-        if (!isset($_SESSION['uid']))
+        if (!sesint('uid'))
             $this->renderHtml([], 'login');
         else {
             $datas['categories'] = $this->categoryService->getCategories(); //to generalize
@@ -105,14 +104,16 @@ class ArticleController extends BaseController
 
     public function postEdit(int $postId): void
     {
+        $datas = [];
         $datas['postId'] = $postId;
         $datas['article'] = $this->articleService->getPost($postId);
-        $datas['editable'] = $datas['article']->uid == $_SESSION['uid'] ? 1 : 0;
+        $datas['editable'] = $datas['article']->uid == sesint('uid') ? true : false;
         $datas['modif'] = true;
         if ($datas['editable']) {
             $datas['categories'] = $this->categoryService->getCategories();
             $this->renderHtml($datas, 'formpost');
-        } else { //show post
+        } else {
+            //show post
             $datas['comments'] = $this->commentService->getcomments($postId);
             $this->renderHtml($datas, 'post');
         }
@@ -132,22 +133,22 @@ class ArticleController extends BaseController
             default => ''
         };
         if ($error) {
-            $this->renderHtml([
-                'editable' => true,
-                //cheat
-                'modif' => true,
-                'article' => [
-                    'title' => $title,
-                    'excerpt' => $excerpt,
-                    'content' => $content
-                ],
-                'error' => $error
-            ], 'formpost');
+            $this->renderHtml(
+                [
+                    'editable' => true,
+                    //cheat
+                    'modif' => true,
+                    'article' => [
+                        'title' => $title,
+                        'excerpt' => $excerpt,
+                        'content' => $content
+                    ],
+                    'error' => $error
+                ], 'formpost');
             return;
         }
-        $ok = $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
+        $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
         $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
-        //$this->displayPost($postId);
     }
 
 }

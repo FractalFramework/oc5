@@ -1,5 +1,5 @@
 {%  block table %}
-        <table>
+        <table class="table">
             <tr>
                 <th>Nom</td>
                 <th>Mail</td>
@@ -14,13 +14,13 @@
                 <td>{{result.msg | raw}}</td>
                 <td>
                 {% if (result.pub == 1) %}
-                <a class="btsav" onclick="bj(this)" data-bj="admin|adminContactPub|publish=0,id={{result.id}}">Publié</a>
+                <a class="btn btn-success" onclick="bj(this)" data-bj="admin|adminContactPub|publish=0,id={{result.id}}">Publié</a>
                 {% else %}
-                <a class="btdel" onclick="bj(this)" data-bj="admin|adminContactPub|publish=1,id={{result.id}}">Dépublié</a>
+                <a class="btn btn-warning" onclick="bj(this)" data-bj="admin|adminContactPub|publish=1,id={{result.id}}">Dépublié</a>
                 {% endif %}
                 </td>
                 <td>
-                    <a class="btn" href="/displayContact/{{result.id}}" onclick="return bh(this)">Voir</a>
+                    <a class="btn btn-link" href="/displayContact/{{result.id}}" onclick="return bh(this)">Voir</a>
                 </td>
             </tr>
         {% endfor %}

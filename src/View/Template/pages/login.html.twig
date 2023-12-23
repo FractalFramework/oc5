@@ -3,10 +3,10 @@
     <h2>Inscription</h2>
     
     {% if error %}
-        <div class="frame-red">{{error}}</div>
+        <div class="alert alert-warning">{{error}}</div>
     {% endif %}
 
-        <div class="frame-white">
+        <div class="alert alert-primary">
             <div class="">
                 <input type="text" id="name" placeholder="Pseudo" value="{{name}}" required>
                 <label for="name">Pseudo</label>
@@ -15,10 +15,10 @@
                 <input type="password" id="pswd" placeholder="Mot de passe" required>
                 <label for="pswd">Mot de passe</label>
             </div>
-            <a class="btsav" onclick="bj(this)" data-bj="main|logon||name,pswd">
+            <a class="btn btn-outline-primary" onclick="bj(this)" data-bj="main|logon||name,pswd">
                 Login !</a>
 
-            <a class="btn" onclick="bg(this)" data-bj="register|register">
+            <a class="btn btn-outline-secondary" onclick="bg(this)" data-bj="register|register">
                 S'enregistrer ?</a>
             <div id="register"></div>
         </div>

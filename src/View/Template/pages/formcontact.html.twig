@@ -21,7 +21,7 @@
             <!-- Contact Section Form-->            
             
             {% if error %}
-                <div class="frame-red">{{error}}</div>
+                <div class="alert alert-warning">{{error}}</div>
             {% endif %}
 
             <div class="row justify-content-center">
@@ -79,7 +79,7 @@
                             <div class="text-center text-danger mb-3">Pas de bol ! ça marche aps.</div>
                         </div>
                         <!-- Submit Button-->
-                        <a class="btn btn-primary btn-xl" id="submitButton" onclick="bj(this)" data-bj="main|contactSave||name,email,excerpt,message">Envoyer par la poste</a>
+                        <a class="btn btn-primary btn-xl" id="submitButton" onclick="bj(this)" data-bj="main|contactSave||name,email,message">Envoyer par la poste</a>
                     </form>
                 </div>
             </div>

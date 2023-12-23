@@ -56,3 +56,4 @@ vendor
 .vscode
 .env.*
 .php-cs-fixer.cache
+installer.php

@@ -13,7 +13,6 @@ class UserController extends BaseController
 {
     private static $instance;
     private UserService $userService;
-    private string $error;
 
     private function __construct(string $ajaxMode)
     {
@@ -40,7 +39,7 @@ class UserController extends BaseController
     {
         $datas = $this->userService->getUser($id);
         $array['results'] = $datas;
-        $this->renderHtml([], 'login');
+        $this->renderHtml($array, 'login');
     }
 
     public function registerUser($requests): void
@@ -85,8 +84,8 @@ class UserController extends BaseController
 
     public function logout(): void
     {
-        unset($_SESSION['usr']);
-        unset($_SESSION['uid']);
+        sesz('uid');
+        sesz('usr');
         $this->loginRoot();
     }
 
@@ -142,14 +141,14 @@ class UserController extends BaseController
 
     public function displayLogOut(): void
     {
-        $this->renderHtml(['name' => $_SESSION['usr']], 'logout');
+        $this->renderHtml(['name' => sesvar('usr')], 'logout');
     }
 
     public function loginRoot(): void
     {
-        if (isset($_SESSION['usr']))
+        if (sesint('uid')) {
             $this->displayLogOut();
-        else
+        } else
             $this->displayLoginForm();
     }
 

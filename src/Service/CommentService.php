@@ -43,7 +43,7 @@ class CommentService
     public function getDashboardComments(int $number): array
     {
         $articleEntities = $this->commentRepository->getAll($number);
-        return $this->commentMapper->forDashboard($articleEntities); //transformer
+        return $this->commentMapper->forDashboard($articleEntities);
     }
 
     public function getAllComments(int $limit): array
@@ -54,15 +54,14 @@ class CommentService
 
     public function commentSave(string $postId, string $name, string $mail, string $comment): string
     {
-        $uid = $_SESSION['uid'] ?? 0;
-        $uid = $_SESSION['uid'] ?? 0;
+        $uid = sesint('uid');
         $values = [
             'uid' => $uid,
             'bid' => $postId,
             'name' => $name,
             'mail' => $mail,
             'txt' => $comment,
-            'pub' => $uid ? 1 : 0
+            'pub' => $uid ? true : false
         ];
         return $this->commentRepository->commentSave($values);
     }
