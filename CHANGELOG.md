@@ -113,3 +113,6 @@ Running a Sql query.
 - ajout des dates et auteurs dans le fil d'articles
 - ajout d'un contenu spcifique dans la home (présentation)
 - correctif erreur pub not int dans save caomment
+
+## Issue 40 : Ui2
+- reformulations admin

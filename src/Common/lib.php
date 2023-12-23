@@ -16,7 +16,6 @@ function br(): string
 #html
 
 function atr(array $array): string
-function atr(array $array): string
 {
     $ret = '';
     if ($array) {
