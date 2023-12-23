@@ -102,7 +102,14 @@ Running a Sql query.
 - use Bootstrap
 - rereform all views
 
-## Issue 13 : Security
-- behaviour in unexcepted conditions (no id, attempts to hack)
-- en train de do: codacy
-- test 2
+## Issue 37 : Codacy
+- install Codacy
+- apply corrections from Codacy
+
+## Issue 38 : Ui
+- révision générale de l'utilisation
+- enlever les pages intermédiaires de validation
+- réformer le menu
+- ajout des dates et auteurs dans le fil d'articles
+- ajout d'un contenu spcifique dans la home (présentation)
+- correctif erreur pub not int dans save caomment

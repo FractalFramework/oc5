@@ -2,6 +2,12 @@
 {% block posts %}{% endblock %}
 {% block post %}
 
+    <!-- Loged-->
+	{% if (welcome) %}
+        <div class="alert alert-success">{{welcome}}</div>
+        <p>Bienvenue, {{name}}</p>
+    {% endif %}
+
     <!-- Portfolio Section-->
     <section class="page-section portfolio" id="portfolio">
         <div class="container">
