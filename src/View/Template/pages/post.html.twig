@@ -4,14 +4,14 @@
 	<div id="post{{article.postId}}" class="post">
 		<h1>{{article.title | raw }}</h1>
     {% if (article.pub == 0) %}
-        <div class="frame-red">Non public</div>
+        <div class="alert alert-warning">Non public</div>
     {% endif %}
 		<div class="headline">
 			<span class="author">{{article.name }}</span>
 			<span class="date">{{article.date }}</span>
 			<strong class="category">[{{article.category | raw }}]</strong>
-			{%if ( editable == 1 ) %}
-			<a class="btsav" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
+			{%if ( editable == true ) %}
+			<a class="btn btn-success" href="/postEdit/{{postId}}" onclick="bh(this)">Editer</a>
 			{% endif %}
 		</div>
 		<div class="excerpt">{{article.excerpt | raw }}</div>
@@ -33,11 +33,11 @@
 		{% endfor %}
 
 		{%if ( comments | length == 0 ) %}
-		<div class="frame-white">Aucun commentaire pour le moment</div>
+		<div class="alert alert-primary">Aucun commentaire pour le moment</div>
 		{% endif %}
 
 		<div class="">
-			<a class="btsav" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
+			<a class="btn btn-success" onclick="bg(this)" data-bj="newComment|newComment|postId={{postId}}">
 			Poster un commentaire
 			</a>
 		</div>

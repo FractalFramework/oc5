@@ -88,7 +88,7 @@ class ArticleRepository
 
     public function getByCategory(int $catid = 1): array
     {
-        $sql = 'select posts.id,title,excerpt,content,category
+        $sql = 'select posts.id,title,excerpt,content,category,pub
         from posts
         left join cats
         on cats.id=catid
@@ -100,7 +100,7 @@ class ArticleRepository
     public function postSave(string $catid, string $title, string $excerpt, string $content): string
     {
         $blind = [
-            'uid' => $_SESSION['uid'],
+            'uid' => sesint('uid'),
             'catid' => $catid,
             'title' => $title,
             'excerpt' => $excerpt,

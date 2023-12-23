@@ -1,7 +1,7 @@
 #page {
     width: auto;
     max-width: 100%;
-    padding: 0px;
+    padding: 0;
     margin: auto;
     height: 100vh
 }
@@ -23,14 +23,14 @@
     background-color: #fffc;
     border-color: #9f9f9f;
     border-style: solid;
-    border-width: 0px
+    border-width: 0
 }
 
 .wrapper,
 .shutter {
-    padding: 0px;
+    padding: 0;
     color: #222;
-    border-width: 0px;
+    border-width: 0;
     border-color: grey;
     border-style: solid;
     height: 100vh;
@@ -50,7 +50,7 @@
 }
 
 .content {
-    margin: 0px;
+    margin: 0;
     padding: 16px;
     background-color: #fffa;
     border: 1px solid #7777;
@@ -59,7 +59,7 @@
 }
 
 nav {
-    padding: 0px;
+    padding: 0;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
@@ -71,11 +71,11 @@ nav {
 nav a {
     margin: 4px;
     color: #aaa;
-    padding: 0px 8px 4px;
+    padding: 0 8px 4px;
     font-size: larger;
     border-color: #d9d9d9;
     border-style: solid;
-    border-width: 0px;
+    border-width: 0;
     text-decoration: none;
     background-color: none;
     display: block !important;
@@ -116,7 +116,7 @@ nav a.admin:hover {
 }
 
 .menu {
-    padding: 0px;
+    padding: 0;
     margin: 6px 0
 }
 
@@ -159,16 +159,16 @@ nav a.admin:hover {
 .excerpt {
     font-family: Lucida Console;
     font-size: big;
-    padding: 4px 0px;
+    padding: 4px 0;
     color: red
 }
 
 .tracks {
-    padding: 0px
+    padding: 0
 }
 
 .track {
-    padding: 6px 0px;
+    padding: 6px 0;
     color: #444
 }
 
@@ -191,7 +191,7 @@ nav a.admin:hover {
 .pane {
     font-size: 14px;
     padding: 6px 16px;
-    margin: 0px;
+    margin: 0;
     background-color: #faebd747
 }
 
