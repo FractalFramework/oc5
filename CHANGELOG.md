@@ -124,4 +124,4 @@ Running a Sql query.
 - ehance nominations
 
 ## Issue 41 : Ui3
-- todo: ehance addmin
+- todo: ehance admin
