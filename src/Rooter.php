@@ -36,7 +36,7 @@ class Rooter
             'home' => $homeController->displayHome(1),
             'post' => $articleController->displayPost($id),
             'posts' => $articleController->displayPosts(),
-            'lasts' => $articleController->displayPosts(),
+            'articles' => $articleController->displayPosts(),
             'category' => $articleController->displayCategory($id),
             'categories' => $categoryController->displayCategories(),
             'user' => $userController->displayName($id),

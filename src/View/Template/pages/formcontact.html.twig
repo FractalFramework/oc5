@@ -23,6 +23,12 @@
             {% if error %}
                 <div class="alert alert-warning">{{error}}</div>
             {% endif %}
+            {% if success %}
+            <div class="alert alert-success">
+                <h3>Merci pour votre message</h3>
+                <a href="/home" class="btn btn-outline-primary" onclick="return bh(this)">Retour à l'accueil</a>
+            </div>
+            {% endif %}
 
             <div class="row justify-content-center">
                 <div class="col-lg-8 col-xl-7">

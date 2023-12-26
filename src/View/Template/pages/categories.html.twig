@@ -1,12 +1,8 @@
 <div class="menu">
-    <ul class="navbar-nav ms-auto">
+	    <a class="btn btn-primary" href="/articles" onclick="return bh(this)">
+            Tout</a>
     {% for result in results %}
-	<li class="nav-item mx-0 mx-lg-1">
-	    <a href="/category/{{result.id}}" onclick="return bh(this)">
 	    <a class="btn btn-primary" href="/category/{{result.id}}" onclick="return bh(this)">
-            {{result.category | raw }}
-        </a>
-	</li>
+            {{result.category | raw }}</a>
     {% endfor %}
-	</ul>
 </div>

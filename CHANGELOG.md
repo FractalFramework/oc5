@@ -113,3 +113,15 @@ Running a Sql query.
 - ajout des dates et auteurs dans le fil d'articles
 - ajout d'un contenu spcifique dans la home (présentation)
 - correctif erreur pub not int dans save caomment
+
+## Issue 40 : Ui2
+- real comments and datas
+- fix error 167 (session)
+- display date of article
+- catégories in articles
+- reload pages instead of message panel
+- fix display comment after submit
+- ehance nominations
+
+## Issue 41 : Ui3
+- todo: ehance addmin

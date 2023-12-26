@@ -67,10 +67,11 @@ class ContactController extends BaseController
 
         if ($error) {
             $this->renderHtml($datas, 'formcontact');
-            return;
+        } else {
+            $datas['contactId'] = $this->contactService->contactSave($name, $mail, $message);
+            $datas['success'] = true;
+            $this->renderHtml($datas, 'formcontact');
         }
-        $datas['contactId'] = $this->contactService->contactSave($name, $mail, $message);
-        $this->renderHtml($datas, 'publishedcontact');
     }
 
     public function contactPub(array $requests): void
