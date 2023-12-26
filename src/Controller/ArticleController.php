@@ -43,7 +43,7 @@ class ArticleController extends BaseController
         $datas['justPosted'] = 0;
 
         $isPublic = $datas['article']->pub ? true : false;
-        if ($isPublic == true || ($isPublic == false && sesint('uid')))
+        if ($isPublic == true || ($isPublic == false && sesint('uid') == $datas['article']->uid))
             $this->renderHtml($datas, 'post');
         else
             $this->renderHtml($datas, 'nopost');
@@ -51,7 +51,7 @@ class ArticleController extends BaseController
 
     public function displayPosts(): void
     {
-        $datas['results'] = $this->articleService->getPosts(20);
+        $datas['results'] = $this->articleService->getPosts(100);
         $datas['pageTitle'] = 'Articles';
         $datas['owner'] = sesint('uid');
         $this->renderHtml($datas, 'posts');

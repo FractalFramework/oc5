@@ -115,4 +115,13 @@ Running a Sql query.
 - correctif erreur pub not int dans save caomment
 
 ## Issue 40 : Ui2
-- reformulations admin
+- real comments and datas
+- fix error 167 (session)
+- display date of article
+- catégories in articles
+- reload pages instead of message panel
+- fix display comment after submit
+- ehance nominations
+
+## Issue 41 : Ui3
+- todo: ehance addmin

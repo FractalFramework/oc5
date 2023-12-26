@@ -91,7 +91,7 @@ class UserController extends BaseController
     {
         sesz('uid');
         sesz('usr');
-        $this->loginRoot();
+        $this->loginRoot(1);
     }
 
     public function logon(string $name, string $uid): void
@@ -141,9 +141,9 @@ class UserController extends BaseController
         $this->renderHtml([], 'register');
     }
 
-    public function displayLoginForm(): void
+    public function displayLoginForm(int $unloged = 0): void
     {
-        $this->renderHtml([], 'login');
+        $this->renderHtml(['unloged' => $unloged], 'login');
     }
 
     public function displayLogOut(): void
@@ -151,12 +151,12 @@ class UserController extends BaseController
         $this->renderHtml(['name' => sesvar('usr')], 'logout');
     }
 
-    public function loginRoot(): void
+    public function loginRoot(int $unloged = 0): void
     {
         if (sesint('uid')) {
             $this->displayLogOut();
         } else
-            $this->displayLoginForm();
+            $this->displayLoginForm($unloged);
     }
 
 }

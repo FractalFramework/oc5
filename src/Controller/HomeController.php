@@ -51,7 +51,6 @@ class HomeController extends BaseController
         }
         $array['presentation'] = $this->articleService->getPost(24);
         $array['jobs'] = $this->articleService->getPost(25);
-        $array['uid'] = sesint('uid');
         $array['welcome'] = $welcome;
         $array['name'] = sesvar('usr');
         $this->renderHtml($array, 'home');

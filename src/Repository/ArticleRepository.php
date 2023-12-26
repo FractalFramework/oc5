@@ -77,13 +77,21 @@ class ArticleRepository
 
     public function getAll(int $limit = 10): array
     {
+        if (sesint('uid') == 1) {
+            $public = 'or uid=:uid';
+            $blind = ['uid' => sesint('uid')];
+        } else {
+            $public = '';
+            $blind = [];
+        }
         $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
         from posts
         left join cats on cats.id=catid
         left join users on users.id=uid
+        where (pub = 1 ' . $public . ')
         order by posts.up desc
         limit ' . $limit;
-        return $this->fetchAllArticles($sql, []);
+        return $this->fetchAllArticles($sql, $blind);
     }
 
     public function getByCategory(int $catid = 1): array

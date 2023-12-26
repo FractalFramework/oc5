@@ -23,7 +23,9 @@ class BaseController
         $params['mtime'] = microtime(true);
         $params['page'] = $_GET['com'] ?? 'home';
         $params['ajaxMode'] = $this->ajaxMode;
-        $params['admin'] = sesint('uid') > 0 ? true : false;
+        $params['admin'] = sesint('uid') == 1 ? true : false;
+        $params['uid'] = sesint('uid');
+        $params['usr'] = sesvar('usr');
         $this->template = 'pages/' . $htmlPage . TemplateService::ARTICLE_VIEW;
         $this->twigService->twig->display($this->template, $params);
     }
