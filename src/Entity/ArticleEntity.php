@@ -12,6 +12,7 @@ class ArticleEntity
     public ?string $content;
     public string $category;
     public string $date;
+    public ?string $dateCreation;
     public int $pub;
     public string $name;
 

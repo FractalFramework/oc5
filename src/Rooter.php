@@ -59,6 +59,7 @@ class Rooter
             'contactSave' => $contactController->contactSave($gets),
             'admin' => $adminController->dashboard($gets),
             'adminArticles' => $adminController->reviewArticles(),
+            'adminMyArticles' => $adminController->reviewMyArticles(),
             'adminComments' => $adminController->reviewComments(),
             'adminContacts' => $adminController->reviewContacts(),
             'adminArticlePub' => $adminController->articlePub($gets),

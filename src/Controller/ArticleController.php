@@ -77,11 +77,14 @@ class ArticleController extends BaseController
     public function postSave(array $requests): void
     {
         $title = $requests['title'];
+        $category = $requests['category'];
         $excerpt = $requests['excerpt'];
         $content = $requests['content'];
+        $categories = $this->categoryService->getCategories();
 
         $error = match (true) {
             !$title => 'N\'oubliez pas le titre quand même',
+            !$category => 'Choisissez ou créez une catégorie',
             !$excerpt => 'Un résumé permet d\'y voir clair',
             !$content => 'Sans contenu, point de salut',
             default => ''
@@ -90,18 +93,31 @@ class ArticleController extends BaseController
         if ($error) {
             $this->renderHtml(
                 [
-                    'title' => $title,
-                    'excerpt' => $excerpt,
-                    'content' => $content,
+                    'article' => [
+                        'title' => $title,
+                        'category' => $category,
+                        'excerpt' => $excerpt,
+                        'content' => $content
+                    ],
+                    'categories' => $categories,
                     'error' => $error
                 ],
                 'formpost'
             );
             return;
         }
-        $postId = $this->articleService->postSave($requests['catid'], $title, $excerpt, $content);
-        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
-        //$this->displayPost($postId);
+        echo $category;
+        $catid = $this->categoryService->getCategoryId($category);
+        echo '-' . $catid . '-';
+        if (!$catid) {
+            $catid = $this->categoryService->CreateCategory($category);
+        }
+        echo $catid;
+        if ($catid) {
+            $postId = $this->articleService->postSave($catid, $title, $excerpt, $content);
+            //$this->renderHtml(['id' => $postId, 'title' => $title, 'categories' => $categories], 'post');
+            $this->displayPost($postId);
+        }
     }
 
     public function postEdit(int $postId): void
@@ -125,8 +141,10 @@ class ArticleController extends BaseController
     {
         $postId = $requests['postId'];
         $title = $requests['title'];
+        $category = $requests['category'];
         $excerpt = $requests['excerpt'];
         $content = $requests['content'];
+        $categories = $this->categoryService->getCategories();
 
         $error = match (true) {
             !$title => 'N\'oubliez pas le titre quand même',
@@ -141,15 +159,25 @@ class ArticleController extends BaseController
                     'modif' => true,
                     'article' => [
                         'title' => $title,
+                        'category' => $category,
                         'excerpt' => $excerpt,
                         'content' => $content
                     ],
+                    'categories' => $categories,
                     'error' => $error
                 ], 'formpost');
             return;
         }
-        $this->articleService->postUpdate((int) $postId, $requests['catid'], $title, $excerpt, $content);
-        $this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+
+        $catid = $this->categoryService->getCategoryId($category);
+        if (!$catid) {
+            $catid = $this->categoryService->CreateCategory($category);
+        }
+        if ($catid) {
+            $this->articleService->postUpdate((int) $postId, $catid, $title, $excerpt, $content);
+        }
+        //$this->renderHtml(['id' => $postId, 'title' => $title], 'publishedpost');
+        $this->displayPost($postId);
     }
 
 }

@@ -1,11 +1,12 @@
 {%  block table %}
+    <h3>Contacts</h3>
         <table class="table">
             <tr>
                 <th>Nom</td>
                 <th>Mail</td>
                 <th>Message</td>
-                <th>Publié</td>
-                <th>Vu</td>
+                <th>Action</td>
+                <th>Voir</td>
             </tr>
         {% for result in results %}
             <tr>
@@ -14,13 +15,13 @@
                 <td>{{result.msg | raw}}</td>
                 <td>
                 {% if (result.pub == 1) %}
-                <a class="btn btn-success" onclick="bj(this)" data-bj="admin|adminContactPub|publish=0,id={{result.id}}">Publié</a>
+                <a class="btn btn-warning" onclick="bj(this)" data-bj="admin|adminContactPub|publish=0,id={{result.id}}">Non lu</a>
                 {% else %}
-                <a class="btn btn-warning" onclick="bj(this)" data-bj="admin|adminContactPub|publish=1,id={{result.id}}">Dépublié</a>
+                <a class="btn btn-success" onclick="bj(this)" data-bj="admin|adminContactPub|publish=1,id={{result.id}}">Lu</a>
                 {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-link" href="/displayContact/{{result.id}}" onclick="return bh(this)">Voir</a>
+                    <a class="btn btn-primary" href="/displayContact/{{result.id}}" onclick="return bh(this)">Afficher</a>
                 </td>
             </tr>
         {% endfor %}

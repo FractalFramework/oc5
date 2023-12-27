@@ -35,6 +35,17 @@ class CategoryService
         return $this->categoryRepository->allCategories();
     }
 
+    public function getCategoryId(string $category): int
+    {
+        $categoryEntity = $this->categoryRepository->findIdFromCategoryName($category);
+        return $categoryEntity ? $categoryEntity->id : 0;
+    }
+
+    public function CreateCategory(string $category): int
+    {
+        return (int) $this->categoryRepository->CreateCategory($category);
+    }
+
     public function getCategoriesArray(): array
     {
         $result = $this->categoryRepository->allCategories();

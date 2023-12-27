@@ -44,7 +44,6 @@ class CommentService
     {
         $articleEntities = $this->commentRepository->getAll($number);
         return $this->commentMapper->forDashboard($articleEntities);
-        return $this->commentMapper->forDashboard($articleEntities);
     }
 
     public function getAllComments(int $limit): array

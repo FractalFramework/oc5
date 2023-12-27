@@ -75,7 +75,7 @@ class ArticleRepository
         return $this->fetchArticle($sql, [$id]);
     }
 
-    public function getAll(int $limit = 10): array
+    public function getAll(int $limit = 20): array
     {
         if (sesint('uid') == 1) {
             $public = 'or uid=:uid';
@@ -94,6 +94,29 @@ class ArticleRepository
         return $this->fetchAllArticles($sql, $blind);
     }
 
+    public function getAllAdmin(int $limit = 20): array
+    {
+        $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date,date_format(posts.up,"%d/%m/%Y") as dateCreation
+        from posts
+        left join cats on cats.id=catid
+        left join users on users.id=uid
+        order by posts.up desc
+        limit ' . $limit;
+        return $this->fetchAllArticles($sql, []);
+    }
+
+    public function getMyAll(int $limit = 20): array
+    {
+        $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date,date_format(posts.up,"%d/%m/%Y") as dateCreation
+        from posts
+        left join cats on cats.id=catid
+        left join users on users.id=uid
+        where uid=:uid
+        order by posts.up desc
+        limit ' . $limit;
+        return $this->fetchAllArticles($sql, ['uid' => sesint('uid')]);
+    }
+
     public function getByCategory(int $catid = 1): array
     {
         $sql = 'select posts.id,title,excerpt,content,category,pub
@@ -105,7 +128,7 @@ class ArticleRepository
         return $this->fetchAllArticles($sql, [$catid]);
     }
 
-    public function postSave(string $catid, string $title, string $excerpt, string $content): string
+    public function postSave(int $catid, string $title, string $excerpt, string $content): string
     {
         $blind = [
             'uid' => sesint('uid'),
@@ -119,7 +142,7 @@ class ArticleRepository
         return $this->insertArticle($sql, $blind);
     }
 
-    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
+    public function postUpdate(int $postId, int $catid, string $title, string $excerpt, string $content): bool
     {
         $blind = [
             'id' => $postId,
