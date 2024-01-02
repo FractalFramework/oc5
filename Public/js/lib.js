@@ -56,3 +56,14 @@ function execom2(d) {
     document.execCommand('formatBlock', false, '<' + d + '>');
     getbyid('content').value = 'no';
 }
+
+//active list
+function activeListElement(n) {
+    var mnu = getbyid('adminNav').getElementsByTagName('a');
+    for (i = 0; i < mnu.length; i++) {
+        if (i == n) mnu[i].className = 'nav-tabs nav-link disabled';
+        else mnu[i].className = 'nav-tabs nav-link';
+    }
+}
+
+

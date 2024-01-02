@@ -124,4 +124,11 @@ Running a Sql query.
 - ehance nominations
 
 ## Issue 41 : Ui3
-- todo: ehance addmin
+- ehance admin
+- revision system of categories (using datalist, create new categories)
+- use real names
+- fix errors
+- menu admin active visible
+- remove pages of confirmation in newPost, login and Contact
+- etc.
+

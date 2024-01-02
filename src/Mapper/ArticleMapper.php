@@ -59,6 +59,7 @@ class ArticleMapper
                 $articleModel->excerpt = $entity->excerpt;
                 $articleModel->name = $entity->name;
                 $articleModel->date = $entity->date;
+                $articleModel->date = $entity->dateCreation;
                 $articleModel->pub = $entity->pub;
                 return $articleModel;
             },
