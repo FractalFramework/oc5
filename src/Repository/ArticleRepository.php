@@ -84,13 +84,6 @@ class ArticleRepository
             $public = '';
             $blind = [];
         }
-        if (sesint('uid') == 1) {
-            $public = 'or uid=:uid';
-            $blind = ['uid' => sesint('uid')];
-        } else {
-            $public = '';
-            $blind = [];
-        }
         $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date
         from posts
         left join cats on cats.id=catid
@@ -107,34 +100,9 @@ class ArticleRepository
         from posts
         left join cats on cats.id=catid
         left join users on users.id=uid
-        where (pub = 1 ' . $public . ')
         order by posts.up desc
         limit ' . $limit;
-        return $this->fetchAllArticles($sql, $blind);
-    }
-
-    public function getAllAdmin(int $limit = 20): array
-    {
-        $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date,date_format(posts.up,"%d/%m/%Y") as dateCreation
-        from posts
-        left join cats on cats.id=catid
-        left join users on users.id=uid
-        where (pub = 1 ' . $public . ')
-        order by posts.up desc
-        limit ' . $limit;
-        return $this->fetchAllArticles($sql, $blind);
-    }
-
-    public function getMyAll(int $limit = 20): array
-    {
-        $sql = 'select posts.id,uid,name,title,excerpt,category,pub,date_format(posts.lastup,"%d/%m/%Y") as date,date_format(posts.up,"%d/%m/%Y") as dateCreation
-        from posts
-        left join cats on cats.id=catid
-        left join users on users.id=uid
-        where uid=:uid
-        order by posts.up desc
-        limit ' . $limit;
-        return $this->fetchAllArticles($sql, ['uid' => sesint('uid')]);
+        return $this->fetchAllArticles($sql, []);
     }
 
     public function getMyAll(int $limit = 20): array
