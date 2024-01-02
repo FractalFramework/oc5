@@ -1,0 +1,18 @@
+{% extends ajaxMode == 'false' ? 'base.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <div class="pane">
+    <br />
+        <h4>Complétez le formulaire avec les champs suivants :</h4>
+        <div class="">
+            <label for="mail">E-mail</label>
+            <input class="form-control" type="mail" id="mail" name="mail" placeholder="E-mail" required>
+        </div>
+        <div class="">
+            <label for="pswd2">Confirmer mot de passe</label>
+            <input class="form-control" type="password" id="psw2" placeholder="Confirmer mot de passe" required>
+        </div>
+        <a class="btn btn-success" onclick="bj(this)" data-bj="main|registerUser||name,mail,pswd,psw2">
+            S'inscrire</a>
+        <div id="callbackRegister"></div>
+    </div>
+{% endblock %}

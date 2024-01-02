@@ -1,0 +1,29 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}
+
+	<a class="btn btn-primary" onclick="return bg(this)" data-bj="categories_menu|categories" class="ajaxCall">Catégories</a>
+	<div id="categories_menu"></div>
+
+	<div class="posts">
+		<h1>{{category}}</h1>
+		{% block body %}
+			{% for result in results %}
+
+			<div class="pane-article" id="post{{result.id}}">
+				{%if ( result.pub != 1 and result.uid == owner) %}
+				<div class="alert alert-primary bs-warning-rgb">Non public</div>
+				{% endif %}
+				<h2 class="title">{{result.title | raw }}</h2>
+				<span class="author">Auteur : {{result.name }}</span>
+				<span class="date">Date de dernière modification : {{result.date }}</span>
+				<strong class="category">Paru dans la catégorie : {{result.category | raw }}</strong>
+				<div class="excerpt">{{result.excerpt | raw }}</div>
+				<p><a class="btn btn-link" href="/post/{{result.id}}" onclick="return bh(this)">Lire l'article</a></p>
+			</div>
+
+			{% endfor %}
+		{% endblock body %}
+	</div>
+{% endblock posts %}
+{% block post %}{% endblock %}
+{% block comments %}{% endblock %}

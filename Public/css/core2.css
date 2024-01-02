@@ -1,0 +1,203 @@
+a {
+    cursor: pointer;
+}
+
+input,
+textarea,
+select {
+    transition: all 0.3s ease;
+    font-size: small;
+    padding: 3px 5px;
+    background-color: #eee;
+    border: 1px solid #bbb;
+    margin: 10px;
+    margin: 10px;
+}
+
+input:hover,
+input:focus,
+textarea:hover,
+textarea:focus,
+select:hover,
+select:focus {
+    border: 1px solid #777;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+    outline: none;
+}
+
+div:focus-visible {
+    outline: 0 dashed darkorange;
+    outline: 0 dashed darkorange;
+}
+
+.content {
+    margin: 0;
+    margin: 0;
+    padding: 16px;
+    font-family: "Montserrat";
+    background-color: #fffa;
+    border: 0 solid #7777;
+    font-family: "Georgia";
+    font-size: 22px;
+}
+
+.title {
+    font-family: "Lato";
+    font-size: xx-large;
+    padding: 4px 0;
+    color: rgb(226, 43, 165);
+}
+
+.excerpt {
+    font-family: "Montserrat";
+    font-size: 18px;
+    padding: 4px 0;
+    color: rgb(0, 0, 0);
+}
+
+.pane-article {
+    font-size: 14px;
+    padding: 6px 16px;
+    margin: 20px 0;
+    background-color: #faebd700;
+    border-bottom: 0px solid #444;
+    border-radius: 10px;
+}
+
+.article {
+    font-family: "Montserrat";
+    font-size: 16px;
+    padding: 6px 16px;
+    margin: 20px 0;
+}
+
+.tracks {
+    padding: 0;
+}
+
+.track {
+    padding: 6px 0;
+    color: #444;
+}
+
+.track-content {
+    padding: 6px 16px;
+    color: #444;
+    background-color: #9f9f9f2e;
+}
+
+.tracks-title {
+    padding: 10px 0 0;
+}
+
+.main {
+    padding: 20px;
+}
+
+.area textarea {
+    font-family: "Lucida Console";
+    width: calc(100% - 12px);
+    font-size: 16px;
+    word-wrap: break-word;
+}
+
+.area input {
+    width: calc(100% - 12px)
+}
+
+.editarea {
+    font-family: "Montserrat";
+    word-wrap: break-word;
+    padding: 16px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: anywhere;
+    height: 201px;
+    scrollbar-width: thin;
+}
+
+.author {
+    font-weight: bold;
+    padding: 2px;
+}
+
+.date {
+    color: gray;
+    padding: 2px;
+}
+
+.category {
+    border: 0 solid silver;
+    padding: 2px 4px;
+}
+
+.menu {
+    padding: 0;
+    margin: 6px 0
+}
+
+.menu a {
+    color: #333;
+    margin: 2px 1px;
+    padding: 2px 4px;
+    font-size: small;
+    border-color: #d9d9d9;
+    border-style: solid;
+    border-width: 1px;
+    text-decoration: none;
+    background-color: white;
+    line-height: 22px;
+    user-select: none;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #111;
+    border-color: #797979
+}
+
+.frame-white,
+.frame-blue,
+.frame-red,
+.frame-green {
+    font-size: big;
+    padding: 4px 8px;
+    margin: 4px 0 9px 0;
+    background-color: #ffffff5e;
+    border-color: #6c6c6ca1;
+    border-style: solid;
+    border-width: 1px
+}
+
+.frame-white {
+    background-color: #ffffff5e;
+    border-color: #6c6c6ca1
+}
+
+.frame-blue {
+    background-color: #0064ff4a;
+    border-color: #0064ff
+}
+
+.frame-red {
+    background-color: #dc143c4a;
+    border-color: #dc143c
+}
+
+.frame-green {
+    background-color: #9acd3273;
+    border-color: #608e00
+}
+
+.bigbt {
+    display: inline-block;
+    border: 1px solid #ffffffe5;
+    padding: 2px 8px;
+    margin: 0;
+    border-radius: 16px;
+    background: #dddddd75
+}

@@ -1,0 +1,11 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Inscription</h2>
+        <div class="alert alert-success">
+            {{welcome}}
+        </div>
+        <p>Bienvenue, {{name}}</p>
+    
+    <a class="btn btn-success" onclick="bj(this)" data-bj="main|home">
+            Retour à la Home</a>
+{% endblock %}

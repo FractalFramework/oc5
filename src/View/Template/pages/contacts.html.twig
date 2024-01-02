@@ -1,0 +1,28 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}
+	<div class="posts">
+		<h1>Contacts</h1>
+		{% block body %}
+			{% for result in results %}
+				<div class="contact" id="contact{{result.id}}">
+				<a href="/displayContact/{{result.id}}" onclick="return bh(this)">
+					<h2>{{ result.name | raw }}</h2>
+				</a>
+				<span class="date">#{{ result.id }}</span>
+				<span class="date">{{ result.date }}</span>
+				<span class="date">{{ result.mail }}</span>
+				<span id="publish{{ result.id }}">
+					{% if (result.pub == 1) %}
+					<a class="btn btn-success" onclick="bj(this)" data-bj="publish{{ result.id }}|contactPub|publish=0,id={{result.id}}">Publié</a>
+					{% else %}
+					<a class="btn btn-warning" onclick="bj(this)" data-bj="publish{{ result.id }}|contactPub|publish=1,id={{result.id}}">Dépublié</a>
+					{% endif %}
+				</span>
+				<div class="track-content">{{ result.msg | raw }}</div>
+				</div>
+			{% endfor %}
+		{% endblock body %}
+	</div>
+{% endblock posts %}
+{% block post %}{% endblock %}
+{% block comments %}{% endblock %}

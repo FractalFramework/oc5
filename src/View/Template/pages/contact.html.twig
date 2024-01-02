@@ -1,0 +1,19 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}
+	<div class="posts">
+		<h1>Contacts</h1>
+		{% block body %}
+			<div class="contact" id="contact{{result.id}}">
+			<a href="/displayContact/{{result.id}}" onclick="return bh(this)">
+				<h2>{{ result.name | raw }}</h2>
+			</a>
+			<span class="date">#{{ result.id }}</span>
+			<span class="date">{{ result.date }}</span>
+			<span class="date">{{ result.mail }}</span>
+			<div class="track-content">{{ result.msg | raw }}</div>
+			</div>
+		{% endblock body %}
+	</div>
+{% endblock posts %}
+{% block post %}{% endblock %}
+{% block comments %}{% endblock %}

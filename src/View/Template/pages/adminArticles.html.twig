@@ -1,0 +1,35 @@
+{%  block table %}
+    <h3>{{pageTitle}}</h3>
+        <table class="table">
+            <tr>
+                <th>id</td>
+                <th>titre</td>
+                <th>auteur</td>
+                <th>Résumé</td>
+                <th>Date création</td>
+                <th>Dernière modification</td>
+                <th>Action</td>
+                <th>Voir</td>
+            </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{result.id}}</td>
+                <td>{{result.name}}</td>
+                <td>{{result.title | raw}}</td>
+                <td>{{result.excerpt}}</td>
+                <td>{{result.date}}</td>
+                <td>{{result.date}}</td>
+                <td>
+                {% if (result.pub == 1) %}
+                <a class="btn btn-success" onclick="bj(this)" data-bj="admin|adminArticlePub|publish=0,id={{result.id}}">Publié</a>
+                {% else %}
+                <a class="btn btn-warning" onclick="bj(this)" data-bj="admin|adminArticlePub|publish=1,id={{result.id}}">Dépublié</a>
+                {% endif %}
+                </td>
+                <td>
+                <a class="btn btn-primary" href="/post/{{result.id}}" onclick="return bh(this)">Afficher</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+{%  endblock table %}
