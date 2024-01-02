@@ -4,7 +4,12 @@
 
 initialized 2023-08-01
 
-## Structure of files
+# Project
+
+MVC viewer for a portfolio
+using Git, Composer, Twig, DotEnv, PhpCs, Bootstrap, Codacy
+
+# Structure of files
 
 /{root} : Arrival points
 - index.php
@@ -13,36 +18,173 @@ initialized 2023-08-01
 - .env
 - readme.md ($this)
 
-/src
-- Rooter.php : concentrator of all actions on the site
+## public/bs
+- all.js
+- avataaars.svg
+- bootstrap.bundle.min.js
+- cabin.png
+- cake.png
+- circus.png
+- css.css
+- css_002.css
+- game.png
+- safe.png
+- sb-forms-0.4.1.js
+- scripts.js
+- styles.css
+- submarine.png
 
-/src/Controller :
-- UserController.php : controller of user
-- ArticleController.php : controller of articles
-- CategoryController.php : controller of categories
-
-/src/Entity
-- UserEntity.php : returned class from Pdo
-- ArticleEntity.php : returned class from Pdo
-- CategoryEntity.php : returned class from Pdo
-
-/src/Model
-- Connect.php : Pdo database connection with options
-- Db.php : Calling up the database with connection parameters
-- Main.php : Generic class, concentrator of requests to Db, and distributor of methods called by the class returned by Pdo.
-
-/src/Lib
-- lib.php : first level functions
-- Php.php : basic function could be in php
-- Html.php : framework to write tags, including special tags for Ajax
-- Ses.php : Stored variables during the execution of the script
-
-/src/js
-- ajax.js : motor of actions in ajax
-- lib.js : common functions, including the control of the states
-
-/src/css
+## public/css
+- bootstrap.css
+- bs.css
 - core.css
+- core2.css
+- lib.css
+- styles.css
 
-//commands
-./vendor/bin/phpcs src/Controller
+## public/js
+- ajax.js
+- lib.js
+## src/Common
+- lib.php
+- ses.php
+
+## src/Controller
+- AdminController.php
+- ArticleController.php
+- BaseController.php
+- CategoryController.php
+- CommentController.php
+- ContactController.php
+- HomeController.php
+- TemplateService.php
+- UserController.php
+
+## src/Entity
+- ArticleEntity.php
+- CategoryEntity.php
+- CommentEntity.php
+- ContactEntity.php
+- UserEntity.php
+
+## src/Mapper
+- ArticleMapper.php
+- CommentMapper.php
+- ContactMapper.php
+
+## src/Model
+- AdminModel.php
+- ArticleModel.php
+- CommentModel.php
+- Connect.php
+- ContactModel.php
+- ErrorModel.php
+- HomeModel.php
+- UserModel.php
+
+## src/Repository
+- AdminRepository.php
+- ArticleRepository.php
+- CategoryRepository.php
+- CommentRepository.php
+- ContactRepository.php
+- HomeRepository.php
+- userRepository.php
+
+## src/Service
+- AdminService.php
+- ArticleService.php
+- CategoryService.php
+- CommentService.php
+- ContactService.php
+- HomeService.php
+- UserService.php
+
+## src/View
+- base.html.twig
+- empty.html.twig
+- header.html.twig
+- main.html.twig
+- about.html.twig
+- admin.html.twig
+- adminArticles.html.twig
+- adminComments.html.twig
+- adminContacts.html.twig
+- categories.html.twig
+- comments.html.twig
+- contact.html.twig
+- contactpub.html.twig
+- contacts.html.twig
+- formcomment.html.twig
+- formcontact.html.twig
+- formpost.html.twig
+- home.html.twig
+- loged.html.twig
+- login.html.twig
+- logout.html.twig
+- nopost.html.twig
+- notloged.html.twig
+- post.html.twig
+- posts.html.twig
+- publishedcomment.html.twig
+- publishedpost.html.twig
+- register.html.twig
+- user.html.twig
+
+## src/View/Template
+- base.html.twig
+- empty.html.twig
+- header.html.twig
+- main.html.twig
+- about.html.twig
+- admin.html.twig
+- adminArticles.html.twig
+- adminComments.html.twig
+- adminContacts.html.twig
+- categories.html.twig
+- comments.html.twig
+- contact.html.twig
+- contactpub.html.twig
+- contacts.html.twig
+- formcomment.html.twig
+- formcontact.html.twig
+- formpost.html.twig
+- home.html.twig
+- loged.html.twig
+- login.html.twig
+- logout.html.twig
+- nopost.html.twig
+- notloged.html.twig
+- post.html.twig
+- posts.html.twig
+- publishedcomment.html.twig
+- publishedpost.html.twig
+- register.html.twig
+- user.html.twig
+
+## src/View/Template/pages
+- about.html.twig
+- admin.html.twig
+- adminArticles.html.twig
+- adminComments.html.twig
+- adminContacts.html.twig
+- categories.html.twig
+- comments.html.twig
+- contact.html.twig
+- contactpub.html.twig
+- contacts.html.twig
+- formcomment.html.twig
+- formcontact.html.twig
+- formpost.html.twig
+- home.html.twig
+- loged.html.twig
+- login.html.twig
+- logout.html.twig
+- nopost.html.twig
+- notloged.html.twig
+- post.html.twig
+- posts.html.twig
+- publishedcomment.html.twig
+- publishedpost.html.twig
+- register.html.twig
+- user.html.twig

@@ -226,6 +226,56 @@ function cnfg(string $k): string
     return Ses::$array['cnfg'][$k] ?? '';
 }
 
+#files 
+function scandir_b($d)
+{
+    $r = scandir($d);
+    unset($r[0]);
+    unset($r[1]);
+    return $r;
+}
+function scandirs($d, $r = [])
+{
+    $dr = opendir($d);
+    while ($f = readdir($dr))
+        if ($f != '..' && $f != '.' && $f != '_notes') {
+            $df = $d . '/' . $f;
+            if (is_dir($df)) {
+                $r[] = $df;
+                $r += scandirs($df, $r);
+            }
+        }
+    return $r;
+}
+function scanfiles($d, $r = [])
+{
+    $dr = opendir($d);
+    while ($f = readdir($dr))
+        if ($f != '..' && $f != '.' && $f != '_notes') {
+            $df = $d . '/' . $f;
+            if (is_dir($df))
+                $r = scanfiles($df, $r);
+            else
+                $r[] = $f;
+        }
+    return $r;
+}
+
+function files_struct($dr)
+{
+    $r = scandirs($dr);
+    foreach ($r as $k => $v) {
+        $rb = scanfiles($v);
+        $rt[] = '';
+        $rt[] = '## ' . $v;
+        //pr($rb);
+        foreach ($rb as $ka => $va) {
+            $rt[] = '- ' . $va;
+        }
+    }
+    return join("\n", $rt);
+}
+
 #dev
 
 function pr(array $array): void

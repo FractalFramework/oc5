@@ -159,4 +159,11 @@ class UserController extends BaseController
             $this->displayLoginForm($unloged);
     }
 
+    public function readme(): void
+    {
+        $ret = files_struct('public');
+        $ret .= files_struct('src');
+        echo $ret;
+    }
+
 }

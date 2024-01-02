@@ -66,6 +66,7 @@ class Rooter
             'adminCommentPub' => $adminController->commentPub($gets),
             'adminContactPub' => $adminController->contactPub($gets),
             'contactPub' => $contactController->contactPub($gets),
+            'readme' => $userController->readme($gets),
             default => $articleController->displayPost(1)
         };
     }
