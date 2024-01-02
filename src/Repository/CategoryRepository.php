@@ -10,7 +10,6 @@ use PDO;
 
 class CategoryRepository
 {
-    protected static string $table = 'cats';
     private static $instance;
     private Connect $connect;
 
@@ -29,7 +28,7 @@ class CategoryRepository
 
     # fetches
 
-    private function fetchCategory(string $sql, array $blind): CategoryEntity
+    private function fetchCategory(string $sql, array $blind): CategoryEntity|bool
     {
         $pdo = $this->connect->pdo;
         $stmt = $pdo->prepare($sql);
@@ -47,18 +46,39 @@ class CategoryRepository
         return $stmt->fetchAll();
     }
 
+    private function insertCategory(string $sql, array $blind): string|bool
+    {
+        $pdo = $this->connect->pdo;
+        $stmt = $pdo->prepare($sql);
+        $stmt->setFetchMode(PDO::FETCH_CLASS, CategoryEntity::class, null);
+        $stmt->execute($blind);
+        return $pdo->lastInsertId();
+    }
+
     # sql 
 
     public function allCategories(): array
     {
-        $sql = 'select id,category from ' . self::$table . '';
+        $sql = 'select id,category from cats';
         return $this->fetchAllCategories($sql, []);
     }
 
     public function findCategoryFromId(int $id): CategoryEntity
     {
-        $sql = 'select category from ' . self::$table . ' where id=?';
+        $sql = 'select category from cats where id=?';
         return $this->fetchCategory($sql, [$id]);
+    }
+
+    public function findIdFromCategoryName(string $category): CategoryEntity|bool
+    {
+        $sql = 'select id from cats where category=?';
+        return $this->fetchCategory($sql, [$category]);
+    }
+
+    public function CreateCategory(string $category): string
+    {
+        $sql = 'insert into cats values (null, :category, now())';
+        return $this->insertCategory($sql, ['category' => $category]);
     }
 
 }

@@ -14,6 +14,7 @@ class AdminController extends BaseController
     private ArticleService $articleService;
     private CommentService $commentService;
     private ContactService $contactService;
+    private static int $numberElements = 40;
 
     private function __construct(string $ajaxMode)
     {
@@ -37,10 +38,10 @@ class AdminController extends BaseController
         if (!$tab)
             $tab = 'articles';
         $array['result'] = match ($tab) {
-            'articles' => $this->articleService->getDashboardPosts(20),
-            'comments' => $this->commentService->getDashboardComments(40),
-            'contacts' => $this->contactService->getDashboardContacts(40),
-            default => $this->articleService->getDashboardPosts(20),
+            'articles' => $this->articleService->getDashboardPosts(self::$numberElements),
+            'comments' => $this->commentService->getDashboardComments(self::$numberElements),
+            'contacts' => $this->contactService->getDashboardContacts(self::$numberElements),
+            default => $this->articleService->getDashboardPosts(self::$numberElements),
         };
         $array['tab'] = $tab;
         $this->renderHtml($array, 'admin');
@@ -48,19 +49,27 @@ class AdminController extends BaseController
 
     public function reviewArticles(): void
     {
-        $array['results'] = $this->articleService->getDashboardPosts(20);
+        $array['results'] = $this->articleService->getDashboardPosts(self::$numberElements);
+        $array['pageTitle'] = 'Tous les articles';
+        $this->renderHtml($array, 'adminArticles');
+    }
+
+    public function reviewMyArticles(): void
+    {
+        $array['results'] = $this->articleService->getDashboardMyPosts(self::$numberElements);
+        $array['pageTitle'] = 'Mes articles';
         $this->renderHtml($array, 'adminArticles');
     }
 
     public function reviewComments(): void
     {
-        $array['results'] = $this->commentService->getDashboardComments(40);
+        $array['results'] = $this->commentService->getDashboardComments(self::$numberElements);
         $this->renderHtml($array, 'adminComments');
     }
 
     public function reviewContacts(): void
     {
-        $array['results'] = $this->contactService->getDashboardContacts(40);
+        $array['results'] = $this->contactService->getDashboardContacts(self::$numberElements);
         $this->renderHtml($array, 'adminContacts');
     }
 

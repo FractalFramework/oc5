@@ -1,4 +1,5 @@
 {%  block table %}
+    <h3>Commentaires</h3>
         <table class="table">
             <tr>
                 <th>id</td>
@@ -8,7 +9,7 @@
                 <th>Mail</td>
                 <th>Commentaire</td>
                 <th>Date</td>
-                <th>Publié</td>
+                <th>Action</td>
                 <th>Voir</td>
             </tr>
         {% for result in results %}
@@ -28,7 +29,7 @@
                 {% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-link" href="/post/{{result.bid}}" onclick="return bh(this)">Voir</a>
+                <a class="btn btn-primary" href="/post/{{result.bid}}" onclick="return bh(this)">afficher</a>
                 </td>
             </tr>
         {% endfor %}

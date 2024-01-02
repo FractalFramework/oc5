@@ -13,27 +13,31 @@
 
 			{%if ( modif == true ) %}
             <a class="btn btn-warning" onclick="bj(this)" 
-                data-bj="main|postUpdate|postId={{postId}}|catid,title,excerpt,content">
+                data-bj="main|postUpdate|postId={{postId}}|category,title,excerpt,content">
                 Modifier</a>
                 <a class="btn btn-outline-warning" href="/post/{{postId}}" onclick="bh(this)">Annuler</a>
 			{% else %}
             <a class="btn btn-success" onclick="bj(this)" 
-                data-bj="main|postSave||catid,title,excerpt,content">
+                data-bj="main|postSave||category,title,excerpt,content">
                 Enregistrer</a>
 			{% endif %}
         <div class="alert alert-primary">
             <div class="area">
-                <select id="catid">
+                <label for="category">Catégorie
+                <input class="form-control" type="text" id="category" name="categories" list="categories" value="{{article.category}}">
+                <datalist id="categories">
 			    {% for category in categories %}
-                    <option value="{{category.id}}">{{category.category | raw }}</option>
+                    <option value="{{category.category}}">{{category.category | raw }}</option>
 			    {% endfor %}
-                </select>
-                <label for="catid">Catégorie</label>
+                </datalist>
+                </label>
             </div>
             <div class="area">
-                <input type="text" id="title" placeholder="Titre" value="{{article.title | raw }}">
+                <label for="title">Titre</label>
+                <input class="form-control" type="text" id="title" placeholder="Titre" value="{{article.title | raw }}"">
             </div>
             <div class="area">
+                <label for="excerpt">Résumé</label>
                 <textarea class="form-control" id="excerpt" placeholder="Résumé">{{article.excerpt | raw }}</textarea>
             </div>
 
@@ -45,8 +49,6 @@
                 <option value="h3">h3</option>
                 <option value="h4">h4</option>
             </select>
-                <a onclick="execom('increaseFontSize')">+</a>
-                <a onclick="execom('decreaseFontSize')">-</a>
                 <a onclick="execom('bold')">b</a>
                 <a onclick="execom('italic')">i</a>
                 <a onclick="execom('underline')">u</a>
@@ -57,7 +59,8 @@
                 <a onclick="execom('createLink')">url</a>
             </div>
 
-            <div id="content" class="editarea" contenteditable>{{article.content | raw }}</div>
+            <label for="content">Contenu</label>
+            <div class="editarea form-control" id="content" placeholder="Contenu" contenteditable>{{article.content | raw }}</div>
 
             <div id="postTest"></div>
         </div>

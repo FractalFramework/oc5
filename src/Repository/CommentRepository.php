@@ -93,7 +93,6 @@ class CommentRepository
         left join posts on tracks.id=posts.uid
         left join profile on tracks.uid=profile.uid
         left join users on tracks.uid=users.id
-        group by tracks.id 
         order by date desc
         limit ' . $limit;
         return $this->fetchAllComments($sql, []);

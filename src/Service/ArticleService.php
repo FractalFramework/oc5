@@ -41,7 +41,13 @@ class ArticleService
 
     public function getDashboardPosts(int $number): array
     {
-        $articleEntities = $this->articleRepository->getAll($number);
+        $articleEntities = $this->articleRepository->getAllAdmin($number);
+        return $this->articleMapper->forDashboard($articleEntities);
+    }
+
+    public function getDashboardMyPosts(int $number): array
+    {
+        $articleEntities = $this->articleRepository->getMyAll($number);
         return $this->articleMapper->forDashboard($articleEntities);
     }
 
@@ -50,12 +56,12 @@ class ArticleService
         return $this->articleRepository->getByCategory($id);
     }
 
-    public function postSave(string $catid, string $title, string $excerpt, string $content): string
+    public function postSave(int $catid, string $title, string $excerpt, string $content): string
     {
         return $this->articleRepository->postSave($catid, $title, $excerpt, $content);
     }
 
-    public function postUpdate(int $postId, string $catid, string $title, string $excerpt, string $content): bool
+    public function postUpdate(int $postId, int $catid, string $title, string $excerpt, string $content): bool
     {
         return $this->articleRepository->postUpdate($postId, $catid, $title, $excerpt, $content);
     }
