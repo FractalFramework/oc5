@@ -1,0 +1,278 @@
+#page {
+    width: auto;
+    max-width: 100%;
+    padding: 0;
+    margin: auto;
+    height: 100vh
+}
+
+.banner {
+    padding: 10px 8px;
+    width: auto;
+    background-position: contain;
+    background-image: linear-gradient(#0000, #000)
+}
+
+.banner a {
+    color: #ddd
+}
+
+.main {
+    padding: 8px 16px;
+    color: #444;
+    background-color: #fffc;
+    border-color: #9f9f9f;
+    border-style: solid;
+    border-width: 0
+}
+
+.wrapper,
+.shutter {
+    padding: 0;
+    color: #222;
+    border-width: 0;
+    border-color: grey;
+    border-style: solid;
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    scrollbar-width: thin
+}
+
+.wrapper a,
+.shutter a {
+    text-decoration: none
+}
+
+.shutter {
+    max-width: 280px
+}
+
+.content {
+    margin: 0;
+    padding: 16px;
+    background-color: #fffa;
+    border: 1px solid #7777;
+    font-family: Georgia;
+    font-size: 22px
+}
+
+nav {
+    padding: 0;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    scrollbar-width: thin;
+    background-color: #00000080
+}
+
+nav a {
+    margin: 4px;
+    color: #aaa;
+    padding: 0 8px 4px;
+    font-size: larger;
+    border-color: #d9d9d9;
+    border-style: solid;
+    border-width: 0;
+    text-decoration: none;
+    background-color: none;
+    display: block !important;
+    flex: inherit;
+    transition: all 0.3s ease
+}
+
+nav a:hover,
+nav a.active {
+    color: #fff;
+    background-color: #0000004a
+}
+
+nav .line {
+    padding: 4px 8px;
+    margin: 8px 8px;
+    border-bottom: 1px double #8a8a8a
+}
+
+nav .ico {
+    font-size: 22px
+}
+
+nav a.home:hover {
+    border-color: #c40000
+}
+
+nav a.cats:hover {
+    border-color: #bdb42c
+}
+
+nav a.contact:hover {
+    border-color: #4cbd2c
+}
+
+nav a.admin:hover {
+    border-color: #0d83ec
+}
+
+.menu {
+    padding: 0;
+    margin: 6px 0
+}
+
+.menu a {
+    color: #333;
+    margin: 2px 1px;
+    padding: 2px 4px;
+    font-size: small;
+    border-color: #d9d9d9;
+    border-style: solid;
+    border-width: 1px;
+    text-decoration: none;
+    background-color: white;
+    line-height: 22px;
+    user-select: none;
+}
+
+.menu a:hover,
+.menu a.active {
+    color: #111;
+    border-color: #797979
+}
+
+.blog-title {
+    font-weight: bold;
+    padding: 0 6px
+}
+
+.blog-subtitle {
+    padding: 2px 6px
+}
+
+.title {}
+
+.title-small {
+    margin: 6px 0;
+    text-transform: capitalize
+}
+
+.excerpt {
+    font-family: Lucida Console;
+    font-size: big;
+    padding: 4px 0;
+    color: red
+}
+
+.tracks {
+    padding: 0
+}
+
+.track {
+    padding: 6px 0;
+    color: #444
+}
+
+.track-content {
+    padding: 6px 16px;
+    color: #444;
+    background-color: #9f9f9f2e
+}
+
+.tracks-title {
+    padding: 10px 0 0
+}
+
+.let-track {
+    padding: 16px 0
+}
+
+.let-track a {}
+
+.pane {
+    font-size: 14px;
+    padding: 6px 16px;
+    margin: 0;
+    background-color: #faebd747
+}
+
+.pane a {
+    color: white
+}
+
+.pane a:hover {
+    color: silver
+}
+
+.area textarea {
+    font-family: Lucida Console;
+    width: calc(100% - 12px);
+    font-size: 16px;
+    word-wrap: break-word
+}
+
+.area input {
+    width: calc(100% - 12px)
+}
+
+.editarea {
+    font-family: Lucida Console;
+    word-wrap: break-word;
+    padding: 16px;
+    background-color: #ddd;
+    min-height: 20px;
+    border: 1px dotted #77777777
+}
+
+.author {
+    font-weight: bold;
+    padding: 2px
+}
+
+.date {
+    color: gray;
+    padding: 2px
+}
+
+.category {
+    border: 1px solid silver;
+    padding: 2px 4px
+}
+
+.grid {
+    grid-template-columns: 280px auto auto;
+    grid-template-rows: 60px auto auto
+}
+
+@media only screen and (max-width: 720px) {
+    .grid {
+        grid-template-columns: 50px auto auto;
+        grid-template-rows: 60px auto 42px
+    }
+
+    .grid-head {
+        grid-column: 2
+    }
+
+    .grid-nav {
+        grid-column: 1;
+        grid-row: 2
+    }
+
+    .grid-main {
+        grid-row: 2
+    }
+
+    .grid-aside {
+        grid-column: 3;
+        grid-row: 1 / 2
+    }
+
+    .grid-foot {
+        grid-column: 2;
+        grid-row: 3
+    }
+
+    .wrapper {
+        height: calc(100vh - 88px)
+    }
+}

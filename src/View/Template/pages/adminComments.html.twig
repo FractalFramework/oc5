@@ -1,0 +1,37 @@
+{%  block table %}
+    <h3>Commentaires</h3>
+        <table class="table">
+            <tr>
+                <th>id</td>
+                <th>postId</td>
+                <th>Article</td>
+                <th>De</td>
+                <th>Mail</td>
+                <th>Commentaire</td>
+                <th>Date</td>
+                <th>Action</td>
+                <th>Voir</td>
+            </tr>
+        {% for result in results %}
+            <tr>
+                <td>{{result.id}}</td>
+                <td>{{result.bid}}</td>
+                <td>{{result.title | raw}}</td>
+                <td>{{result.name}}</td>
+                <td>{{result.mail}}</td>
+                <td>{{result.txt}}</td>
+                <td>{{result.date}}</td>
+                <td>
+                {% if (result.pub == 1) %}
+                <a class="btn btn-success" onclick="bj(this)" data-bj="admin|adminCommentPub|publish=0,id={{result.id}}">Publié</a>
+                {% else %}
+                <a class="btn btn-warning" onclick="bj(this)" data-bj="admin|adminCommentPub|publish=1,id={{result.id}}">Dépublié</a>
+                {% endif %}
+                </td>
+                <td>
+                <a class="btn btn-primary" href="/post/{{result.bid}}" onclick="return bh(this)">afficher</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </table>
+{%  endblock table %}

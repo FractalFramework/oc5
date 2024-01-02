@@ -1,0 +1,31 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Connexion</h2>
+    
+    {% if error %}
+        <div class="alert alert-warning">{{error}}</div>
+        <div class="alert alert-warning">{{error}}</div>
+    {% endif %}
+    {% if unloged == 1 %}
+         <meta http-equiv="refresh" content="0;URL=/login"> 
+    {% endif %}
+    
+
+        <div class="alert alert-primary">
+        <div class="alert alert-primary">
+            <div class="">
+                <label for="name">Pseudo</label>
+                <input class="form-control" type="text" id="name" placeholder="Pseudo" value="{{name}}" required>
+            </div>
+            <div class="">
+                <label for="pswd">Mot de passe</label>
+                <input class="form-control" type="password" id="pswd" placeholder="Mot de passe" required>
+            </div>
+            <a class="btn btn-outline-primary" onclick="bj(this)" data-bj="main|logon||name,pswd">
+                S'identifier</a>
+
+            <a class="btn btn-outline-secondary" onclick="bg(this)" data-bj="register|register">
+                Inscription</a>
+            <div id="register"></div>
+        </div>
+{% endblock %}

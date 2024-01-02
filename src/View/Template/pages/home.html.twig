@@ -1,0 +1,483 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}{% endblock %}
+{% block post %}
+
+    <!-- Loged-->
+	{% if (welcome) %}
+        <div class="alert alert-success">{{welcome}}</div>
+        <p>Bienvenue, {{name}}</p>
+         <meta http-equiv="refresh" content="2;URL=/home"> 
+    {% endif %}
+
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Présentation</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true"
+                        focusable="false" data-prefix="fas" data-icon="star" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                        </path>
+                    </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                <div class="divider-custom-line"></div>
+            </div>
+
+        <div class="profile">
+            <h1>{{results.name | raw }}</h1>
+            <!-- <div class="excerpt">{{results.surname | raw }}</div> -->
+            <div class="excerpt">{{results.slogan | raw }}</div>
+            <img src="/img/{{results.banner }}" width="340px" />
+        </div>
+
+        <div class="article">
+            <h1 class="title">{{presentation.title | raw }}</h1>
+            <div class="content">{{presentation.content | raw }}</div>
+        </div>
+
+        <div class="article">
+            <h1 class="title">{{jobs.title | raw }}</h1>
+            <div class="content">{{jobs.content | raw }}</div>
+        </div>
+
+        <h3>Curriculum Vitae<h3>
+        <p><a href="http://logic.ovh">CV au format Pdf</a></p>
+
+    </section>
+
+
+    <!-- Portfolio Section-->
+    <section class="page-section portfolio" id="portfolio">
+        <div class="container">
+            <!-- Portfolio Section Heading-->
+            <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Articles</h2>
+            <!-- Icon Divider-->
+            <div class="divider-custom">
+                <div class="divider-custom-line"></div>
+                <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star" aria-hidden="true"
+                        focusable="false" data-prefix="fas" data-icon="star" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg="">
+                        <path fill="currentColor"
+                            d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                        </path>
+                    </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                <div class="divider-custom-line"></div>
+            </div>
+        
+            <!-- Portfolio Grid Items-->
+            <div class="row justify-content-center">
+                <!-- Portfolio Item 1-->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/cabin.png"
+                            alt="...">
+                    </div>
+                </div>
+                <!-- Portfolio Item 2-->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal2">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/cake.png"
+                            alt="...">
+                    </div>
+                </div>
+                <!-- Portfolio Item 3-->
+                <div class="col-md-6 col-lg-4 mb-5">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal3">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/circus.png"
+                            alt="...">
+                    </div>
+                </div>
+                <!-- Portfolio Item 4-->
+                <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/game.png"
+                            alt="...">
+                    </div>
+                </div>
+                <!-- Portfolio Item 5-->
+                <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/safe.png"
+                            alt="...">
+                    </div>
+                </div>
+                <!-- Portfolio Item 6-->
+                <div class="col-md-6 col-lg-4">
+                    <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
+                        <div
+                            class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                            <div class="portfolio-item-caption-content text-center text-white"><svg
+                                    class="svg-inline--fa fa-plus fa-3x" aria-hidden="true" focusable="false"
+                                    data-prefix="fas" data-icon="plus" role="img" xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 448 512" data-fa-i2svg="">
+                                    <path fill="currentColor"
+                                        d="M240 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H32c-17.7 0-32 14.3-32 32s14.3 32 32 32H176V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H384c17.7 0 32-14.3 32-32s-14.3-32-32-32H240V80z">
+                                    </path>
+                                </svg><!-- <i class="fas fa-plus fa-3x"></i> Font Awesome fontawesome.com --></div>
+                        </div>
+                        <img class="img-fluid" src="/public/bs/submarine.png"
+                            alt="...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+    <!-- Portfolio Modals-->
+    <!-- Portfolio Modal 1-->
+    <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post1.title | raw }}<</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                    src="/public/bs/cabin.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post1.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post1.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 2-->
+    <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post2.title | raw }}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                    src="/public/bs/cake.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post2.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post2.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 3-->
+    <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post3.title | raw }}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                    src="/public/bs/circus.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post3.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post3.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 4-->
+    <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post4.title | raw }}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                    src="/public/bs/game.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post4.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post4.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 5-->
+    <div class="portfolio-modal modal fade" id="portfolioModal5" tabindex="-1" aria-labelledby="portfolioModal5"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post5.title | raw }}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                    src="/public/bs/safe.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post5.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post5.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Portfolio Modal 6-->
+    <div class="portfolio-modal modal fade" id="portfolioModal6" tabindex="-1" aria-labelledby="portfolioModal6"
+        aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header border-0"><button class="btn-close" type="button" data-bs-dismiss="modal"
+                        aria-label="Close"></button></div>
+                <div class="modal-body text-center pb-5">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <!-- Portfolio Modal - Title-->
+                                <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">{{ preview.post6.title | raw }}</h2>
+                                <!-- Icon Divider-->
+                                <div class="divider-custom">
+                                    <div class="divider-custom-line"></div>
+                                    <div class="divider-custom-icon"><svg class="svg-inline--fa fa-star"
+                                            aria-hidden="true" focusable="false" data-prefix="fas" data-icon="star"
+                                            role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"
+                                            data-fa-i2svg="">
+                                            <path fill="currentColor"
+                                                d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z">
+                                            </path>
+                                        </svg><!-- <i class="fas fa-star"></i> Font Awesome fontawesome.com --></div>
+                                    <div class="divider-custom-line"></div>
+                                </div>
+                                <!-- Portfolio Modal - Image-->
+                                <img class="img-fluid rounded mb-5"
+                                        src="/public/bs/submarine.png" alt="...">
+                                <!-- Portfolio Modal - Text-->
+                                <p class="mb-4">{{ preview.post6.excerpt | raw }}</p>
+                                <a class="btn btn-primary" data-bs-dismiss="modal" href="/post/{{ preview.post6.id }}" onclick="return bh(this)">
+                                    <svg class="svg-inline--fa fa-xmark fa-fw" aria-hidden="true" focusable="false"
+                                        data-prefix="fas" data-icon="xmark" role="img"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+                                        <path fill="currentColor"
+                                            d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z">
+                                        </path>
+                                    </svg><!-- <i class="fas fa-xmark fa-fw"></i> Font Awesome fontawesome.com -->
+                                    Lire la suite
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	
+	<div class="menu">
+	{% for link in links %}
+		<a href="{{link.url}}">{{link.url | raw }}</a>
+	{% endfor %}
+	</div>
+
+{% endblock post %}
+
+{% block comments %}{% endblock comments %}

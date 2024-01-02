@@ -1,0 +1,8 @@
+<div class="menu">
+	    <a class="btn btn-primary" href="/articles" onclick="return bh(this)">
+            Tout</a>
+    {% for result in results %}
+	    <a class="btn btn-primary" href="/category/{{result.id}}" onclick="return bh(this)">
+            {{result.category | raw }}</a>
+    {% endfor %}
+</div>

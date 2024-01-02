@@ -1,0 +1,10 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{% block posts %}{% endblock %}
+{% block post %}
+	<div id="post{{article.postId}}" class="post">
+		<div class="alert alert-warning">Post indisponible</div>
+	</div>
+{% endblock post %}
+
+{% block comments %}
+{% endblock comments %}

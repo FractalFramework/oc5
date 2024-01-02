@@ -1,0 +1,25 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+    <h2>Admin</h2>
+
+    {% if (admin == true) %}
+		<div class="nav" id="adminNav">
+			<a class="nav-tabs nav-link" onclick="bj(this); activeListElement(0)" data-bj="admin|adminArticles|">
+			Tous les Articles</a>
+			<a class="nav-tabs nav-link" onclick="bj(this); activeListElement(1)" data-bj="admin|adminMyArticles|">
+			Mes articles</a>
+			<a class="nav-tabs nav-link" onclick="bj(this); activeListElement(2)" data-bj="admin|adminComments|">
+			Commentaires</a>
+			<a class="nav-tabs nav-link" onclick="bj(this); activeListElement(3)" data-bj="admin|adminContacts|">
+			Contacts</a>
+			<a class="nav-tabs nav-link" onclick="bj(this); activeListElement(4)" data-bj="admin|newPost|">
+			+ Nouvel article</a>
+		</div>
+		<br />
+    {% else %}
+        <div class="alert alert-warning">Vous n'êtes pas autorisé à siéger ici.</div>
+    {% endif %}
+		<div id="admin">
+			{% block table %}{% endblock %}
+        </div>
+{% endblock %}

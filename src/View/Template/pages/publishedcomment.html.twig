@@ -1,0 +1,7 @@
+        <div class="frame-green">
+        <h3>Merci pour votre commentaire</h3>
+        {%if ( isLoged == false ) %}
+        <p>On va quand même vérifier que vous ne dites pas trop de conneries, hein.</p>
+        {% endif %}
+        <a href="/post/{{postId}}" class="btn btn-outline-primary" onclick="return bh(this)">Fermer</a>
+        </div>

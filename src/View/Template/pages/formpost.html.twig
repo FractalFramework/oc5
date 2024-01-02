@@ -1,0 +1,67 @@
+{% extends ajaxMode == 'false' ? 'main.html.twig' : 'empty.html.twig' %}
+{%  block main %}
+
+	{%if ( modif == 1 ) %}
+    <h2>Modifier article</h2>
+	{% else %}
+    <h2>Nouvel article</h2>
+	{% endif %}
+    
+    {% if error %}
+        <div class="alert alert-warning">{{ error | raw }}</div>
+    {% endif %}
+
+			{%if ( modif == true ) %}
+            <a class="btn btn-warning" onclick="bj(this)" 
+                data-bj="main|postUpdate|postId={{postId}}|category,title,excerpt,content">
+                Modifier</a>
+                <a class="btn btn-outline-warning" href="/post/{{postId}}" onclick="bh(this)">Annuler</a>
+			{% else %}
+            <a class="btn btn-success" onclick="bj(this)" 
+                data-bj="main|postSave||category,title,excerpt,content">
+                Enregistrer</a>
+			{% endif %}
+        <div class="alert alert-primary">
+            <div class="area">
+                <label for="category">Catégorie
+                <input class="form-control" type="text" id="category" name="categories" list="categories" value="{{article.category}}">
+                <datalist id="categories">
+			    {% for category in categories %}
+                    <option value="{{category.category}}">{{category.category | raw }}</option>
+			    {% endfor %}
+                </datalist>
+                </label>
+            </div>
+            <div class="area">
+                <label for="title">Titre</label>
+                <input class="form-control" type="text" id="title" placeholder="Titre" value="{{article.title | raw }}"">
+            </div>
+            <div class="area">
+                <label for="excerpt">Résumé</label>
+                <textarea class="form-control" id="excerpt" placeholder="Résumé">{{article.excerpt | raw }}</textarea>
+            </div>
+
+            <div class="menu">
+            <select onchange="execom2(this.value)">
+                <option value="no">titres</option>
+                <option value="p">normal</option>
+                <option value="h2">h2</option>
+                <option value="h3">h3</option>
+                <option value="h4">h4</option>
+            </select>
+                <a onclick="execom('bold')">b</a>
+                <a onclick="execom('italic')">i</a>
+                <a onclick="execom('underline')">u</a>
+                <a onclick="execom('strikeThrough')">k</a>
+                <a onclick="execom('insertUnorderedList')">list</a>
+                <a onclick="execom('Indent')">block</a>
+                <a onclick="execom('Outdent')">outblock</a>
+                <a onclick="execom('createLink')">url</a>
+            </div>
+
+            <label for="content">Contenu</label>
+            <div class="editarea form-control" id="content" placeholder="Contenu" contenteditable>{{article.content | raw }}</div>
+
+            <div id="postTest"></div>
+        </div>
+{% endblock %}

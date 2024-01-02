@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+	{{pageTitle}}
+{% endblock %}
+{% block nav %}
+    
+	<li class="nav-item mx-0 mx-lg-1">
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/articles" onclick="return bh(this)">Articles</a>
+	</li>
+		{% if (admin == true) %}
+	<li class="nav-item mx-0 mx-lg-1">
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/admin" onclick="return bh(this)">Admin</a>
+	</li>
+		{% endif %}
+	<li class="nav-item mx-0 mx-lg-1">
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/contact" onclick="return bh(this)">Contact</a>
+	</li>
+	<li class="nav-item mx-0 mx-lg-1">
+		<a class="nav-link py-3 px-0 px-lg-3 rounded" href="/login" onclick="return bh(this)">
+		{% if (uid == 0) %}S'identifier{% else %}Se déconnecter ({{usr}}){% endif %}</a>
+	</li>
+
+{% endblock nav %}
+{% block main %}
+
+	{{ dump(article) }}
+	{% block post %}{% endblock post %}
+	{% block posts %}{% endblock posts %}
+	{% block comments %}{% endblock comments %}
+{% endblock main %}

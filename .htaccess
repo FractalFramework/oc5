@@ -1,0 +1,8 @@
+RewriteEngine On
+#RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^./]+)/([^./]+)/([^./]+)/([^./]+)$ /index.php?com=$1&p1=$2&p2=$3&p3=$4 [L]
+RewriteRule ^([^./]+)/([^./]+)/([^./]+)$ /index.php?com=$1&p1=$2&p2=$3 [L]
+RewriteRule ^([^./]+)/([^./]+)$ /index.php?com=$1&p1=$2 [L]
+RewriteRule ^([^./]+)$ /index.php?com=$1 [L]
+RewriteRule ^/$ /index.php [L]
+RewriteRule ^$ /index.php [L]
